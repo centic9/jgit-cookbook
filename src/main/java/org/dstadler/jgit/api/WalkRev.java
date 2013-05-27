@@ -1,4 +1,4 @@
-package org.dstadler.jgit;
+package org.dstadler.jgit.api;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  *
  * @author dominik.stadler@gmx.at
  */
-public class GetRevCommitFromObjectId {
+public class WalkRev {
 	public static void main(String[] args) throws IOException {
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 		Repository repository = builder
@@ -27,8 +27,15 @@ public class GetRevCommitFromObjectId {
 
 		// a RevWalk allows to walk over commits based on some filtering that is defined
 		RevWalk walk = new RevWalk(repository);
+
 		RevCommit commit = walk.parseCommit(head.getObjectId());
-		System.out.println("Found Commit: " + commit);
+		System.out.println("Commit: " + commit);
+
+		System.out.println("Walking all commits starting at HEAD");
+		walk.markStart(commit);
+		for(RevCommit rev : walk) {
+			System.out.println("Commit: " + rev);
+		}
 
 		repository.close();
 	}

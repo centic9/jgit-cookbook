@@ -2,20 +2,19 @@ package org.dstadler.jgit.api;
 
 import java.io.IOException;
 
+import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 
 /**
- * Simple snippet which shows how to use RevWalk to iterate over objects
+ * Simple snippet which shows how to retrieve a Ref for some reference string.
  *
  * @author dominik.stadler@gmx.at
  */
-public class WalkRev {
+public class ReadBlobContents {
 	public static void main(String[] args) throws IOException {
 		FileRepositoryBuilder builder = new FileRepositoryBuilder();
 		Repository repository = builder
@@ -23,19 +22,13 @@ public class WalkRev {
 		  .findGitDir() // scan up the file system tree
 		  .build();
 
+		// the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
 		Ref head = repository.getRef("refs/heads/master");
+		System.out.println("Ref of refs/heads/master: " + head);
 
-		// a RevWalk allows to walk over commits based on some filtering that is defined
-		RevWalk walk = new RevWalk(repository);
-
-		RevCommit commit = walk.parseCommit(head.getObjectId());
-		System.out.println("Commit: " + commit);
-
-		System.out.println("Walking all commits starting at HEAD");
-		walk.markStart(commit);
-		for(RevCommit rev : walk) {
-			System.out.println("Commit: " + rev);
-		}
+		System.out.println("Print contents of head of master branch, i.e. the latest commit information");
+		ObjectLoader loader = repository.open(head.getObjectId());
+		loader.copyTo(System.out);
 
 		repository.close();
 	}

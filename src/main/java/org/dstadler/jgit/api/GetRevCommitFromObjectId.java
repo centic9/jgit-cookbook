@@ -2,26 +2,18 @@ package org.dstadler.jgit.api;
 
 import java.io.IOException;
 
+import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-
-
 
 /**
  * Simple snippet which shows how to use RevWalk to iterate over objects
- *
- * @author dominik.stadler@gmx.at
  */
 public class GetRevCommitFromObjectId {
 	public static void main(String[] args) throws IOException {
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-		Repository repository = builder
-		  .readEnvironment() // scan environment GIT_* variables
-		  .findGitDir() // scan up the file system tree
-		  .build();
+		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
 		Ref head = repository.getRef("refs/heads/master");
 

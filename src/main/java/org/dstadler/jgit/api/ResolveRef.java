@@ -2,27 +2,27 @@ package org.dstadler.jgit.api;
 
 import java.io.IOException;
 
+import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 
 /**
  * Simple snippet which shows how to retrieve an ObjectId for some name.
- *
- * @author dominik.stadler@gmx.at
  */
 public class ResolveRef {
 	public static void main(String[] args) throws IOException {
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-		Repository repository = builder
-		  .readEnvironment() // scan environment GIT_* variables
-		  .findGitDir() // scan up the file system tree
-		  .build();
+		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		ObjectId head = repository.resolve("HEAD");
-		System.out.println("ObjectId of HEAD: " + head);
+		// basic syntax is similar to getRef()
+		ObjectId id = repository.resolve("HEAD");
+		System.out.println("ObjectId of HEAD: " + id);
+
+		// however resolve() supports almost all of the git-syntax, where getRef() only works on names
+		id = repository.resolve("HEAD^1");
+		System.out.println("ObjectId of HEAD: " + id);
+
 		repository.close();
 	}
 }

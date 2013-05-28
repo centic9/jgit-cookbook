@@ -19,7 +19,7 @@ public class CreateNewRepository {
 		localPath.delete();
 
 		// create the directory
-        Repository repository = new FileRepository(localPath + ".git");
+        Repository repository = new FileRepository(new File(localPath, ".git"));
         repository.create();
 
 		System.out.println("Having repository: " + repository.getDirectory());

@@ -34,7 +34,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 #### Missing snippets
 
-* Iterate all commits of a repository
+* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
 * Read file attributes, e.g. executeable state
 
 #### Sources

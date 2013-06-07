@@ -31,9 +31,14 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [Resolve complex references, e.g. HEAD^^ to a SHA-1](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ResolveRef.java)
 * [Iterate over the commits on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkRev.java)
 
+#### Missing snippets
+
+* Iterate all commits of a repository
+* Read file attributes, e.g. executeable state
+
 #### Sources
 
-The following sources were used to 
+The following sources were used to build the snippets
 
 * [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)

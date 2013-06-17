@@ -1,8 +1,16 @@
 jgit-cookbook
+
+
 =============
+
+
 [![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
 
+
+
 Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
+
+
 
 The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
 

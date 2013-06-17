@@ -23,13 +23,16 @@ public class WalkRev {
 		RevWalk walk = new RevWalk(repository);
 
 		RevCommit commit = walk.parseCommit(head.getObjectId());
-		System.out.println("Commit: " + commit);
+		System.out.println("Start-Commit: " + commit);
 
 		System.out.println("Walking all commits starting at HEAD");
 		walk.markStart(commit);
+		int count = 0;
 		for(RevCommit rev : walk) {
 			System.out.println("Commit: " + rev);
+			count++;
 		}
+		System.out.println(count);
 
 		repository.close();
 	}

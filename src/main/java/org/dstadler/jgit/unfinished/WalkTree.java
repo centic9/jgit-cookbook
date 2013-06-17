@@ -11,7 +11,7 @@ import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 
 /**
- * Simple snippet which shows how to use RevWalk to iterate over objects
+ * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
  *
  * @author dominik.stadler@gmx.at
  */

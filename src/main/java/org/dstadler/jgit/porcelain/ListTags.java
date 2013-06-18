@@ -23,7 +23,7 @@ public class ListTags {
 
 		List<Ref> call = new Git(repository).tagList().call();
 		for(Ref rev : call) {
-			System.out.println("Tag: " + rev);
+			System.out.println("Tag: " + rev + " " + rev.getName() + " " + rev.getObjectId().getName());
 		}
 
 		repository.close();

@@ -16,6 +16,7 @@ public class GetRevCommitFromObjectId {
 		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
 		Ref head = repository.getRef("refs/heads/master");
+		System.out.println("Found head: " + head);
 
 		// a RevWalk allows to walk over commits based on some filtering that is defined
 		RevWalk walk = new RevWalk(repository);

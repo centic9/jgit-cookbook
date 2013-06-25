@@ -22,8 +22,8 @@ public class ListBranches {
 		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
 		List<Ref> call = new Git(repository).branchList().call();
-		for(Ref rev : call) {
-			System.out.println("Branch: " + rev + " " + rev.getName() + " " + rev.getObjectId().getName());
+		for(Ref ref : call) {
+			System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
 		}
 
 		repository.close();

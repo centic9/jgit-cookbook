@@ -8,6 +8,20 @@ The JGit framework is rich and diverse, it has two layers, a low-level _api_ and
 
 This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
 
+#### Getting started
+
+##### Grab it
+
+    git clone git://github.com/centic9/jgit-cookbook
+
+##### Build it and create Eclipse project files
+
+	mvn dependency:sources eclipse:eclipse package
+
+#### Run it
+
+    Import the project into an Eclipse workspace and execute the snippets there.
+
 #### Currently the following snippets are available
 
 ##### General Repository handling

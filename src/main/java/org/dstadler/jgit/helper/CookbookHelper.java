@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
@@ -25,7 +24,7 @@ public class CookbookHelper {
 		localPath.delete();
 
 		// create the directory
-        Repository repository = new FileRepository(localPath + "/.git");
+        Repository repository = FileRepositoryBuilder.create(new File(localPath, ".git"));
         repository.create();
 
         return repository;

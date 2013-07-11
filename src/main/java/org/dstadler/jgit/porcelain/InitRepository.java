@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepository;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 
@@ -26,7 +26,7 @@ public class InitRepository {
 			.setDirectory(dir)
            .call();
 
-		Repository repository = new FileRepository(dir.getAbsolutePath() + "/.git");
+		Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"));
 
         System.out.println("Created a new repository at " + repository.getDirectory());
 

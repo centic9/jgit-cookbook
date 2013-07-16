@@ -57,6 +57,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 * Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
 * Read file attributes, e.g. executeable state
+* Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
 
 #### Sources
 

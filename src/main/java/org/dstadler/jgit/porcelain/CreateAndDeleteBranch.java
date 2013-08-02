@@ -19,7 +19,7 @@ import org.eclipse.jgit.lib.Repository;
 public class CreateAndDeleteBranch {
 
 	public static void main(String[] args) throws IOException, GitAPIException {
-		// prepare a new test-repository
+		// prepare test-repository
 		Repository repository = CookbookHelper.openJGitCookbookRepository();
 		Git git = new Git(repository);
 

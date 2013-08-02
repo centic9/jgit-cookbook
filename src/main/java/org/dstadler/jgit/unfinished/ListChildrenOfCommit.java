@@ -12,8 +12,7 @@ import org.eclipse.jgit.revplot.PlotWalk;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 /**
- * Snippet which shows how to use RevWalk and TreeWalk to read the contents
- * of a specific file from a specific commit.
+ * Snippet which shows how to use PlotWalk to read from a specific commit.
  *
  * @author dominik.stadler@gmx.at
  */

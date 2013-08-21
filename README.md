@@ -54,11 +54,11 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [Read contents of a specific file from a specific commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadFileFromCommit.java)
 * [List remotes configured for the current repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/PrintRemotes.java)
 * [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
+* [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
 
 #### Missing snippets
 
 * Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
-* Read file attributes, e.g. executeable state
 * Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
 
 #### Sources

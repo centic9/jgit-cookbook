@@ -14,7 +14,7 @@ import org.eclipse.jgit.lib.Repository;
  *
  * @author dominik.stadler@gmx.at
  */
-public class ListRemoteReferences {
+public class ListRemotes {
 
 	public static void main(String[] args) throws IOException, GitAPIException {
 		Repository repository = CookbookHelper.openJGitCookbookRepository();

@@ -16,45 +16,48 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Simple snippet which shows how to poull from a remote repository from a remote source
- *
+ * 
  * @author dominik.stadler@gmx.at
  */
 public class PullRemoteRepository {
-	private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-	public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
-		Repository repository = cloneRepository();
+    private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-		System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
-				repository.getRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" + repository.resolve("refs/heads/master"));
+    public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+        Repository repository = cloneRepository();
 
-		// TODO: why do we get null here for HEAD?!? See also http://stackoverflow.com/questions/17979660/jgit-pull-noheadexception
+        System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
+                repository.getRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" +
+                repository.resolve("refs/heads/master"));
 
-		PullResult call = new Git(repository).pull().call();
+        // TODO: why do we get null here for HEAD?!? See also
+// http://stackoverflow.com/questions/17979660/jgit-pull-noheadexception
 
-		System.out.println("Pulled from the remote repository: " + call);
+        PullResult call = new Git(repository).pull().call();
 
-		repository.close();
-	}
+        System.out.println("Pulled from the remote repository: " + call);
 
-	private static Repository cloneRepository() throws IOException, GitAPIException, InvalidRemoteException, TransportException {
-		// prepare a new folder for the cloned repository
-		File localPath = File.createTempFile("TestGitRepository", "");
-		localPath.delete();
+        repository.close();
+    }
 
-		// then clone
-		System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
+    private static Repository cloneRepository() throws IOException, GitAPIException, InvalidRemoteException, TransportException {
+        // prepare a new folder for the cloned repository
+        File localPath = File.createTempFile("TestGitRepository", "");
+        localPath.delete();
+
+        // then clone
+        System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
         Git.cloneRepository()
-        .setURI(REMOTE_URL)
-        .setDirectory(localPath)
-        .call();
+                .setURI(REMOTE_URL)
+                .setDirectory(localPath)
+                .call();
 
         // now open the created repository
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-		Repository repository = builder.setGitDir(localPath)
-		  .readEnvironment() // scan environment GIT_* variables
-		  .findGitDir() // scan up the file system tree
-		  .build();
-		return repository;
-	}
+        FileRepositoryBuilder builder = new FileRepositoryBuilder();
+        Repository repository = builder.setGitDir(localPath)
+                .readEnvironment() // scan environment GIT_* variables
+                .findGitDir() // scan up the file system tree
+                .build();
+        return repository;
+    }
 }

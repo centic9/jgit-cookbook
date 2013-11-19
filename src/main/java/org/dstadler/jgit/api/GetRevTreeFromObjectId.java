@@ -15,21 +15,21 @@ import org.eclipse.jgit.revwalk.RevWalk;
  */
 public class GetRevTreeFromObjectId {
 
-	public static void main(String[] args) throws IOException, GitAPIException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
+    public static void main(String[] args) throws IOException, GitAPIException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		Ref head = repository.getRef("HEAD");
+        Ref head = repository.getRef("HEAD");
 
-		// a RevWalk allows to walk over commits based on some filtering that is defined
-		RevWalk walk = new RevWalk(repository);
+        // a RevWalk allows to walk over commits based on some filtering that is defined
+        RevWalk walk = new RevWalk(repository);
 
-		RevCommit commit = walk.parseCommit(head.getObjectId());
-		System.out.println("Commit: " + commit);
+        RevCommit commit = walk.parseCommit(head.getObjectId());
+        System.out.println("Commit: " + commit);
 
-		// a commit points to a tree
-		RevTree tree = walk.parseTree(commit.getTree().getId());
-		System.out.println("Found Tree: " + tree);
+        // a commit points to a tree
+        RevTree tree = walk.parseTree(commit.getTree().getId());
+        System.out.println("Found Tree: " + tree);
 
-		repository.close();
-	}
+        repository.close();
+    }
 }

@@ -9,24 +9,24 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 public class CookbookHelper {
 
-	public static Repository openJGitCookbookRepository() throws IOException {
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
-		Repository repository = builder
-		  .readEnvironment() // scan environment GIT_* variables
-		  .findGitDir() // scan up the file system tree
-		  .build();
-		return repository;
-	}
+    public static Repository openJGitCookbookRepository() throws IOException {
+        FileRepositoryBuilder builder = new FileRepositoryBuilder();
+        Repository repository = builder
+                .readEnvironment() // scan environment GIT_* variables
+                .findGitDir() // scan up the file system tree
+                .build();
+        return repository;
+    }
 
-	public static Repository createNewRepository() throws IOException {
-		// prepare a new folder
-		File localPath = File.createTempFile("TestGitRepository", "");
-		localPath.delete();
+    public static Repository createNewRepository() throws IOException {
+        // prepare a new folder
+        File localPath = File.createTempFile("TestGitRepository", "");
+        localPath.delete();
 
-		// create the directory
+        // create the directory
         Repository repository = FileRepositoryBuilder.create(new File(localPath, ".git"));
         repository.create();
 
         return repository;
-	}
+    }
 }

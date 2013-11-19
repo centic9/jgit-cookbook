@@ -14,24 +14,24 @@ import org.eclipse.jgit.notes.Note;
 
 /**
  * Simple snippet which shows how to load Notes in a Git repository
- *
+ * 
  * @author dominik.stadler@gmx.at
  */
 public class ListNotes {
 
-	public static void main(String[] args) throws IOException, GitAPIException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
+    public static void main(String[] args) throws IOException, GitAPIException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		List<Note> call = new Git(repository).notesList().call();
-		System.out.println("Listing " + call.size() + " notes");
-		for(Note note : call) {
-			System.out.println("Note: " + note + " " + note.getName() + " " + note.getData().getName() + "\nContent: ");
+        List<Note> call = new Git(repository).notesList().call();
+        System.out.println("Listing " + call.size() + " notes");
+        for (Note note : call) {
+            System.out.println("Note: " + note + " " + note.getName() + " " + note.getData().getName() + "\nContent: ");
 
-			// displaying the contents of the note is done via a simple blob-read
-			ObjectLoader loader = repository.open(note.getData());
-			loader.copyTo(System.out);
-		}
+            // displaying the contents of the note is done via a simple blob-read
+            ObjectLoader loader = repository.open(note.getData());
+            loader.copyTo(System.out);
+        }
 
-		repository.close();
-	}
+        repository.close();
+    }
 }

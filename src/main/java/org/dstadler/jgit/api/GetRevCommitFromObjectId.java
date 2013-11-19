@@ -12,17 +12,18 @@ import org.eclipse.jgit.revwalk.RevWalk;
  * Simple snippet which shows how to use RevWalk to iterate over objects
  */
 public class GetRevCommitFromObjectId {
-	public static void main(String[] args) throws IOException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		Ref head = repository.getRef("refs/heads/master");
-		System.out.println("Found head: " + head);
+    public static void main(String[] args) throws IOException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		// a RevWalk allows to walk over commits based on some filtering that is defined
-		RevWalk walk = new RevWalk(repository);
-		RevCommit commit = walk.parseCommit(head.getObjectId());
-		System.out.println("Found Commit: " + commit);
+        Ref head = repository.getRef("refs/heads/master");
+        System.out.println("Found head: " + head);
 
-		repository.close();
-	}
+        // a RevWalk allows to walk over commits based on some filtering that is defined
+        RevWalk walk = new RevWalk(repository);
+        RevCommit commit = walk.parseCommit(head.getObjectId());
+        System.out.println("Found Commit: " + commit);
+
+        repository.close();
+    }
 }

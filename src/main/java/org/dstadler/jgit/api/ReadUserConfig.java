@@ -11,17 +11,17 @@ import org.eclipse.jgit.lib.Repository;
  */
 public class ReadUserConfig {
 
-	public static void main(String[] args) throws IOException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
+    public static void main(String[] args) throws IOException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		Config config = repository.getConfig();
-		String name = config.getString("user", null, "name");
-		String email = config.getString("user", null, "email");
-		if (name == null || email == null) {
-		        System.out.println("User identity is unknown!");
-		} else {
-		        System.out.println("User identity is " + name + " <" + email + ">");
-		}
-		repository.close();
-	}
+        Config config = repository.getConfig();
+        String name = config.getString("user", null, "name");
+        String email = config.getString("user", null, "email");
+        if (name == null || email == null) {
+            System.out.println("User identity is unknown!");
+        } else {
+            System.out.println("User identity is " + name + " <" + email + ">");
+        }
+        repository.close();
+    }
 }

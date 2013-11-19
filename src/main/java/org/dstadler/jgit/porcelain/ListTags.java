@@ -13,19 +13,19 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to list all Tags
- *
+ * 
  * @author dominik.stadler@gmx.at
  */
 public class ListTags {
 
-	public static void main(String[] args) throws IOException, GitAPIException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
+    public static void main(String[] args) throws IOException, GitAPIException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		List<Ref> call = new Git(repository).tagList().call();
-		for(Ref ref : call) {
-			System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-		}
+        List<Ref> call = new Git(repository).tagList().call();
+        for (Ref ref : call) {
+            System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+        }
 
-		repository.close();
-	}
+        repository.close();
+    }
 }

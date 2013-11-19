@@ -15,21 +15,21 @@ import org.eclipse.jgit.revwalk.RevWalk;
 
 /**
  * Simple snippet which shows how to create a tag
- *
+ * 
  * @author dominik.stadler@gmx.at
  */
 public class CreateAndDeleteTag {
 
-	public static void main(String[] args) throws IOException, GitAPIException {
-		// prepare test-repository
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
-		Git git = new Git(repository);
+    public static void main(String[] args) throws IOException, GitAPIException {
+        // prepare test-repository
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
+        Git git = new Git(repository);
 
         // remove the tag before creating it
         git.tagDelete().setTags("tag_for_testing").call();
 
-		// set it on the current HEAD
-		Ref tag = git.tag().setName("tag_for_testing").call();
+        // set it on the current HEAD
+        Ref tag = git.tag().setName("tag_for_testing").call();
         System.out.println("Created/moved tag " + tag + " to repository at " + repository.getDirectory());
 
         // remove the tag again
@@ -37,9 +37,9 @@ public class CreateAndDeleteTag {
 
         // read some other commit and set the tag on it
         ObjectId id = repository.resolve("HEAD^");
-		RevWalk walk = new RevWalk(repository);
-		RevCommit commit = walk.parseCommit(id);
-		tag = git.tag().setObjectId(commit).setName("tag_for_testing").call();
+        RevWalk walk = new RevWalk(repository);
+        RevCommit commit = walk.parseCommit(id);
+        tag = git.tag().setObjectId(commit).setName("tag_for_testing").call();
         System.out.println("Created/moved tag " + tag + " to repository at " + repository.getDirectory());
 
         // remove the tag again
@@ -53,5 +53,5 @@ public class CreateAndDeleteTag {
         git.tagDelete().setTags("tag_for_testing").call();
 
         repository.close();
-	}
+    }
 }

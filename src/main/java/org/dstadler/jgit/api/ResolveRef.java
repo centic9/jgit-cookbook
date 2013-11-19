@@ -12,17 +12,18 @@ import org.eclipse.jgit.lib.Repository;
  * Simple snippet which shows how to retrieve an ObjectId for some name.
  */
 public class ResolveRef {
-	public static void main(String[] args) throws IOException {
-		Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		// basic syntax is similar to getRef()
-		ObjectId id = repository.resolve("HEAD");
-		System.out.println("ObjectId of HEAD: " + id);
+    public static void main(String[] args) throws IOException {
+        Repository repository = CookbookHelper.openJGitCookbookRepository();
 
-		// however resolve() supports almost all of the git-syntax, where getRef() only works on names
-		id = repository.resolve("HEAD^1");
-		System.out.println("ObjectId of HEAD: " + id);
+        // basic syntax is similar to getRef()
+        ObjectId id = repository.resolve("HEAD");
+        System.out.println("ObjectId of HEAD: " + id);
 
-		repository.close();
-	}
+        // however resolve() supports almost all of the git-syntax, where getRef() only works on names
+        id = repository.resolve("HEAD^1");
+        System.out.println("ObjectId of HEAD: " + id);
+
+        repository.close();
+    }
 }

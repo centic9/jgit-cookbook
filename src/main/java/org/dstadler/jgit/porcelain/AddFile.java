@@ -12,27 +12,27 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to add a file to the index
- *
+ * 
  * @author dominik.stadler@gmx.at
  */
 public class AddFile {
 
-	public static void main(String[] args) throws IOException, GitAPIException {
-		// prepare a new test-repository
-		Repository repository = CookbookHelper.createNewRepository();
-		Git git = new Git(repository);
+    public static void main(String[] args) throws IOException, GitAPIException {
+        // prepare a new test-repository
+        Repository repository = CookbookHelper.createNewRepository();
+        Git git = new Git(repository);
 
-		// create the file
+        // create the file
         File myfile = new File(repository.getDirectory().getParent(), "testfile");
         myfile.createNewFile();
 
         // run the add-call
         git.add()
-           .addFilepattern("testfile")
-           .call();
+                .addFilepattern("testfile")
+                .call();
 
         System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
 
-		repository.close();
-	}
+        repository.close();
+    }
 }

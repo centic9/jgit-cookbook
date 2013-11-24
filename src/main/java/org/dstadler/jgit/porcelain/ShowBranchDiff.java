@@ -31,7 +31,7 @@ public class ShowBranchDiff {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // the diff works on TreeIterators, we prepare two for the two branches
-        AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "refs/heads/oldbranch");
+        AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "refs/heads/testbranch");
         AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "refs/heads/master");
 
         // then the procelain diff-command returns a list of diff entries

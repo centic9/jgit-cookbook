@@ -11,7 +11,7 @@ import org.eclipse.jgit.lib.Repository;
 
 
 /**
- * Simple snippet which shows how to list all Tags
+ * Simple snippet which shows how to commit a file
  * 
  * @author dominik.stadler@gmx.at
  */

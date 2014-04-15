@@ -79,6 +79,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
 * Stashes, see http://wiki.eclipse.org/JGit/New_and_Noteworthy/2.0#StashApplyCommand
 * CherryPick
+* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
 
 #### Sources
 

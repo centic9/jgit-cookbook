@@ -48,6 +48,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
 * [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
 * [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
+* [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
 
 ##### Commands working with remote repositories
 
@@ -82,7 +83,6 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
 * Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
-* Stashes, see http://wiki.eclipse.org/JGit/New_and_Noteworthy/2.0#StashApplyCommand
 * CherryPick
 * Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
 
@@ -113,3 +113,4 @@ Please note that the list of snippets is not yet complete, probably never will. 
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+some more text

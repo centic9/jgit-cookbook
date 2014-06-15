@@ -25,6 +25,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 #### Currently the following snippets are available
 
 ##### General Repository handling
+
 * [Open an existing repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/OpenRepository.java)
 * [Create a new repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/CreateNewRepository.java)
 
@@ -45,14 +46,15 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [Write contents of branch into an compressed file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateArchive.java)
 * [Blame, i.e. find out which commit changed specific lines in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBlame.java)
 * [Add and list Notes attached to commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/AddAndListNoteOfCommit.java)
+* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
 * [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
+
+##### Commands working with remote repositories
 
 * [Clone a remote reppository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
 * [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
 * [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
 * [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
-
-* [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
 
 ##### Low-level API
 

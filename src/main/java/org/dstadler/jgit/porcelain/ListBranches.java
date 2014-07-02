@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand.ListMode;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -37,11 +38,18 @@ public class ListBranches {
     public static void main(String[] args) throws IOException, GitAPIException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
+        System.out.println("Listing local branches:");
         List<Ref> call = new Git(repository).branchList().call();
         for (Ref ref : call) {
             System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
         }
 
+        System.out.println("Now including remote branches:");
+        call = new Git(repository).branchList().setListMode(ListMode.ALL).call();
+        for (Ref ref : call) {
+            System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+        }
+        
         repository.close();
     }
 }

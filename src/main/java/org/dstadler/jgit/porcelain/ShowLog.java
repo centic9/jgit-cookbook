@@ -37,22 +37,31 @@ public class ShowLog {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         Iterable<RevCommit> logs = new Git(repository).log()
-                .all()
                 .call();
         int count = 0;
         for (RevCommit rev : logs) {
-            System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
             count++;
         }
         System.out.println("Had " + count + " commits overall on current branch");
-
+        
+        logs = new Git(repository).log()
+                .all()
+                .call();
+        count = 0;
+        for (RevCommit rev : logs) {
+            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            count++;
+        }
+        System.out.println("Had " + count + " commits overall in repository");
+        
         logs = new Git(repository).log()
                 // for all log.all()
                 .addPath("README.md")
                 .call();
         count = 0;
         for (RevCommit rev : logs) {
-            System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
             count++;
         }
         System.out.println("Had " + count + " commits on README.md");
@@ -63,7 +72,7 @@ public class ShowLog {
                 .call();
         count = 0;
         for (RevCommit rev : logs) {
-            System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
             count++;
         }
         System.out.println("Had " + count + " commits on pom.xml");

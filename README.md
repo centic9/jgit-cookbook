@@ -94,6 +94,8 @@ The following sources were used to build the snippets
 * [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
 * [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
+* [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
+* [JGit main page](http://www.eclipse.org/jgit/)
 
 #### Contribute
 

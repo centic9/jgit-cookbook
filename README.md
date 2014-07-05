@@ -49,6 +49,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [List available Notes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListNotes.java)
 * [Clean all untracked files](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CleanUntrackedFiles.java)
 * [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
+* [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
 
 ##### Commands working with remote repositories
 

@@ -33,6 +33,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
  */
 public class ShowLog {
 
+    @SuppressWarnings("unused")
     public static void main(String[] args) throws IOException, GitAPIException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 

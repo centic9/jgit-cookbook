@@ -1,19 +1,19 @@
 package org.dstadler.jgit.porcelain;
 
 /*
-   Copyright 2013, 2014 Dominik Stadler
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ * Copyright 2013, 2014 Dominik Stadler
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import java.io.File;
@@ -52,10 +52,13 @@ public class CreateArchive {
         }
 
         public void putEntry(ZipOutputStream out, String path, FileMode mode, ObjectLoader loader) throws IOException {
-            ZipEntry entry = new ZipEntry(path);
-            out.putNextEntry(entry);
-            out.write(loader.getBytes());
-            out.closeEntry();
+            // loader is null for directories...
+            if (loader != null) {
+                ZipEntry entry = new ZipEntry(path);
+                out.putNextEntry(entry);
+                out.write(loader.getBytes());
+                out.closeEntry();
+            }
         }
 
         public Iterable<String> suffixes() {
@@ -68,31 +71,26 @@ public class CreateArchive {
 
 
         File file = File.createTempFile("test", ".zip");
+        // make the archive format known
+        ArchiveCommand.registerFormat("zip", new ZipArchiveFormat());
         try {
-
-            // make the archive format known
-            ArchiveCommand.registerFormat("zip", new ZipArchiveFormat());
+            // this is the file that we write the archive to
+            OutputStream out = new FileOutputStream(file);
             try {
-                // this is the file that we write the archive to
-                OutputStream out = new FileOutputStream(file);
-                try {
-                    // finally call the ArchiveCommand to write out using the given format
-                    new Git(repository).archive()
-                            .setTree(repository.resolve("master"))
-                            .setFormat("zip")
-                            .setOutputStream(out)
-                            .call();
-                } finally {
-                    out.close();
-                }
+                // finally call the ArchiveCommand to write out using the given format
+                new Git(repository).archive()
+                        .setTree(repository.resolve("master"))
+                        .setFormat("zip")
+                        .setOutputStream(out)
+                        .call();
             } finally {
-                ArchiveCommand.unregisterFormat("zip");
+                out.close();
             }
-
-            System.out.println("Wrote " + file.length() + " bytes to " + file);
         } finally {
-            file.delete();
+            ArchiveCommand.unregisterFormat("zip");
         }
+
+        System.out.println("Wrote " + file.length() + " bytes to " + file);
 
         repository.close();
     }

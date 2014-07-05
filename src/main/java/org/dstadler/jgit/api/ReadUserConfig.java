@@ -38,6 +38,12 @@ public class ReadUserConfig {
         } else {
             System.out.println("User identity is " + name + " <" + email + ">");
         }
+        
+        String url = config.getString("remote", "origin", "url");
+        if (url != null) {
+                System.out.println("Origin comes from " + url);
+        }
+        
         repository.close();
     }
 }

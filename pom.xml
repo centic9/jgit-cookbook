@@ -22,6 +22,11 @@
       <artifactId>org.eclipse.jgit</artifactId>
       <version>3.4.1.201406201815-r</version>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit.archive</artifactId>
+      <version>3.4.1.201406201815-r</version>
+    </dependency>
 
 	<dependency>
 		<groupId>commons-io</groupId>

@@ -40,6 +40,8 @@ public class GetCommitMessage {
         RevCommit commit = walk.parseCommit(head.getObjectId());
         
         System.out.println("\nCommit-Message: " + commit.getFullMessage());
+        
+        walk.dispose();
 
         repository.close();
     }

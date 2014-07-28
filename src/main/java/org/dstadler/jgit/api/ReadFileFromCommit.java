@@ -66,6 +66,8 @@ public class ReadFileFromCommit {
         // and then one can the loader to read the file
         loader.copyTo(System.out);
 
+        revWalk.dispose();
+
         repository.close();
     }
 }

@@ -68,6 +68,8 @@ public class CreateAndDeleteTag {
         // remove the tag again
         git.tagDelete().setTags("tag_for_testing").call();
 
+        walk.dispose();
+
         repository.close();
     }
 }

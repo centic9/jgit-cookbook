@@ -75,6 +75,9 @@ public class ShowBranchDiff {
         } finally {
             oldReader.release();
         }
+
+        walk.dispose();
+
         return oldTreeParser;
     }
 }

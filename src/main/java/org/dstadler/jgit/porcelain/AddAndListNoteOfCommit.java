@@ -66,6 +66,8 @@ public class AddAndListNoteOfCommit {
 			loader.copyTo(System.out);
 		}
 
+        walk.dispose();
+
 		repository.close();
 	}
 }

@@ -52,6 +52,8 @@ public class ReadBlobContents {
         loader = repository.open(tree.getId());
         loader.copyTo(System.out);
 
+        walk.dispose();
+
         repository.close();
     }
 }

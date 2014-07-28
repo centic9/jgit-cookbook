@@ -88,6 +88,8 @@ public class ShowBlame {
         // and then one can the loader to read the file
         loader.copyTo(stream);
 
+        revWalk.dispose();
+
         return IOUtils.readLines(new ByteArrayInputStream(stream.toByteArray())).size();
     }
 }

@@ -46,6 +46,8 @@ public class GetRevTreeFromObjectId {
         RevTree tree = walk.parseTree(commit.getTree().getId());
         System.out.println("Found Tree: " + tree);
 
+        walk.dispose();
+
         repository.close();
     }
 }

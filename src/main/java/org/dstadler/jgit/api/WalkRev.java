@@ -51,6 +51,8 @@ public class WalkRev {
         }
         System.out.println(count);
 
+        walk.dispose();
+
         repository.close();
     }
 }

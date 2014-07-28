@@ -40,6 +40,8 @@ public class GetRevCommitFromObjectId {
         RevCommit commit = walk.parseCommit(head.getObjectId());
         System.out.println("Found Commit: " + commit);
 
+        walk.dispose();
+
         repository.close();
     }
 }

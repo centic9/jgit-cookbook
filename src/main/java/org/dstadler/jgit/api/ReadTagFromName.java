@@ -52,6 +52,8 @@ public class ReadTagFromName {
         ObjectLoader loader = repository.open(annotatedTag.getObjectId());
         loader.copyTo(System.out);
 
+        walk.dispose();
+
         repository.close();
     }
 }

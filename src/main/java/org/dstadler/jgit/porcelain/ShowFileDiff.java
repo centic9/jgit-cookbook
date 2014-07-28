@@ -83,6 +83,9 @@ public class ShowFileDiff {
         } finally {
             oldReader.release();
         }
+        
+        walk.dispose();
+
         return oldTreeParser;
     }
 }

@@ -28,7 +28,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 /**
  * Simple snippet which shows how to get the commit-ids for a file to provide log information.
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ShowLog {
@@ -45,7 +45,17 @@ public class ShowLog {
             count++;
         }
         System.out.println("Had " + count + " commits overall on current branch");
-        
+
+        logs = new Git(repository).log()
+                .add(repository.resolve("remotes/origin/testbranch"))
+                .call();
+        count = 0;
+        for (RevCommit rev : logs) {
+            System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+            count++;
+        }
+        System.out.println("Had " + count + " commits overall on test-branch");
+
         logs = new Git(repository).log()
                 .all()
                 .call();
@@ -55,7 +65,7 @@ public class ShowLog {
             count++;
         }
         System.out.println("Had " + count + " commits overall in repository");
-        
+
         logs = new Git(repository).log()
                 // for all log.all()
                 .addPath("README.md")

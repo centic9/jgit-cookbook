@@ -91,6 +91,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
 * CherryPick
 * Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
+* Submodules - http://www.codeaffine.com/2014/04/16/how-to-manage-git-submodules-with-jgit/
 
 #### Sources
 

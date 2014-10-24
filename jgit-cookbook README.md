@@ -105,6 +105,8 @@ The following sources were used to build the snippets
 
 Please note that the list of snippets is not yet complete, probably never will. If you are missing things or have suggestions how to improve or add snippets, please either send pull requests or create [issues](https://github.com/centic9/jgit-cookbook/issues).
 
+Added line
+
 #### Licensing
 
    Copyright 2013, 2014 Dominik Stadler

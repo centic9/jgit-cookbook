@@ -30,7 +30,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Simple snippet which shows how to clone a repository from a remote source
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class PushToRemoteRepository {
@@ -44,7 +44,7 @@ public class PushToRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git.cloneRepository()
+        Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
                 .call();
@@ -55,7 +55,7 @@ public class PushToRemoteRepository {
 
         // then clone again
         System.out.println("Cloning from file://" + localPath + " to " + localPath2);
-        Git.cloneRepository()
+        Git result2 = Git.cloneRepository()
                 .setURI("file://" + localPath)
                 .setDirectory(localPath2)
                 .call();
@@ -74,5 +74,8 @@ public class PushToRemoteRepository {
         System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);
 
         repository.close();
+
+        result.close();
+        result2.close();
     }
 }

@@ -23,14 +23,12 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 
 
 /**
  * Simple snippet which shows how to clone a repository from a remote source
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CloneRemoteRepository {
@@ -44,20 +42,16 @@ public class CloneRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git.cloneRepository()
+        Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
                 .call();
 
-        // now open the created repository
-        FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder.setGitDir(localPath)
-                .readEnvironment() // scan environment GIT_* variables
-                .findGitDir() // scan up the file system tree
-                .build();
-
-        System.out.println("Having repository: " + repository.getDirectory());
-
-        repository.close();
+        try {
+	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
+	        System.out.println("Having repository: " + result.getRepository().getDirectory());
+        } finally {
+        	result.close();
+        }
     }
 }

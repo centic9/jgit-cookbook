@@ -30,7 +30,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Simple snippet which shows how to clone a repository from a remote source
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class TrackMaster {
@@ -44,7 +44,7 @@ public class TrackMaster {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git.cloneRepository()
+        Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
                 .call();
@@ -69,5 +69,7 @@ public class TrackMaster {
                 REMOTE_URL);
 
         repository.close();
+
+        result.close();
     }
 }

@@ -18,7 +18,13 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 ##### Build it and create Eclipse project files
 
+###### When using Maven
+
 	mvn dependency:sources eclipse:eclipse package
+
+###### When using Gradle
+
+	./gradlew eclipse check
 
 #### Run it
 

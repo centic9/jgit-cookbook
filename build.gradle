@@ -1,0 +1,20 @@
+apply plugin: 'java'
+//apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://repo.eclipse.org/content/groups/releases/"
+  }
+}
+
+dependencies {
+	compile 'org.eclipse.jgit:org.eclipse.jgit:3.4.1.201406201815-r'
+	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:3.4.1.201406201815-r'
+	compile 'commons-io:commons-io:2.4'
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.1'
+}

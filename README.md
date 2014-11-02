@@ -85,6 +85,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [Print out user information from Git](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ReadUserConfig.java)
 * [Read file attributes, e.g. executeable state, file or directory, size, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/GetFileAttributes.java)
 * [Use class BranchTrackingStatus to retrieve number of commits ahead/behind compared to remote branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ShowBranchTrackingStatus.java)
+* [Check if commits on other branches are merged into a given branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/CheckMergeStatusOfCommit.java)
 
 #### Missing snippets
 

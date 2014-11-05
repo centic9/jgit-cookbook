@@ -29,7 +29,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 /**
  * Snippet which shows how to use PlotWalk to read from a specific commit.
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListChildrenOfCommit {

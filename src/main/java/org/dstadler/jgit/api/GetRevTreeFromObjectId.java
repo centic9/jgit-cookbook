@@ -34,6 +34,7 @@ public class GetRevTreeFromObjectId {
     public static void main(String[] args) throws IOException, GitAPIException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
+        // See e.g. GetRevCommitFromObjectId for how to use a SHA-1 directly
         Ref head = repository.getRef("HEAD");
 
         // a RevWalk allows to walk over commits based on some filtering that is defined

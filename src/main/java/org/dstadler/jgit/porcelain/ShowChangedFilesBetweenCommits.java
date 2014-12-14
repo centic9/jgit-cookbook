@@ -41,6 +41,9 @@ public class ShowChangedFilesBetweenCommits {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // The {tree} will return the underlying tree-id instead of the commit-id itself!
+        // For a description of what the carets do see e.g. http://www.paulboxley.com/blog/2011/06/git-caret-and-tilde
+        // This means we are selecting the parent of the parent of the parent of the parent of current HEAD and
+        // take the tree-ish of it
         ObjectId oldHead = repository.resolve("HEAD^^^^{tree}");
         ObjectId head = repository.resolve("HEAD^{tree}");
 

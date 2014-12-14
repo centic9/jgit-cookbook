@@ -19,6 +19,7 @@ package org.dstadler.jgit.api;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -39,6 +40,12 @@ public class GetRevCommitFromObjectId {
         RevWalk walk = new RevWalk(repository);
         RevCommit commit = walk.parseCommit(head.getObjectId());
         System.out.println("Found Commit: " + commit);
+
+        // You can also get the commit for an (abbreviated) SHA
+        walk.reset();
+        ObjectId id = repository.resolve("38d51408bd");
+        RevCommit commitAgain = walk.parseCommit(id);
+        System.out.println("Found Commit again: " + commitAgain);
 
         walk.dispose();
 

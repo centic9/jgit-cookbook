@@ -19,7 +19,6 @@ package org.dstadler.jgit.unfinished;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheEntry;
 import org.eclipse.jgit.lib.Repository;
@@ -31,7 +30,7 @@ import org.eclipse.jgit.lib.Repository;
  */
 public class ListIndex {
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // DirCache contains all files of the repository

@@ -57,16 +57,13 @@ public class CreateArchive {
     private static void write(Repository repository, String suffix, String format) throws IOException, GitAPIException {
         // this is the file that we write the archive to
         File file = File.createTempFile("test", suffix);
-        OutputStream out = new FileOutputStream(file);
-        try {
+        try (OutputStream out = new FileOutputStream(file)) {
             // finally call the ArchiveCommand to write out using the various supported formats
             new Git(repository).archive()
                     .setTree(repository.resolve("master"))
                     .setFormat(format)
                     .setOutputStream(out)
                     .call();
-        } finally {
-            out.close();
         }
 
         System.out.println("Wrote " + file.length() + " bytes to " + file);

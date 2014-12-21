@@ -58,7 +58,7 @@ public class ListRefLog {
         repository.close();
     }
 
-    private static void listReflog(Repository repository, Ref ref) throws GitAPIException, InvalidRefNameException, IOException {
+    private static void listReflog(Repository repository, Ref ref) throws GitAPIException, InvalidRefNameException {
         /*
          * Ref head = repository.getRef(ref.getName());
          * RevWalk walk = new RevWalk(repository);

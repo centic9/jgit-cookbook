@@ -53,7 +53,7 @@ public class ShowBranchTrackingStatus {
 
     private static List<Integer> getCounts(org.eclipse.jgit.lib.Repository repository, String branchName) throws IOException {
         BranchTrackingStatus trackingStatus = BranchTrackingStatus.of(repository, branchName);
-        List<Integer> counts = new ArrayList<Integer>();
+        List<Integer> counts = new ArrayList<>();
         if (trackingStatus != null) {
             counts.add(trackingStatus.getAheadCount());
             counts.add(trackingStatus.getBehindCount());

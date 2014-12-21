@@ -19,7 +19,6 @@ package org.dstadler.jgit.unfinished;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revplot.PlotCommitList;
@@ -34,14 +33,14 @@ import org.eclipse.jgit.revwalk.RevCommit;
  */
 public class ListChildrenOfCommit {
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         PlotWalk revWalk = new PlotWalk(repository);
         ObjectId rootId = repository.resolve("refs/heads/master");
         RevCommit root = revWalk.parseCommit(rootId);
         revWalk.markStart(root);
-        PlotCommitList<PlotLane> plotCommitList = new PlotCommitList<PlotLane>();
+        PlotCommitList<PlotLane> plotCommitList = new PlotCommitList<>();
         plotCommitList.source(revWalk);
         plotCommitList.fillTo(Integer.MAX_VALUE);
 

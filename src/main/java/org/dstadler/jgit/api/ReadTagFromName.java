@@ -19,7 +19,6 @@ package org.dstadler.jgit.api;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -31,7 +30,7 @@ import org.eclipse.jgit.revwalk.RevWalk;
  */
 public class ReadTagFromName {
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // a RevWalk allows to retrieve information from the repository

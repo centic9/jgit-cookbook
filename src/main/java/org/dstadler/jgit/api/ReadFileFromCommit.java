@@ -19,7 +19,6 @@ package org.dstadler.jgit.api;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectLoader;
@@ -38,7 +37,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
  */
 public class ReadFileFromCommit {
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // find the HEAD

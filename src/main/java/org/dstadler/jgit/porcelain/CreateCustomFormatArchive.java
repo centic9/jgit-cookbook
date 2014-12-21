@@ -48,11 +48,13 @@ public class CreateCustomFormatArchive {
      */
     private static final class ZipArchiveFormat implements Format<ZipOutputStream> {
 
-		public ZipOutputStream createArchiveOutputStream(OutputStream s) throws IOException {
+		@Override
+        public ZipOutputStream createArchiveOutputStream(OutputStream s) throws IOException {
             return new ZipOutputStream(s);
         }
 
-		public void putEntry(ZipOutputStream out, String path, FileMode mode, ObjectLoader loader) throws IOException {
+		@Override
+        public void putEntry(ZipOutputStream out, String path, FileMode mode, ObjectLoader loader) throws IOException {
             // loader is null for directories...
             if (loader != null) {
                 ZipEntry entry = new ZipEntry(path);
@@ -62,7 +64,8 @@ public class CreateCustomFormatArchive {
             }
         }
 
-		public Iterable<String> suffixes() {
+		@Override
+        public Iterable<String> suffixes() {
             return Collections.singleton(".mzip");
         }
     }
@@ -76,16 +79,13 @@ public class CreateCustomFormatArchive {
         ArchiveCommand.registerFormat("myzip", new ZipArchiveFormat());
         try {
             // this is the file that we write the archive to
-            OutputStream out = new FileOutputStream(file);
-            try {
+            try (OutputStream out = new FileOutputStream(file)) {
                 // finally call the ArchiveCommand to write out using the given format
                 new Git(repository).archive()
                         .setTree(repository.resolve("master"))
                         .setFormat("myzip")
                         .setOutputStream(out)
                         .call();
-            } finally {
-                out.close();
             }
         } finally {
             ArchiveCommand.unregisterFormat("myzip");

@@ -19,7 +19,6 @@ package org.dstadler.jgit.api;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.AmbiguousObjectException;
 import org.eclipse.jgit.errors.CorruptObjectException;
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
@@ -43,7 +42,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
  */
 public class GetFileAttributes {
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException {
         Repository repository = CookbookHelper.openJGitCookbookRepository();
 
         // find the Tree for current HEAD

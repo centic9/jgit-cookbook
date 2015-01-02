@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit:3.5.3.201412180710-r'
-	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:3.5.3.201412180710-r'
+	compile 'org.eclipse.jgit:org.eclipse.jgit:3.6.0.201412230720-r'
+	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:3.6.0.201412230720-r'
 	compile 'commons-io:commons-io:2.4'
 }
 

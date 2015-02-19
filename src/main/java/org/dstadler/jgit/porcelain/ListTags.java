@@ -21,15 +21,17 @@ import java.util.List;
 
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 
 
 
 /**
  * Simple snippet which shows how to list all Tags
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListTags {
@@ -40,6 +42,21 @@ public class ListTags {
         List<Ref> call = new Git(repository).tagList().call();
         for (Ref ref : call) {
             System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+
+            // fetch all commits for this tag
+            LogCommand log = new Git(repository).log();
+
+            Ref peeledRef = repository.peel(ref);
+            if(peeledRef.getPeeledObjectId() != null) {
+            	log.add(peeledRef.getPeeledObjectId());
+            } else {
+            	log.add(ref.getObjectId());
+            }
+
+			Iterable<RevCommit> logs = log.call();
+			for (RevCommit rev : logs) {
+				System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+			}
         }
 
         repository.close();

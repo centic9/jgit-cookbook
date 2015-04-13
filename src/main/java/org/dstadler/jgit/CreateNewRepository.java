@@ -20,28 +20,27 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
  * Simple snippet which shows how to create a new repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CreateNewRepository {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, IllegalStateException, GitAPIException {
         // prepare a new folder
         File localPath = File.createTempFile("TestGitRepository", "");
         localPath.delete();
 
         // create the directory
-        Repository repository = FileRepositoryBuilder.create(new File(localPath, ".git"));
-        repository.create();
+        Git git = Git.init().setDirectory(localPath).call();
 
-        System.out.println("Having repository: " + repository.getDirectory());
+        System.out.println("Having repository: " + git.getRepository().getDirectory());
 
-        repository.close();
+        git.close();
 
         FileUtils.deleteDirectory(localPath);
     }

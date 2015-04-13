@@ -4,9 +4,9 @@ jgit-cookbook
 
 Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
 
-The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. 
+The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. This can be a bit intimidating at first as there are lots of classes, some of which are not relevant for most tasks.
 
-This project tries to provide a collection of ready-to-run snippets which try to augment the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide)
+This project tries to provide a collection of ready-to-run snippets which try to provide a quick start into building functionality using JGit. Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
 
 *Note: Please use sites such as http://stackoverflow.com for general questions about JGit usage, not issues in this project. Issues should be used for problems with snippets and suggestions of missing snippets. Snippets from good answers on stackoverflow can then be included here, naturally.*
 
@@ -20,11 +20,11 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 ###### When using Maven
 
-	mvn dependency:sources eclipse:eclipse package
+    mvn dependency:sources eclipse:eclipse package
 
 ###### When using Gradle
 
-	./gradlew eclipse check
+    ./gradlew eclipse check
 
 #### Run it
 

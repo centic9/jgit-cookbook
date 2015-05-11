@@ -18,6 +18,19 @@ dependencies {
 	compile 'org.slf4j:slf4j-simple:1.7.12'
 }
 
+// work around unnecessary timestamp in generated file which always causes dirty files in version control
+// https://issues.gradle.org/browse/GRADLE-2293
+task adjustEclipseSettingsFile << {
+   ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
+      fileset(dir: project.projectDir, includes: '.settings/org.eclipse.jdt.core.prefs')
+   }
+}
+task sortEclipseSettingsFile << {
+   new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+}
+eclipseJdt.finalizedBy adjustEclipseSettingsFile
+eclipseJdt.finalizedBy sortEclipseSettingsFile
+
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.3'
+	gradleVersion = '2.4'
 }

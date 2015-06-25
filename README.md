@@ -2,11 +2,11 @@ jgit-cookbook
 =============
 [![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
 
-Provides examples and code snippets for the [JGit](http://wiki.eclipse.org/JGit/) Java Git implementation. 
+Provides examples and code snippets for the [JGit](https://eclipse.org/jgit/) Java Git implementation. 
 
 The JGit framework is rich and diverse, it has two layers, a low-level _api_ and a higher-level set of _porcelain_ commands. This can be a bit intimidating at first as there are lots of classes, some of which are not relevant for most tasks.
 
-This project tries to provide a collection of ready-to-run snippets which try to provide a quick start into building functionality using JGit. Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
+This project tries to provide a collection of ready-to-run snippets which try to provide a quick start into building functionality using JGit. Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/3.7.1.201504261725-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
 
 *Note: Please use sites such as http://stackoverflow.com for general questions about JGit usage, not issues in this project. Issues should be used for problems with snippets and suggestions of missing snippets. Snippets from good answers on stackoverflow can then be included here, naturally.*
 
@@ -106,7 +106,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 The following sources were used to build the snippets
 
-* [JGit JavaDoc](http://download.eclipse.org/jgit/docs/latest/apidocs/)
+* [JGit JavaDoc](http://download.eclipse.org/jgit/site/3.7.1.201504261725-r/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
 * [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)

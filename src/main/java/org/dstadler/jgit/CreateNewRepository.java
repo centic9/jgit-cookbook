@@ -36,11 +36,9 @@ public class CreateNewRepository {
         localPath.delete();
 
         // create the directory
-        Git git = Git.init().setDirectory(localPath).call();
-
-        System.out.println("Having repository: " + git.getRepository().getDirectory());
-
-        git.close();
+        try (Git git = Git.init().setDirectory(localPath).call()) {
+            System.out.println("Having repository: " + git.getRepository().getDirectory());
+        }
 
         FileUtils.deleteDirectory(localPath);
     }

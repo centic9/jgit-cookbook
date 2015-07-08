@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -68,31 +69,33 @@ public class CreateCustomFormatArchive {
         public Iterable<String> suffixes() {
             return Collections.singleton(".mzip");
         }
+
+        @Override
+        public ZipOutputStream createArchiveOutputStream(OutputStream s, Map<String, Object> o) throws IOException {
+            return new ZipOutputStream(s);
+        }
     }
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-
-        File file = File.createTempFile("test", ".mzip");
-        // make the archive format known
-        ArchiveCommand.registerFormat("myzip", new ZipArchiveFormat());
-        try {
-            // this is the file that we write the archive to
-            try (OutputStream out = new FileOutputStream(file)) {
-                // finally call the ArchiveCommand to write out using the given format
-                new Git(repository).archive()
-                        .setTree(repository.resolve("master"))
-                        .setFormat("myzip")
-                        .setOutputStream(out)
-                        .call();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            File file = File.createTempFile("test", ".mzip");
+            // make the archive format known
+            ArchiveCommand.registerFormat("myzip", new ZipArchiveFormat());
+            try {
+                // this is the file that we write the archive to
+                try (OutputStream out = new FileOutputStream(file)) {
+                    // finally call the ArchiveCommand to write out using the given format
+                    new Git(repository).archive()
+                            .setTree(repository.resolve("master"))
+                            .setFormat("myzip")
+                            .setOutputStream(out)
+                            .call();
+                }
+            } finally {
+                ArchiveCommand.unregisterFormat("myzip");
             }
-        } finally {
-            ArchiveCommand.unregisterFormat("myzip");
+    
+            System.out.println("Wrote " + file.length() + " bytes to " + file);
         }
-
-        System.out.println("Wrote " + file.length() + " bytes to " + file);
-
-        repository.close();
     }
 }

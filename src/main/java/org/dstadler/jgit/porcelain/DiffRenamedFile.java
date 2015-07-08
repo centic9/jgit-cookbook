@@ -34,11 +34,8 @@ public class DiffRenamedFile {
 		RevTree tree = walk.parseTree(commit.getTree().getId());
 
 		CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-		ObjectReader oldReader = repository.newObjectReader();
-		try {
+		try (ObjectReader oldReader = repository.newObjectReader()) {
 			oldTreeParser.reset(oldReader, tree.getId());
-		} finally {
-			oldReader.release();
 		}
 
 		walk.dispose();

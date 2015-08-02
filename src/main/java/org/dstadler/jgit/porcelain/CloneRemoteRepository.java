@@ -51,6 +51,7 @@ public class CloneRemoteRepository {
 	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
 	        System.out.println("Having repository: " + result.getRepository().getDirectory());
         } finally {
+        	result.getRepository().close();
         	result.close();
         }
     }

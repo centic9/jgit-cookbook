@@ -42,17 +42,15 @@ public class CloneRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git result = Git.cloneRepository()
+        try (Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
-                .call();
-
-        try {
+                .call()) {
 	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
 	        System.out.println("Having repository: " + result.getRepository().getDirectory());
-        } finally {
-        	result.getRepository().close();
-        	result.close();
+
+            // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=474093
+	        result.getRepository().close();
         }
     }
 }

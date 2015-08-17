@@ -84,6 +84,9 @@ public class CloneRemoteRepositoryWithAuthentication {
                 .call()) {
 	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
 	        System.out.println("Having repository: " + result.getRepository().getDirectory());
+
+            // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=474093
+            result.getRepository().close();
         }
     }
 }

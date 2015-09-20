@@ -27,10 +27,11 @@ task adjustEclipseSettingsFile << {
 }
 task sortEclipseSettingsFile << {
    new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+   new File(project.projectDir, '.classpath').with { it.text = it.readLines().findAll { it }.unique().join('\n') }
 }
 eclipseJdt.finalizedBy adjustEclipseSettingsFile
 eclipseJdt.finalizedBy sortEclipseSettingsFile
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '2.5'
+	gradleVersion = '2.7'
 }

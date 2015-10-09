@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+org.moreunit.preferences.version=2
+org.moreunit.unitsourcefolder=jgit-cookbook\:src/main/java\:jgit-cookbook\:src/test/java
+org.moreunit.useprojectsettings=true

@@ -38,25 +38,32 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 /**
  * Simple snippet which shows how to show diffs between branches
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ShowBranchDiff {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                if(repository.getRef("refs/heads/testbranch") == null) {
+                    // first we need to ensure that the remote branch is visible locally
+                    Ref ref = git.branchCreate().setName("testbranch").setStartPoint("origin/testbranch").call();
 
-        // the diff works on TreeIterators, we prepare two for the two branches
-        AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "refs/heads/testbranch");
-        AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "refs/heads/master");
+                    System.out.println("Created local testbranch with ref: " + ref);
+                }
 
-        // then the procelain diff-command returns a list of diff entries
-        List<DiffEntry> diff = new Git(repository).diff().setOldTree(oldTreeParser).setNewTree(newTreeParser).call();
-        for (DiffEntry entry : diff) {
-            System.out.println("Entry: " + entry);
+                // the diff works on TreeIterators, we prepare two for the two branches
+                AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "refs/heads/testbranch");
+                AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "refs/heads/master");
+
+                // then the procelain diff-command returns a list of diff entries
+                List<DiffEntry> diff = git.diff().setOldTree(oldTreeParser).setNewTree(newTreeParser).call();
+                for (DiffEntry entry : diff) {
+                    System.out.println("Entry: " + entry);
+                }
+            }
         }
-
-        repository.close();
     }
 
     private static AbstractTreeIterator prepareTreeParser(Repository repository, String ref) throws IOException,
@@ -64,17 +71,18 @@ public class ShowBranchDiff {
             IncorrectObjectTypeException {
         // from the commit we can build the tree which allows us to construct the TreeParser
         Ref head = repository.getRef(ref);
-        RevWalk walk = new RevWalk(repository);
-        RevCommit commit = walk.parseCommit(head.getObjectId());
-        RevTree tree = walk.parseTree(commit.getTree().getId());
+        try (RevWalk walk = new RevWalk(repository)) {
+            RevCommit commit = walk.parseCommit(head.getObjectId());
+            RevTree tree = walk.parseTree(commit.getTree().getId());
 
-        CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-        try (ObjectReader oldReader = repository.newObjectReader()) {
-            oldTreeParser.reset(oldReader, tree.getId());
+            CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
+            try (ObjectReader oldReader = repository.newObjectReader()) {
+                oldTreeParser.reset(oldReader, tree.getId());
+            }
+
+            walk.dispose();
+
+            return oldTreeParser;
         }
-
-        walk.dispose();
-
-        return oldTreeParser;
     }
 }

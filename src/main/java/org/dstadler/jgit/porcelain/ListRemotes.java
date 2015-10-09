@@ -33,26 +33,26 @@ import org.eclipse.jgit.lib.Repository;
 public class ListRemotes {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        // all refs
-        Collection<Ref> refs = new Git(repository).lsRemote().call();
-        for (Ref ref : refs) {
-            System.out.println("Ref: " + ref);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // all refs
+            try (Git git = new Git(repository)) {
+                Collection<Ref> refs = git.lsRemote().call();
+                for (Ref ref : refs) {
+                    System.out.println("Ref: " + ref);
+                }
+        
+                // heads only
+                refs = git.lsRemote().setHeads(true).call();
+                for (Ref ref : refs) {
+                    System.out.println("Head: " + ref);
+                }
+        
+                // tags only
+                refs = git.lsRemote().setTags(true).call();
+                for (Ref ref : refs) {
+                    System.out.println("Remote tag: " + ref);
+                }
+            }
         }
-
-        // heads only
-        refs = new Git(repository).lsRemote().setHeads(true).call();
-        for (Ref ref : refs) {
-            System.out.println("Head: " + ref);
-        }
-
-        // tags only
-        refs = new Git(repository).lsRemote().setTags(true).call();
-        for (Ref ref : refs) {
-            System.out.println("Remote tag: " + ref);
-        }
-
-        repository.close();
     }
 }

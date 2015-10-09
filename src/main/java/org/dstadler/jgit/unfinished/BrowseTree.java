@@ -34,26 +34,26 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 public class BrowseTree {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        ObjectId revId = repository.resolve(Constants.HEAD);
-        TreeWalk treeWalk = new TreeWalk(repository);
-
-        treeWalk.addTree(new RevWalk(repository).parseTree(revId));
-
-        while (treeWalk.next())
-        {
-            System.out.println("---------------------------");
-            System.out.append("name: ").println(treeWalk.getNameString());
-            System.out.append("path: ").println(treeWalk.getPathString());
-
-            ObjectLoader loader = repository.open(treeWalk.getObjectId(0));
-
-            System.out.append("directory: ").println(loader.getType()
-                    == Constants.OBJ_TREE);
-            System.out.append("size: ").println(loader.getSize());
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            ObjectId revId = repository.resolve(Constants.HEAD);
+            try (TreeWalk treeWalk = new TreeWalk(repository)) {
+                try (RevWalk revWalk = new RevWalk(repository)) {
+                    treeWalk.addTree(revWalk.parseTree(revId));
+            
+                    while (treeWalk.next())
+                    {
+                        System.out.println("---------------------------");
+                        System.out.append("name: ").println(treeWalk.getNameString());
+                        System.out.append("path: ").println(treeWalk.getPathString());
+            
+                        ObjectLoader loader = repository.open(treeWalk.getObjectId(0));
+            
+                        System.out.append("directory: ").println(loader.getType()
+                                == Constants.OBJ_TREE);
+                        System.out.append("size: ").println(loader.getSize());
+                    }
+                }
+            }
         }
-
-        repository.close();
     }
 }

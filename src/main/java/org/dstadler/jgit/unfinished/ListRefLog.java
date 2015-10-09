@@ -39,23 +39,23 @@ import org.eclipse.jgit.lib.Repository;
 public class ListRefLog {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        List<Ref> refs = new Git(repository).branchList().call();
-        for (Ref ref : refs) {
-            System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-
-            listReflog(repository, ref);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                List<Ref> refs = git.branchList().call();
+                for (Ref ref : refs) {
+                    System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+        
+                    listReflog(repository, ref);
+                }
+        
+                List<Ref> call = git.tagList().call();
+                for (Ref ref : call) {
+                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+        
+                    listReflog(repository, ref);
+                }
+            }
         }
-
-        List<Ref> call = new Git(repository).tagList().call();
-        for (Ref ref : call) {
-            System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-
-            listReflog(repository, ref);
-        }
-
-        repository.close();
     }
 
     private static void listReflog(Repository repository, Ref ref) throws GitAPIException, InvalidRefNameException {
@@ -65,11 +65,13 @@ public class ListRefLog {
          * RevCommit commit = walk.parseCommit(head.getObjectId());
          */
 
-        Collection<ReflogEntry> call = new Git(repository).reflog().setRef(ref.getName()).call();
-        Iterator<ReflogEntry> it = call.iterator();
-        while (it.hasNext()) {
-            ReflogEntry reflog = it.next();
-            System.out.println("Reflog: " + reflog);
+        try (Git git = new Git(repository)) {
+            Collection<ReflogEntry> call = git.reflog().setRef(ref.getName()).call();
+            Iterator<ReflogEntry> it = call.iterator();
+            while (it.hasNext()) {
+                ReflogEntry reflog = it.next();
+                System.out.println("Reflog: " + reflog);
+            }
         }
     }
 }

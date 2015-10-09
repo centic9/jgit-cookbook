@@ -31,25 +31,23 @@ import org.eclipse.jgit.lib.Repository;
 public class ListIndex {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        // DirCache contains all files of the repository
-        DirCache index = DirCache.read(repository);
-        System.out.println("DirCache has " + index.getEntryCount() + " items");
-        for (int i = 0; i < index.getEntryCount(); i++) {
-            // the number after the AnyObjectId is the "stage", see the constants in DirCacheEntry
-            System.out.println("Item " + i + ": " + index.getEntry(i));
-        }
-
-        //
-        System.out.println("Now printing staged items...");
-        for (int i = 0; i < index.getEntryCount(); i++) {
-            DirCacheEntry entry = index.getEntry(i);
-            if (entry.getStage() != DirCacheEntry.STAGE_0) {
-                System.out.println("Item " + i + ": " + entry);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // DirCache contains all files of the repository
+            DirCache index = DirCache.read(repository);
+            System.out.println("DirCache has " + index.getEntryCount() + " items");
+            for (int i = 0; i < index.getEntryCount(); i++) {
+                // the number after the AnyObjectId is the "stage", see the constants in DirCacheEntry
+                System.out.println("Item " + i + ": " + index.getEntry(i));
+            }
+    
+            //
+            System.out.println("Now printing staged items...");
+            for (int i = 0; i < index.getEntryCount(); i++) {
+                DirCacheEntry entry = index.getEntry(i);
+                if (entry.getStage() != DirCacheEntry.STAGE_0) {
+                    System.out.println("Item " + i + ": " + entry);
+                }
             }
         }
-
-        repository.close();
     }
 }

@@ -28,12 +28,10 @@ import org.eclipse.jgit.lib.Repository;
 public class GetRefFromName {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
-        Ref head = repository.getRef("refs/heads/master");
-        System.out.println("Ref of refs/heads/master: " + head);
-
-        repository.close();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
+            Ref head = repository.getRef("refs/heads/master");
+            System.out.println("Ref of refs/heads/master: " + head);
+        }
     }
 }

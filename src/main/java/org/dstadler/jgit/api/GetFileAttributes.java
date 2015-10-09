@@ -43,18 +43,16 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 public class GetFileAttributes {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        // find the Tree for current HEAD
-        RevTree tree = getTree(repository);
-
-        printFile(repository, tree);
-
-        printDirectory(repository, tree);
-
-        // there is also FileMode.SYMLINK for symbolic links, but this is not handled here yet
-
-        repository.close();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // find the Tree for current HEAD
+            RevTree tree = getTree(repository);
+    
+            printFile(repository, tree);
+    
+            printDirectory(repository, tree);
+    
+            // there is also FileMode.SYMLINK for symbolic links, but this is not handled here yet
+        }
     }
 
     private static RevTree getTree(Repository repository) throws AmbiguousObjectException, IncorrectObjectTypeException,
@@ -62,50 +60,53 @@ public class GetFileAttributes {
         ObjectId lastCommitId = repository.resolve(Constants.HEAD);
 
         // a RevWalk allows to walk over commits based on some filtering
-        RevWalk revWalk = new RevWalk(repository);
-        RevCommit commit = revWalk.parseCommit(lastCommitId);
-
-        System.out.println("Time of commit (seconds since epoch): " + commit.getCommitTime());
-
-        // and using commit's tree find the path
-        RevTree tree = commit.getTree();
-        System.out.println("Having tree: " + tree);
-        return tree;
+        try (RevWalk revWalk = new RevWalk(repository)) {
+            RevCommit commit = revWalk.parseCommit(lastCommitId);
+    
+            System.out.println("Time of commit (seconds since epoch): " + commit.getCommitTime());
+    
+            // and using commit's tree find the path
+            RevTree tree = commit.getTree();
+            System.out.println("Having tree: " + tree);
+            return tree;
+        }
     }
 
     private static void printFile(Repository repository, RevTree tree) throws MissingObjectException,
             IncorrectObjectTypeException, CorruptObjectException, IOException {
         // now try to find a specific file
-        TreeWalk treeWalk = new TreeWalk(repository);
-        treeWalk.addTree(tree);
-        treeWalk.setRecursive(false);
-        treeWalk.setFilter(PathFilter.create("README.md"));
-        if (!treeWalk.next()) {
-            throw new IllegalStateException("Did not find expected file 'README.md'");
+        try (TreeWalk treeWalk = new TreeWalk(repository)) {
+            treeWalk.addTree(tree);
+            treeWalk.setRecursive(false);
+            treeWalk.setFilter(PathFilter.create("README.md"));
+            if (!treeWalk.next()) {
+                throw new IllegalStateException("Did not find expected file 'README.md'");
+            }
+    
+            // FileMode specifies the type of file, FileMode.REGULAR_FILE for normal file, FileMode.EXECUTABLE_FILE for executable bit
+    // set
+            FileMode fileMode = treeWalk.getFileMode(0);
+            ObjectLoader loader = repository.open(treeWalk.getObjectId(0));
+            System.out.println("README.md: " + getFileMode(fileMode) + ", type: " + fileMode.getObjectType() + ", mode: " + fileMode +
+                    " size: " + loader.getSize());
         }
-
-        // FileMode specifies the type of file, FileMode.REGULAR_FILE for normal file, FileMode.EXECUTABLE_FILE for executable bit
-// set
-        FileMode fileMode = treeWalk.getFileMode(0);
-        ObjectLoader loader = repository.open(treeWalk.getObjectId(0));
-        System.out.println("README.md: " + getFileMode(fileMode) + ", type: " + fileMode.getObjectType() + ", mode: " + fileMode +
-                " size: " + loader.getSize());
     }
 
     private static void printDirectory(Repository repository, RevTree tree) throws MissingObjectException,
             IncorrectObjectTypeException, CorruptObjectException, IOException {
         // look at directory, this has FileMode.TREE
-        TreeWalk treeWalk = new TreeWalk(repository);
-        treeWalk.addTree(tree);
-        treeWalk.setRecursive(false);
-        treeWalk.setFilter(PathFilter.create("src"));
-        if (!treeWalk.next()) {
-            throw new IllegalStateException("Did not find expected file 'README.md'");
+        try (TreeWalk treeWalk = new TreeWalk(repository)) {
+            treeWalk.addTree(tree);
+            treeWalk.setRecursive(false);
+            treeWalk.setFilter(PathFilter.create("src"));
+            if (!treeWalk.next()) {
+                throw new IllegalStateException("Did not find expected file 'README.md'");
+            }
+    
+            // FileMode now indicates that this is a directory, i.e. FileMode.TREE.equals(fileMode) holds true
+            FileMode fileMode = treeWalk.getFileMode(0);
+            System.out.println("src: " + getFileMode(fileMode) + ", type: " + fileMode.getObjectType() + ", mode: " + fileMode);
         }
-
-        // FileMode now indicates that this is a directory, i.e. FileMode.TREE.equals(fileMode) holds true
-        FileMode fileMode = treeWalk.getFileMode(0);
-        System.out.println("src: " + getFileMode(fileMode) + ", type: " + fileMode.getObjectType() + ", mode: " + fileMode);
     }
 
     private static String getFileMode(FileMode fileMode) {

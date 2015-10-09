@@ -36,20 +36,20 @@ import org.eclipse.jgit.lib.Repository;
 public class ListBranches {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        System.out.println("Listing local branches:");
-        List<Ref> call = new Git(repository).branchList().call();
-        for (Ref ref : call) {
-            System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        }
-
-        System.out.println("Now including remote branches:");
-        call = new Git(repository).branchList().setListMode(ListMode.ALL).call();
-        for (Ref ref : call) {
-            System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        }
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            System.out.println("Listing local branches:");
+            try (Git git = new Git(repository)) {
+                List<Ref> call = git.branchList().call();
+                for (Ref ref : call) {
+                    System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
         
-        repository.close();
+                System.out.println("Now including remote branches:");
+                call = git.branchList().setListMode(ListMode.ALL).call();
+                for (Ref ref : call) {
+                    System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
+            }
+        }        
     }
 }

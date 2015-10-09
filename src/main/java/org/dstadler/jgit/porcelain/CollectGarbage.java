@@ -36,13 +36,13 @@ import org.eclipse.jgit.lib.Repository;
 public class CollectGarbage {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        Properties ret = new Git(repository).gc().call();
-        for(Map.Entry<Object, Object> entry : ret.entrySet()) {
-            System.out.println("Ret: " + entry.getKey() + ": " + entry.getValue());
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                Properties ret = git.gc().call();
+                for(Map.Entry<Object, Object> entry : ret.entrySet()) {
+                    System.out.println("Ret: " + entry.getKey() + ": " + entry.getValue());
+                }
+            }
         }
-
-        repository.close();
     }
 }

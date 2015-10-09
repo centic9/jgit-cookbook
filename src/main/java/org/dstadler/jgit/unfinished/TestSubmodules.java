@@ -36,19 +36,19 @@ public class TestSubmodules {
     public static void main(String[] args) throws IOException, GitAPIException {
         File mainRepoDir = createRepository();
         
-        Repository mainRepo = openMainRepo(mainRepoDir);
-        
-        addSubmodule(mainRepo);
-        
-        FileRepositoryBuilder builder = new FileRepositoryBuilder();
-
-        Repository subRepo = builder.setGitDir(new File("testrepo/.git"))
-          .readEnvironment() // scan environment GIT_* variables
-          .findGitDir() // scan up the file system tree
-          .build();
-
-        if(subRepo.isBare()) {
-            throw new IllegalStateException("Repository at " + subRepo.getDirectory() + " should not be bare");
+        try (Repository mainRepo = openMainRepo(mainRepoDir)) {
+            addSubmodule(mainRepo);
+            
+            FileRepositoryBuilder builder = new FileRepositoryBuilder();
+    
+            try (Repository subRepo = builder.setGitDir(new File("testrepo/.git"))
+              .readEnvironment() // scan environment GIT_* variables
+              .findGitDir() // scan up the file system tree
+              .build()) {
+                if(subRepo.isBare()) {
+                    throw new IllegalStateException("Repository at " + subRepo.getDirectory() + " should not be bare");
+                }
+            }
         }
 
         System.out.println("All done!");
@@ -56,12 +56,15 @@ public class TestSubmodules {
 
     private static void addSubmodule(Repository mainRepo) throws GitAPIException {
         System.out.println("Adding submodule");
-        Repository subRepoInit = new Git(mainRepo).submoduleAdd().
-                setURI("https://github.com/github/testrepo.git").
-                setPath("testrepo").
-                call();
-        if(subRepoInit.isBare()) {
-            throw new IllegalStateException("Repository at " + subRepoInit.getDirectory() + " should not be bare");
+        try (Git git = new Git(mainRepo)) {
+            try (Repository subRepoInit = git.submoduleAdd().
+                    setURI("https://github.com/github/testrepo.git").
+                    setPath("testrepo").
+                    call()) {
+                if(subRepoInit.isBare()) {
+                    throw new IllegalStateException("Repository at " + subRepoInit.getDirectory() + " should not be bare");
+                }
+            }
         }
     }
 
@@ -87,11 +90,9 @@ public class TestSubmodules {
                 .setDirectory(dir)
                 .call();
 
-        Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"));
-
-        System.out.println("Created a new repository at " + repository.getDirectory());
-
-        repository.close();
+        try (Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"))) {
+            System.out.println("Created a new repository at " + repository.getDirectory());
+        }
         
         return dir;
     }

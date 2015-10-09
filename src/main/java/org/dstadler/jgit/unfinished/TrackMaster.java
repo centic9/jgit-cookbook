@@ -44,32 +44,28 @@ public class TrackMaster {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git result = Git.cloneRepository()
+        try (Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
-                .call();
-
-        // now open the created repository
-        FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder.setGitDir(localPath)
-                .readEnvironment() // scan environment GIT_* variables
-                .findGitDir() // scan up the file system tree
-                .build();
-
-        Git git = new Git(repository);
-
-        git.branchCreate()
-                .setName("master")
-                // ?!? .setUpstreamMode(SetupUpstreamMode.SET_UPSTREAM)
-                .setStartPoint("origin/master")
-                .setForce(true)
-                .call();
-
-        System.out.println("Now tracking master in repository at " + repository.getDirectory() + " from origin/master at " +
-                REMOTE_URL);
-
-        repository.close();
-
-        result.close();
+                .call()) {
+            // now open the created repository
+            FileRepositoryBuilder builder = new FileRepositoryBuilder();
+            try (Repository repository = builder.setGitDir(localPath)
+                    .readEnvironment() // scan environment GIT_* variables
+                    .findGitDir() // scan up the file system tree
+                    .build()) {
+                try (Git git = new Git(repository)) {
+                    git.branchCreate()
+                            .setName("master")
+                            // ?!? .setUpstreamMode(SetupUpstreamMode.SET_UPSTREAM)
+                            .setStartPoint("origin/master")
+                            .setForce(true)
+                            .call();
+                }
+        
+                System.out.println("Now tracking master in repository at " + repository.getDirectory() + " from origin/master at " +
+                        REMOTE_URL);
+            }
+        }
     }
 }

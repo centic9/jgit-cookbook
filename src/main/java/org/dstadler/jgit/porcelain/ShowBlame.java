@@ -46,50 +46,50 @@ public class ShowBlame {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new test-repository
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        BlameCommand blamer = new BlameCommand(repository);
-        ObjectId commitID = repository.resolve("HEAD");
-        blamer.setStartCommit(commitID);
-        blamer.setFilePath("README.md");
-        BlameResult blame = blamer.call();
-
-        // read the number of lines from the commit to not look at changes in the working copy
-        int lines = countFiles(repository, commitID, "README.md");
-        for (int i = 0; i < lines; i++) {
-            RevCommit commit = blame.getSourceCommit(i);
-            System.out.println("Line: " + i + ": " + commit);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            BlameCommand blamer = new BlameCommand(repository);
+            ObjectId commitID = repository.resolve("HEAD");
+            blamer.setStartCommit(commitID);
+            blamer.setFilePath("README.md");
+            BlameResult blame = blamer.call();
+    
+            // read the number of lines from the commit to not look at changes in the working copy
+            int lines = countFiles(repository, commitID, "README.md");
+            for (int i = 0; i < lines; i++) {
+                RevCommit commit = blame.getSourceCommit(i);
+                System.out.println("Line: " + i + ": " + commit);
+            }
+    
+            System.out.println("Displayed commits responsible for " + lines + " lines of README.md");
         }
-
-        System.out.println("Displayed commits responsible for " + lines + " lines of README.md");
-
-        repository.close();
     }
 
     private static int countFiles(Repository repository, ObjectId commitID, String name) throws IOException {
-        RevWalk revWalk = new RevWalk(repository);
-        RevCommit commit = revWalk.parseCommit(commitID);
-        RevTree tree = commit.getTree();
-        System.out.println("Having tree: " + tree);
-
-        // now try to find a specific file
-        TreeWalk treeWalk = new TreeWalk(repository);
-        treeWalk.addTree(tree);
-        treeWalk.setRecursive(true);
-        treeWalk.setFilter(PathFilter.create(name));
-        if (!treeWalk.next()) {
-            throw new IllegalStateException("Did not find expected file 'README.md'");
+        try (RevWalk revWalk = new RevWalk(repository)) {
+            RevCommit commit = revWalk.parseCommit(commitID);
+            RevTree tree = commit.getTree();
+            System.out.println("Having tree: " + tree);
+    
+            // now try to find a specific file
+            try (TreeWalk treeWalk = new TreeWalk(repository)) {
+                treeWalk.addTree(tree);
+                treeWalk.setRecursive(true);
+                treeWalk.setFilter(PathFilter.create(name));
+                if (!treeWalk.next()) {
+                    throw new IllegalStateException("Did not find expected file 'README.md'");
+                }
+        
+                ObjectId objectId = treeWalk.getObjectId(0);
+                ObjectLoader loader = repository.open(objectId);
+        
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                // and then one can the loader to read the file
+                loader.copyTo(stream);
+                
+                revWalk.dispose();
+                
+                return IOUtils.readLines(new ByteArrayInputStream(stream.toByteArray())).size();
+            }
         }
-
-        ObjectId objectId = treeWalk.getObjectId(0);
-        ObjectLoader loader = repository.open(objectId);
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // and then one can the loader to read the file
-        loader.copyTo(stream);
-
-        revWalk.dispose();
-
-        return IOUtils.readLines(new ByteArrayInputStream(stream.toByteArray())).size();
     }
 }

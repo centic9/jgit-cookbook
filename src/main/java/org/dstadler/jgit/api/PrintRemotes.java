@@ -29,16 +29,14 @@ import org.eclipse.jgit.lib.Repository;
 public class PrintRemotes {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        Config storedConfig = repository.getConfig();
-        Set<String> remotes = storedConfig.getSubsections("remote");
-
-        for (String remoteName : remotes) {
-            String url = storedConfig.getString("remote", remoteName, "url");
-            System.out.println(remoteName + " " + url);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            Config storedConfig = repository.getConfig();
+            Set<String> remotes = storedConfig.getSubsections("remote");
+    
+            for (String remoteName : remotes) {
+                String url = storedConfig.getString("remote", remoteName, "url");
+                System.out.println(remoteName + " " + url);
+            }
         }
-
-        repository.close();
     }
 }

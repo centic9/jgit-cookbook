@@ -34,24 +34,23 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class ListChildrenOfCommit {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        PlotWalk revWalk = new PlotWalk(repository);
-        ObjectId rootId = repository.resolve("refs/heads/master");
-        RevCommit root = revWalk.parseCommit(rootId);
-        revWalk.markStart(root);
-        PlotCommitList<PlotLane> plotCommitList = new PlotCommitList<>();
-        plotCommitList.source(revWalk);
-        plotCommitList.fillTo(Integer.MAX_VALUE);
-
-        System.out.println("Printing children of commit " + root);
-        for (RevCommit com : revWalk) {
-            System.out.println("Child: " + com);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (PlotWalk revWalk = new PlotWalk(repository)) {
+                ObjectId rootId = repository.resolve("refs/heads/master");
+                RevCommit root = revWalk.parseCommit(rootId);
+                revWalk.markStart(root);
+                PlotCommitList<PlotLane> plotCommitList = new PlotCommitList<>();
+                plotCommitList.source(revWalk);
+                plotCommitList.fillTo(Integer.MAX_VALUE);
+        
+                System.out.println("Printing children of commit " + root);
+                for (RevCommit com : revWalk) {
+                    System.out.println("Child: " + com);
+                }
+        
+                System.out.println("Printing with next()");
+                System.out.println("next: " + revWalk.next());
+            }
         }
-
-        System.out.println("Printing with next()");
-        System.out.println("next: " + revWalk.next());
-
-        repository.close();
     }
 }

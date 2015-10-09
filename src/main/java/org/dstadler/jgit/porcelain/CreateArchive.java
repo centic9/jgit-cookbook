@@ -37,21 +37,18 @@ import org.eclipse.jgit.lib.Repository;
  */
 public class CreateArchive {
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-
-        // make the included archive formats known
-        ArchiveFormats.registerAll();
-        try {
-            write(repository, ".zip", "zip");
-            write(repository, ".tar.gz", "tgz");
-            write(repository, ".tar.bz2", "tbz2");
-            write(repository, ".tar.xz", "txz");
-        } finally {
-            ArchiveFormats.unregisterAll();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // make the included archive formats known
+            ArchiveFormats.registerAll();
+            try {
+                write(repository, ".zip", "zip");
+                write(repository, ".tar.gz", "tgz");
+                write(repository, ".tar.bz2", "tbz2");
+                write(repository, ".tar.xz", "txz");
+            } finally {
+                ArchiveFormats.unregisterAll();
+            }
         }
-
-        repository.close();
     }
 
     private static void write(Repository repository, String suffix, String format) throws IOException, GitAPIException {
@@ -59,11 +56,13 @@ public class CreateArchive {
         File file = File.createTempFile("test", suffix);
         try (OutputStream out = new FileOutputStream(file)) {
             // finally call the ArchiveCommand to write out using the various supported formats
-            new Git(repository).archive()
-                    .setTree(repository.resolve("master"))
-                    .setFormat(format)
-                    .setOutputStream(out)
-                    .call();
+            try (Git git = new Git(repository)) {
+                git.archive()
+                        .setTree(repository.resolve("master"))
+                        .setFormat(format)
+                        .setOutputStream(out)
+                        .call();
+            }
         }
 
         System.out.println("Wrote " + file.length() + " bytes to " + file);

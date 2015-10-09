@@ -85,11 +85,13 @@ public class CreateCustomFormatArchive {
                 // this is the file that we write the archive to
                 try (OutputStream out = new FileOutputStream(file)) {
                     // finally call the ArchiveCommand to write out using the given format
-                    new Git(repository).archive()
-                            .setTree(repository.resolve("master"))
-                            .setFormat("myzip")
-                            .setOutputStream(out)
-                            .call();
+                    try (Git git = new Git(repository)) {
+                        git.archive()
+                                .setTree(repository.resolve("master"))
+                                .setFormat("myzip")
+                                .setOutputStream(out)
+                                .call();
+                    }
                 }
             } finally {
                 ArchiveCommand.unregisterFormat("myzip");

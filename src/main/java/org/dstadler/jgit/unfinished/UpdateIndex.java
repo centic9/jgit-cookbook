@@ -39,25 +39,23 @@ import org.eclipse.jgit.lib.Repository;
 public class UpdateIndex {
 
 	public static void main(String[] args) throws IOException, GitAPIException {
-		final Repository repo = CookbookHelper.openJGitCookbookRepository();
-		final Git git = new Git(repo);
-		final String testFile = "README.md";
-		
-		try {
-			// Modify the file
-			FileUtils.write(new File(testFile), new Date().toString());			
-			System.out.println("Modified files: " + getModifiedFiles(git));
-			
-			new AssumeChangedCommand(repo, testFile, true).call();
-			System.out.println("Modified files after assume-changed: " + getModifiedFiles(git));
-
-			new AssumeChangedCommand(repo, testFile, false).call();
-			System.out.println("Modified files after no-assume-changed: " + getModifiedFiles(git));
-
-			git.checkout().addPath(testFile).call();
-			System.out.println("Modified files after reset: " + getModifiedFiles(git));
-		} finally {
-			repo.close();
+		try (final Repository repo = CookbookHelper.openJGitCookbookRepository()) {
+    		try (final Git git = new Git(repo)) {
+    		    final String testFile = "README.md";
+    		
+    			// Modify the file
+    			FileUtils.write(new File(testFile), new Date().toString());			
+    			System.out.println("Modified files: " + getModifiedFiles(git));
+    			
+    			new AssumeChangedCommand(repo, testFile, true).call();
+    			System.out.println("Modified files after assume-changed: " + getModifiedFiles(git));
+    
+    			new AssumeChangedCommand(repo, testFile, false).call();
+    			System.out.println("Modified files after no-assume-changed: " + getModifiedFiles(git));
+    
+    			git.checkout().addPath(testFile).call();
+    			System.out.println("Modified files after reset: " + getModifiedFiles(git));
+    		}
 		}
 	}
 

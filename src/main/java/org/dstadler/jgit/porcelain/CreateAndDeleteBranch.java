@@ -36,49 +36,48 @@ public class CreateAndDeleteBranch {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare test-repository
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-        Git git = new Git(repository);
-
-        List<Ref> call = new Git(repository).branchList().call();
-        for (Ref ref : call) {
-            System.out.println("Branch-Before: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        }
-
-        // make sure the branch is not there
-        List<Ref> refs = git.branchList().call();
-        for(Ref ref : refs) {
-            System.out.println("Had branch: " + ref.getName());
-            if(ref.getName().equals("refs/heads/testbranch")) {
-                System.out.println("Removing branch before");
-                git.branchDelete()
-                .setBranchNames("testbranch")
-                .setForce(true)
-                .call();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                List<Ref> call = git.branchList().call();
+                for (Ref ref : call) {
+                    System.out.println("Branch-Before: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
+        
+                // make sure the branch is not there
+                List<Ref> refs = git.branchList().call();
+                for(Ref ref : refs) {
+                    System.out.println("Had branch: " + ref.getName());
+                    if(ref.getName().equals("refs/heads/testbranch")) {
+                        System.out.println("Removing branch before");
+                        git.branchDelete()
+                        .setBranchNames("testbranch")
+                        .setForce(true)
+                        .call();
+                        
+                        break;
+                    }
+                }
                 
-                break;
+                // run the add-call
+                git.branchCreate()
+                        .setName("testbranch")
+                        .call();
+        
+                call = git.branchList().call();
+                for (Ref ref : call) {
+                    System.out.println("Branch-Created: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
+        
+                // run the delete-call
+                git.branchDelete()
+                        .setBranchNames("testbranch")
+                        .call();
+        
+                call = git.branchList().call();
+                for (Ref ref : call) {
+                    System.out.println("Branch-After: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
             }
         }
-        
-        // run the add-call
-        git.branchCreate()
-                .setName("testbranch")
-                .call();
-
-        call = new Git(repository).branchList().call();
-        for (Ref ref : call) {
-            System.out.println("Branch-Created: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        }
-
-        // run the delete-call
-        git.branchDelete()
-                .setBranchNames("testbranch")
-                .call();
-
-        call = new Git(repository).branchList().call();
-        for (Ref ref : call) {
-            System.out.println("Branch-After: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        }
-
-        repository.close();
     }
 }

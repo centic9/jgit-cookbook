@@ -37,28 +37,28 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class ListTags {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        List<Ref> call = new Git(repository).tagList().call();
-        for (Ref ref : call) {
-            System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-
-            // fetch all commits for this tag
-            LogCommand log = new Git(repository).log();
-
-            Ref peeledRef = repository.peel(ref);
-            if(peeledRef.getPeeledObjectId() != null) {
-            	log.add(peeledRef.getPeeledObjectId());
-            } else {
-            	log.add(ref.getObjectId());
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                List<Ref> call = git.tagList().call();
+                for (Ref ref : call) {
+                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+        
+                    // fetch all commits for this tag
+                    LogCommand log = git.log();
+        
+                    Ref peeledRef = repository.peel(ref);
+                    if(peeledRef.getPeeledObjectId() != null) {
+                    	log.add(peeledRef.getPeeledObjectId());
+                    } else {
+                    	log.add(ref.getObjectId());
+                    }
+        
+        			Iterable<RevCommit> logs = log.call();
+        			for (RevCommit rev : logs) {
+        				System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+        			}
+                }
             }
-
-			Iterable<RevCommit> logs = log.call();
-			for (RevCommit rev : logs) {
-				System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-			}
         }
-
-        repository.close();
     }
 }

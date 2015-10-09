@@ -35,20 +35,19 @@ public class AddFile {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new test-repository
-        Repository repository = CookbookHelper.createNewRepository();
-        Git git = new Git(repository);
-
-        // create the file
-        File myfile = new File(repository.getDirectory().getParent(), "testfile");
-        myfile.createNewFile();
-
-        // run the add-call
-        git.add()
-                .addFilepattern("testfile")
-                .call();
-
-        System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
-
-        repository.close();
+        try (Repository repository = CookbookHelper.createNewRepository()) {
+            try (Git git = new Git(repository)) {
+                // create the file
+                File myfile = new File(repository.getDirectory().getParent(), "testfile");
+                myfile.createNewFile();
+        
+                // run the add-call
+                git.add()
+                        .addFilepattern("testfile")
+                        .call();
+        
+                System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
+            }
+        }
     }
 }

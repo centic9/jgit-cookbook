@@ -46,43 +46,45 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 public class ShowFileDiff {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        // the diff works on TreeIterators, we prepare two for the two branches
-        AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "09c65401f3730eb3e619c33bf31e2376fb393727");
-        AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "aa31703b65774e4a06010824601e56375a70078c");
-
-        // then the procelain diff-command returns a list of diff entries
-        List<DiffEntry> diff = new Git(repository).diff().
-                setOldTree(oldTreeParser).
-                setNewTree(newTreeParser).
-                setPathFilter(PathFilter.create("README.md")).
-                call();
-        for (DiffEntry entry : diff) {
-            System.out.println("Entry: " + entry + ", from: " + entry.getOldId() + ", to: " + entry.getNewId());
-            DiffFormatter formatter = new DiffFormatter(System.out);
-            formatter.setRepository(repository);
-            formatter.format(entry);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // the diff works on TreeIterators, we prepare two for the two branches
+            AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "09c65401f3730eb3e619c33bf31e2376fb393727");
+            AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "aa31703b65774e4a06010824601e56375a70078c");
+    
+            // then the procelain diff-command returns a list of diff entries
+            try (Git git = new Git(repository)) {
+                List<DiffEntry> diff = git.diff().
+                        setOldTree(oldTreeParser).
+                        setNewTree(newTreeParser).
+                        setPathFilter(PathFilter.create("README.md")).
+                        call();
+                for (DiffEntry entry : diff) {
+                    System.out.println("Entry: " + entry + ", from: " + entry.getOldId() + ", to: " + entry.getNewId());
+                    try (DiffFormatter formatter = new DiffFormatter(System.out)) {
+                        formatter.setRepository(repository);
+                        formatter.format(entry);
+                    }
+                }
+            }
         }
-
-        repository.close();
     }
 
     private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException,
             MissingObjectException,
             IncorrectObjectTypeException {
         // from the commit we can build the tree which allows us to construct the TreeParser
-        RevWalk walk = new RevWalk(repository);
-        RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
-        RevTree tree = walk.parseTree(commit.getTree().getId());
-
-        CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-        try (ObjectReader oldReader = repository.newObjectReader()) {
-            oldTreeParser.reset(oldReader, tree.getId());
+        try (RevWalk walk = new RevWalk(repository)) {
+            RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
+            RevTree tree = walk.parseTree(commit.getTree().getId());
+    
+            CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
+            try (ObjectReader oldReader = repository.newObjectReader()) {
+                oldTreeParser.reset(oldReader, tree.getId());
+            }
+            
+            walk.dispose();
+    
+            return oldTreeParser;
         }
-        
-        walk.dispose();
-
-        return oldTreeParser;
     }
 }

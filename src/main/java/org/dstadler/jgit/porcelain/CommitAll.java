@@ -19,21 +19,20 @@ public class CommitAll {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new test-repository
-        Repository repository = CookbookHelper.createNewRepository();
-        Git git = new Git(repository);
-
-        // create the file
-        File myfile = new File(repository.getDirectory().getParent(), "testfile");
-        myfile.createNewFile();
-
-        // and then commit the changes
-        git.commit()
-        		.setAll(true)
-                .setMessage("Commit all")
-                .call();
-
-        System.out.println("Committed all changes to repository at " + repository.getDirectory());
-
-        repository.close();
+        try (Repository repository = CookbookHelper.createNewRepository()) {
+            try (Git git = new Git(repository)) {
+                // create the file
+                File myfile = new File(repository.getDirectory().getParent(), "testfile");
+                myfile.createNewFile();
+        
+                // and then commit the changes
+                git.commit()
+                		.setAll(true)
+                        .setMessage("Commit all")
+                        .call();
+        
+                System.out.println("Committed all changes to repository at " + repository.getDirectory());
+            }
+        }
     }
 }

@@ -39,20 +39,20 @@ public class PullRemoteRepository {
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
     public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
-        Repository repository = cloneRepository();
-
-        System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
-                repository.getRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" +
-                repository.resolve("refs/heads/master"));
-
-        // TODO: why do we get null here for HEAD?!? See also
-// http://stackoverflow.com/questions/17979660/jgit-pull-noheadexception
-
-        PullResult call = new Git(repository).pull().call();
-
-        System.out.println("Pulled from the remote repository: " + call);
-
-        repository.close();
+        try (Repository repository = cloneRepository()) {
+            System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
+                    repository.getRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" +
+                    repository.resolve("refs/heads/master"));
+    
+            // TODO: why do we get null here for HEAD?!? See also
+    // http://stackoverflow.com/questions/17979660/jgit-pull-noheadexception
+    
+            try (Git git = new Git(repository)) {
+                PullResult call = git.pull().call();
+        
+                System.out.println("Pulled from the remote repository: " + call);
+            }
+        }
     }
 
     private static Repository cloneRepository() throws IOException, GitAPIException, InvalidRemoteException, TransportException {
@@ -62,12 +62,12 @@ public class PullRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git result = Git.cloneRepository()
+        try (Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
-                .call();
-
-        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
-        return result.getRepository();
+                .call()) {
+            // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
+            return result.getRepository();
+        }
     }
 }

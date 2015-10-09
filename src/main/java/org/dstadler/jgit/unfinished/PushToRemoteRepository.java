@@ -44,38 +44,34 @@ public class PushToRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        Git result = Git.cloneRepository()
+        try (Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
-                .call();
-
-        // prepare a second folder for the 2nd clone
-        File localPath2 = File.createTempFile("TestGitRepository", "");
-        localPath2.delete();
-
-        // then clone again
-        System.out.println("Cloning from file://" + localPath + " to " + localPath2);
-        Git result2 = Git.cloneRepository()
-                .setURI("file://" + localPath)
-                .setDirectory(localPath2)
-                .call();
-
-        // now open the created repository
-        FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder.setGitDir(localPath2)
-                .readEnvironment() // scan environment GIT_* variables
-                .findGitDir() // scan up the file system tree
-                .build();
-
-        Git git = new Git(repository);
-        git.push()
-                .call();
-
-        System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);
-
-        repository.close();
-
-        result.close();
-        result2.close();
+                .call()) {
+            // prepare a second folder for the 2nd clone
+            File localPath2 = File.createTempFile("TestGitRepository", "");
+            localPath2.delete();
+    
+            // then clone again
+            System.out.println("Cloning from file://" + localPath + " to " + localPath2);
+            try (Git result2 = Git.cloneRepository()
+                    .setURI("file://" + localPath)
+                    .setDirectory(localPath2)
+                    .call()) {
+                // now open the created repository
+                FileRepositoryBuilder builder = new FileRepositoryBuilder();
+                try (Repository repository = builder.setGitDir(localPath2)
+                        .readEnvironment() // scan environment GIT_* variables
+                        .findGitDir() // scan up the file system tree
+                        .build()) {
+                    try (Git git = new Git(repository)) {
+                        git.push()
+                                .call();
+                    }
+            
+                    System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);
+                }
+            }
+        }
     }
 }

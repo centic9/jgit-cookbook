@@ -42,10 +42,8 @@ public class InitRepository {
                 .setDirectory(dir)
                 .call();
 
-        Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"));
-
-        System.out.println("Created a new repository at " + repository.getDirectory());
-
-        repository.close();
+        try (Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"))) {
+            System.out.println("Created a new repository at " + repository.getDirectory());
+        }
     }
 }

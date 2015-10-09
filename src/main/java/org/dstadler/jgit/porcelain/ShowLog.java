@@ -35,59 +35,59 @@ public class ShowLog {
 
     @SuppressWarnings("unused")
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        Iterable<RevCommit> logs = new Git(repository).log()
-                .call();
-        int count = 0;
-        for (RevCommit rev : logs) {
-            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-            count++;
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                Iterable<RevCommit> logs = git.log()
+                        .call();
+                int count = 0;
+                for (RevCommit rev : logs) {
+                    //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits overall on current branch");
+        
+                logs = git.log()
+                        .add(repository.resolve("remotes/origin/testbranch"))
+                        .call();
+                count = 0;
+                for (RevCommit rev : logs) {
+                    System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits overall on test-branch");
+        
+                logs = git.log()
+                        .all()
+                        .call();
+                count = 0;
+                for (RevCommit rev : logs) {
+                    //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits overall in repository");
+        
+                logs = git.log()
+                        // for all log.all()
+                        .addPath("README.md")
+                        .call();
+                count = 0;
+                for (RevCommit rev : logs) {
+                    //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits on README.md");
+        
+                logs = git.log()
+                        // for all log.all()
+                        .addPath("pom.xml")
+                        .call();
+                count = 0;
+                for (RevCommit rev : logs) {
+                    //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits on pom.xml");
+            }
         }
-        System.out.println("Had " + count + " commits overall on current branch");
-
-        logs = new Git(repository).log()
-                .add(repository.resolve("remotes/origin/testbranch"))
-                .call();
-        count = 0;
-        for (RevCommit rev : logs) {
-            System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-            count++;
-        }
-        System.out.println("Had " + count + " commits overall on test-branch");
-
-        logs = new Git(repository).log()
-                .all()
-                .call();
-        count = 0;
-        for (RevCommit rev : logs) {
-            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-            count++;
-        }
-        System.out.println("Had " + count + " commits overall in repository");
-
-        logs = new Git(repository).log()
-                // for all log.all()
-                .addPath("README.md")
-                .call();
-        count = 0;
-        for (RevCommit rev : logs) {
-            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-            count++;
-        }
-        System.out.println("Had " + count + " commits on README.md");
-
-        logs = new Git(repository).log()
-                // for all log.all()
-                .addPath("pom.xml")
-                .call();
-        count = 0;
-        for (RevCommit rev : logs) {
-            //System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);
-            count++;
-        }
-        System.out.println("Had " + count + " commits on pom.xml");
-
-        repository.close();
     }
 }

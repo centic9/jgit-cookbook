@@ -34,17 +34,16 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class WalkAllCommits {
 
     public static void main(String[] args) throws IOException, InvalidRefNameException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        Git git = new Git(repository);
-        Iterable<RevCommit> commits = git.log().all().call();
-        int count = 0;
-        for (RevCommit commit : commits) {
-            System.out.println("LogCommit: " + commit);
-            count++;
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                Iterable<RevCommit> commits = git.log().all().call();
+                int count = 0;
+                for (RevCommit commit : commits) {
+                    System.out.println("LogCommit: " + commit);
+                    count++;
+                }
+                System.out.println(count);
+            }
         }
-        System.out.println(count);
-
-        repository.close();
     }
 }

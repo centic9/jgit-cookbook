@@ -41,46 +41,44 @@ public class OpenRepository {
         
         // now open the resulting repository with a FileRepositoryBuilder
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder.setGitDir(repoDir)
+        try (Repository repository = builder.setGitDir(repoDir)
                 .readEnvironment() // scan environment GIT_* variables
                 .findGitDir() // scan up the file system tree
-                .build();
-
-        System.out.println("Having repository: " + repository.getDirectory());
-
-        // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
-        Ref head = repository.getRef("refs/heads/master");
-        System.out.println("Ref of refs/heads/master: " + head);
-
-        repository.close();
+                .build()) {
+            System.out.println("Having repository: " + repository.getDirectory());
+    
+            // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
+            Ref head = repository.getRef("refs/heads/master");
+            System.out.println("Ref of refs/heads/master: " + head);
+        }
     }
 
     private static File createSampleGitRepo() throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.createNewRepository();
+        try (Repository repository = CookbookHelper.createNewRepository()) {
+            System.out.println("Temporary repository at " + repository.getDirectory());
+    
+            // create the file
+            File myfile = new File(repository.getDirectory().getParent(), "testfile");
+            myfile.createNewFile();
+    
+            // run the add-call
+            try (Git git = new Git(repository)) {
+                git.add()
+                        .addFilepattern("testfile")
+                        .call();
         
-        System.out.println("Temporary repository at " + repository.getDirectory());
-
-        // create the file
-        File myfile = new File(repository.getDirectory().getParent(), "testfile");
-        myfile.createNewFile();
-
-        // run the add-call
-        new Git(repository).add()
-                .addFilepattern("testfile")
-                .call();
-
-
-        // and then commit the changes
-        new Git(repository).commit()
-                .setMessage("Added testfile")
-                .call();
         
-        System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
-        
-        File dir = repository.getDirectory();
-        
-        repository.close();
-        
-        return dir;
+                // and then commit the changes
+                git.commit()
+                        .setMessage("Added testfile")
+                        .call();
+            }
+            
+            System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
+            
+            File dir = repository.getDirectory();
+            
+            return dir;
+        }
     }
 }

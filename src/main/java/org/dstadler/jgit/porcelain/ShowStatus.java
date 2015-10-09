@@ -35,20 +35,20 @@ import org.eclipse.jgit.lib.Repository;
 public class ShowStatus {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        Status status = new Git(repository).status().call();
-        System.out.println("Added: " + status.getAdded());
-        System.out.println("Changed: " + status.getChanged());
-        System.out.println("Conflicting: " + status.getConflicting());
-        System.out.println("ConflictingStageState: " + status.getConflictingStageState());
-        System.out.println("IgnoredNotInIndex: " + status.getIgnoredNotInIndex());
-        System.out.println("Missing: " + status.getMissing());
-        System.out.println("Modified: " + status.getModified());
-        System.out.println("Removed: " + status.getRemoved());
-        System.out.println("Untracked: " + status.getUntracked());
-        System.out.println("UntrackedFolders: " + status.getUntrackedFolders());
-
-        repository.close();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                Status status = git.status().call();
+                System.out.println("Added: " + status.getAdded());
+                System.out.println("Changed: " + status.getChanged());
+                System.out.println("Conflicting: " + status.getConflicting());
+                System.out.println("ConflictingStageState: " + status.getConflictingStageState());
+                System.out.println("IgnoredNotInIndex: " + status.getIgnoredNotInIndex());
+                System.out.println("Missing: " + status.getMissing());
+                System.out.println("Modified: " + status.getModified());
+                System.out.println("Removed: " + status.getRemoved());
+                System.out.println("Untracked: " + status.getUntracked());
+                System.out.println("UntrackedFolders: " + status.getUntrackedFolders());
+            }
+        }
     }
 }

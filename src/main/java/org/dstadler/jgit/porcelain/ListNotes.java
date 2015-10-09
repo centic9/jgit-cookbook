@@ -36,18 +36,18 @@ import org.eclipse.jgit.notes.Note;
 public class ListNotes {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        List<Note> call = new Git(repository).notesList().call();
-        System.out.println("Listing " + call.size() + " notes");
-        for (Note note : call) {
-            System.out.println("Note: " + note + " " + note.getName() + " " + note.getData().getName() + "\nContent: ");
-
-            // displaying the contents of the note is done via a simple blob-read
-            ObjectLoader loader = repository.open(note.getData());
-            loader.copyTo(System.out);
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                List<Note> call = git.notesList().call();
+                System.out.println("Listing " + call.size() + " notes");
+                for (Note note : call) {
+                    System.out.println("Note: " + note + " " + note.getName() + " " + note.getData().getName() + "\nContent: ");
+        
+                    // displaying the contents of the note is done via a simple blob-read
+                    ObjectLoader loader = repository.open(note.getData());
+                    loader.copyTo(System.out);
+                }
+            }
         }
-
-        repository.close();
     }
 }

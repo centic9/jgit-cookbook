@@ -30,22 +30,20 @@ import org.eclipse.jgit.lib.Repository;
 public class ResolveRef {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // basic syntax is similar to getRef()
+            ObjectId id = repository.resolve("HEAD");
+            System.out.println("ObjectId of HEAD: " + id);
 
-        // basic syntax is similar to getRef()
-        ObjectId id = repository.resolve("HEAD");
-        System.out.println("ObjectId of HEAD: " + id);
+            // however resolve() supports almost all of the git-syntax, where getRef() only works on names
+            id = repository.resolve("HEAD^1");
+            System.out.println("ObjectId of HEAD: " + id);
 
-        // however resolve() supports almost all of the git-syntax, where getRef() only works on names
-        id = repository.resolve("HEAD^1");
-        System.out.println("ObjectId of HEAD: " + id);
+            id = repository.resolve("b419522521af553ae2752fd1b609f2aa11062243");
+            System.out.println("ObjectId of specific commit: " + id);
 
-        id = repository.resolve("b419522521af553ae2752fd1b609f2aa11062243");
-        System.out.println("ObjectId of specific commit: " + id);
-        
-        id = repository.resolve("05d18a76875716fbdbd2c200091b40caa06c713d");
-        System.out.println("ObjectId of merged commit: " + id);
-
-        repository.close();
+            id = repository.resolve("05d18a76875716fbdbd2c200091b40caa06c713d");
+            System.out.println("ObjectId of merged commit: " + id);
+        }
     }
 }

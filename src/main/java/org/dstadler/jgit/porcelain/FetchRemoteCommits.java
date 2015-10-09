@@ -28,18 +28,18 @@ import org.eclipse.jgit.transport.FetchResult;
 
 /**
  * Simple snippet which shows how to fetch commits from a remote Git repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class FetchRemoteCommits {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        System.out.println("Starting fetch");
-        FetchResult result = new Git(repository).fetch().setCheckFetchedObjects(true).call();
-        System.out.println("Messages: " + result.getMessages());
-
-        repository.close();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            System.out.println("Starting fetch");
+            try (Git git = new Git(repository)) {
+                FetchResult result = git.fetch().setCheckFetchedObjects(true).call();
+                System.out.println("Messages: " + result.getMessages());
+            }
+        }
     }
 }

@@ -37,18 +37,18 @@ import org.eclipse.jgit.lib.Repository;
 public class ShowBranchTrackingStatus {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
-
-        List<Ref> call = new Git(repository).branchList().call();
-        for (Ref ref : call) {
-            List<Integer> counts = getCounts(repository, ref.getName());
-            System.out.println("For branch: " + ref.getName());
-            System.out.println("Commits ahead : " + counts.get(0));
-            System.out.println("Commits behind : " + counts.get(1));
-            System.out.println();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            try (Git git = new Git(repository)) {
+                List<Ref> call = git.branchList().call();
+                for (Ref ref : call) {
+                    List<Integer> counts = getCounts(repository, ref.getName());
+                    System.out.println("For branch: " + ref.getName());
+                    System.out.println("Commits ahead : " + counts.get(0));
+                    System.out.println("Commits behind : " + counts.get(1));
+                    System.out.println();
+                }
+            }
         }
-
-        repository.close();
     }
 
     private static List<Integer> getCounts(org.eclipse.jgit.lib.Repository repository, String branchName) throws IOException {

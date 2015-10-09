@@ -31,28 +31,26 @@ import org.eclipse.jgit.revwalk.RevWalk;
 public class ReadTagFromName {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            // a RevWalk allows to retrieve information from the repository
+            try (RevWalk walk = new RevWalk(repository)) {
+                // a simple tag that is not annotated
+                Ref simpleTag = repository.getRef("initialtag");
+                RevObject any = walk.parseAny(simpleTag.getObjectId());
+                System.out.println("Commit: " + any);
 
-        // a RevWalk allows to retrieve information from the repository
-        RevWalk walk = new RevWalk(repository);
+                // an annotated tag
+                Ref annotatedTag = repository.getRef("secondtag");
+                any = walk.parseAny(annotatedTag.getObjectId());
+                System.out.println("Tag: " + any);
 
-        // a simple tag that is not annotated
-        Ref simpleTag = repository.getRef("initialtag");
-        RevObject any = walk.parseAny(simpleTag.getObjectId());
-        System.out.println("Commit: " + any);
+                // finally try to print out the tag-content
+                System.out.println("\nTag-Content: \n");
+                ObjectLoader loader = repository.open(annotatedTag.getObjectId());
+                loader.copyTo(System.out);
 
-        // an annotated tag
-        Ref annotatedTag = repository.getRef("secondtag");
-        any = walk.parseAny(annotatedTag.getObjectId());
-        System.out.println("Tag: " + any);
-
-        // finally try to print out the tag-content
-        System.out.println("\nTag-Content: \n");
-        ObjectLoader loader = repository.open(annotatedTag.getObjectId());
-        loader.copyTo(System.out);
-
-        walk.dispose();
-
-        repository.close();
+                walk.dispose();
+            }
+        }
     }
 }

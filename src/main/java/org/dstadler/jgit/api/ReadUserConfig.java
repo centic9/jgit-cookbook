@@ -28,22 +28,20 @@ import org.eclipse.jgit.lib.Repository;
 public class ReadUserConfig {
 
     public static void main(String[] args) throws IOException {
-        Repository repository = CookbookHelper.openJGitCookbookRepository();
+        try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+            Config config = repository.getConfig();
+            String name = config.getString("user", null, "name");
+            String email = config.getString("user", null, "email");
+            if (name == null || email == null) {
+                System.out.println("User identity is unknown!");
+            } else {
+                System.out.println("User identity is " + name + " <" + email + ">");
+            }
 
-        Config config = repository.getConfig();
-        String name = config.getString("user", null, "name");
-        String email = config.getString("user", null, "email");
-        if (name == null || email == null) {
-            System.out.println("User identity is unknown!");
-        } else {
-            System.out.println("User identity is " + name + " <" + email + ">");
+            String url = config.getString("remote", "origin", "url");
+            if (url != null) {
+                    System.out.println("Origin comes from " + url);
+            }
         }
-        
-        String url = config.getString("remote", "origin", "url");
-        if (url != null) {
-                System.out.println("Origin comes from " + url);
-        }
-        
-        repository.close();
     }
 }

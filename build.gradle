@@ -16,6 +16,8 @@ dependencies {
 	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.1.0.201509280440-r'
 	compile 'commons-io:commons-io:2.4'
 	compile 'org.slf4j:slf4j-simple:1.7.12'
+
+    testCompile "junit:junit:4+"
 }
 
 // work around unnecessary timestamp in generated file which always causes dirty files in version control

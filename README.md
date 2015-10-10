@@ -1,6 +1,6 @@
 jgit-cookbook
 =============
-[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/)
+[![Build Status](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/badge/icon)](https://buildhive.cloudbees.com/job/centic9/job/jgit-cookbook/) [![Gradle Status](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status)
 
 Provides examples and code snippets for the [JGit](https://eclipse.org/jgit/) Java Git implementation. 
 
@@ -105,9 +105,9 @@ This project tries to provide a collection of ready-to-run snippets which try to
 
 #### Sources
 
-The following sources were used to build the snippets
+The following sources were used to build the snippets:
 
-* [JGit JavaDoc](http://download.eclipse.org/jgit/site/3.7.1.201504261725-r/apidocs/)
+* [JGit JavaDoc](http://download.eclipse.org/jgit/site/4.1.0.201509280440-r/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
 * [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)

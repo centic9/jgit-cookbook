@@ -31,7 +31,7 @@ public class GetRefFromName {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
             Ref head = repository.getRef("refs/heads/master");
-            System.out.println("Ref of refs/heads/master: " + head);
+            System.out.println("Ref of refs/heads/master: " + head + ": " + head.getName() + " - " + head.getObjectId().getName());
         }
     }
 }

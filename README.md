@@ -71,6 +71,7 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
 * [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
 * [Clone a remote reppository via SSH protocol and username/password credentials](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryWithAuthentication.java)
+* [Rebase onto an upstream branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RebaseToOriginMaster.java)
 
 ##### Low-level API
 
@@ -101,7 +102,6 @@ This project tries to provide a collection of ready-to-run snippets which try to
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
 * Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
 * CherryPick
-* Rebase - http://stackoverflow.com/questions/22945257/jgit-how-to-squash-commits
 * Submodules - http://www.codeaffine.com/2014/04/16/how-to-manage-git-submodules-with-jgit/
 
 #### Sources

@@ -35,5 +35,6 @@ public class PorcelainTest {
         ShowLog.main(null);
         ShowStatus.main(null);
         WalkAllCommits.main(null);
+        ListUncommittedChanges.main(null);
     }
 }

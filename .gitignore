@@ -4,3 +4,4 @@ target
 .project
 .gradle
 /bin/
+/build/

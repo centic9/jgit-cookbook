@@ -15,7 +15,7 @@ dependencies {
 	compile 'org.eclipse.jgit:org.eclipse.jgit:4.1.1.201511131810-r'
 	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.1.1.201511131810-r'
 	compile 'commons-io:commons-io:2.4'
-	compile 'org.slf4j:slf4j-simple:1.7.12'
+	compile 'org.slf4j:slf4j-simple:1.7.13'
 
     testCompile "junit:junit:4+"
 }
@@ -24,12 +24,17 @@ dependencies {
 // https://issues.gradle.org/browse/GRADLE-2293
 task adjustEclipseSettingsFile << {
    ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
-      fileset(dir: project.projectDir, includes: '.settings/org.eclipse.jdt.core.prefs')
+      fileset(dir: project.projectDir, includes: '.settings/org.eclipse.jdt.core.prefs,.settings/com.google.gdt.eclipse.core.prefs')
    }
+   ant.fixcrlf(srcDir: '.settings', eol: 'lf')
 }
 task sortEclipseSettingsFile << {
-   new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
-   new File(project.projectDir, '.classpath').with { it.text = it.readLines().findAll { it }.unique().join('\n') }
+	new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+	new File(project.projectDir, '.classpath').with { it.text = it.readLines().findAll { it }.unique().join('\n') }
+	File file = new File(project.projectDir, '.settings/com.google.gdt.eclipse.core.prefs');
+	if(file.exists()) {
+		file.with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+	}
 }
 eclipseJdt.finalizedBy adjustEclipseSettingsFile
 eclipseJdt.finalizedBy sortEclipseSettingsFile
@@ -37,3 +42,12 @@ eclipseJdt.finalizedBy sortEclipseSettingsFile
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
 }
+
+task adjustWrapperPropertiesFile << {
+	ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
+		fileset(dir: project.projectDir, includes: 'gradle/wrapper/gradle-wrapper.properties')
+	}
+	ant.fixcrlf(srcDir: '.settings', eol: 'lf')
+	new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.properties').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+}
+wrapper.finalizedBy adjustWrapperPropertiesFile

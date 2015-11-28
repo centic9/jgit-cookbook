@@ -2,6 +2,7 @@ package org.dstadler.jgit.porcelain;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
@@ -24,12 +25,25 @@ public class CommitAll {
                 // create the file
                 File myfile = new File(repository.getDirectory().getParent(), "testfile");
                 myfile.createNewFile();
+
+                // Stage all files in the repo including new files
+                git.add().addFilepattern(".").call();
         
-                // and then commit the changes
+                // and then commit the changes.
                 git.commit()
-                		.setAll(true)
-                        .setMessage("Commit all")
+                        .setMessage("Commit all changes including additions")
                         .call();
+
+                try(PrintWriter writer = new PrintWriter(myfile)) {
+                    writer.append("Hello, world!");
+                }
+
+                // Stage all changed files, omitting new files, and commit with one command
+                git.commit()
+                        .setAll(true)
+                        .setMessage("Commit changes to all files")
+                        .call();
+
         
                 System.out.println("Committed all changes to repository at " + repository.getDirectory());
             }

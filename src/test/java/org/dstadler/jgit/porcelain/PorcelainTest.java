@@ -28,6 +28,8 @@ public class PorcelainTest {
         ListRemoteRepository.main(null);
         ListRemotes.main(null);
         ListTags.main(null);
+        ListUncommittedChanges.main(null);
+        RebaseToOriginMaster.main(null);
         ShowBlame.main(null);
         ShowBranchDiff.main(null);
         ShowChangedFilesBetweenCommits.main(null);
@@ -35,6 +37,5 @@ public class PorcelainTest {
         ShowLog.main(null);
         ShowStatus.main(null);
         WalkAllCommits.main(null);
-        ListUncommittedChanges.main(null);
     }
 }

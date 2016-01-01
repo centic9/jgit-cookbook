@@ -5,7 +5,7 @@ jdk:
 before_install:
  - chmod +x gradlew
  - git fetch --unshallow
- - git fetch origin testbranch
+ - git fetch origin testbranch:testbranch
 
 after_success:
 - ./gradlew jacocoTestReport

@@ -7,3 +7,6 @@ before_install:
   
 after_success:
 - ./gradlew jacocoTestReport
+
+after_failure:
+- cat build/test-result/*.xml

@@ -54,9 +54,6 @@ public class PullFromRemoteRepository {
 	        }
 
 	        System.out.println("Pulled from remote repository to local repository at " + result.getRepository().getDirectory());
-
-            // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=474093
-            result.getRepository().close();
         }
     }
 }

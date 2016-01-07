@@ -22,6 +22,7 @@ public class PorcelainTest {
         CreateListApplyAndDropStash.main(null);
         DiffRenamedFile.main(null);
         FetchRemoteCommits.main(null);
+        FetchRemoteCommitsWithPrune.main(null);
         InitRepository.main(null);
         ListBranches.main(null);
         ListNotes.main(null);

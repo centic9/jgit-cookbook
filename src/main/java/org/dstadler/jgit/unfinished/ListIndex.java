@@ -25,7 +25,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Snippet which shows how to work with the Index
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListIndex {
@@ -39,7 +39,7 @@ public class ListIndex {
                 // the number after the AnyObjectId is the "stage", see the constants in DirCacheEntry
                 System.out.println("Item " + i + ": " + index.getEntry(i));
             }
-    
+
             //
             System.out.println("Now printing staged items...");
             for (int i = 0; i < index.getEntryCount(); i++) {

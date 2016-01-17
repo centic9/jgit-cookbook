@@ -28,9 +28,9 @@ import org.eclipse.jgit.lib.Repository;
 
 
 /**
- * Simple snippet which shows how to execute the "gc" command to remove unused 
+ * Simple snippet which shows how to execute the "gc" command to remove unused
  * objects from the .git directory.
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CollectGarbage {

@@ -29,7 +29,7 @@ import org.eclipse.jgit.lib.Repository;
 /**
  * Simple snippet which prints the Status of a git repository, i.e. modified/added/
  * removed/ignored files, similar to "git status"
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ShowStatus {

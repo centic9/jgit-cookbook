@@ -46,7 +46,7 @@ public class CreateListApplyAndDropStash {
                 FileUtils.writeStringToFile(file1, "some text");
                 File file2 = new File(repository.getDirectory().getParent(), "testfile2");
                 FileUtils.writeStringToFile(file2, "some text");
-        
+
                 // add and commit the file
                 git.add()
                         .addFilepattern("testfile")
@@ -57,35 +57,35 @@ public class CreateListApplyAndDropStash {
                 git.commit()
                         .setMessage("Added testfiles")
                         .call();
-        
+
                 // then modify the file
                 FileUtils.writeStringToFile(file1, "some more text", true);
-        
+
                 // push the changes to a new stash
                 RevCommit stash = git.stashCreate()
                         .call();
-        
+
                 System.out.println("Created stash " + stash);
-        
+
                 // then modify the 2nd file
                 FileUtils.writeStringToFile(file2, "some more text", true);
-        
+
                 // push the changes to a new stash
                 stash = git.stashCreate()
                         .call();
-        
+
                 System.out.println("Created stash " + stash);
-        
+
                 // list the stashes
                 Collection<RevCommit> stashes = git.stashList().call();
                 for(RevCommit rev : stashes) {
                     System.out.println("Found stash: " + rev + ": " + rev.getFullMessage());
                 }
-        
+
                 // drop the 1st stash without applying it
                 ObjectId call = git.stashDrop().setStashRef(0).call();
                 System.out.println("StashDrop returned: " + call);
-        
+
                 ObjectId applied = git.stashApply().setStashRef(stash.getName()).call();
                 System.out.println("Applied 2nd stash as: " + applied);
             }

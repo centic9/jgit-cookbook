@@ -28,7 +28,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to commit a file
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CommitFile {
@@ -40,17 +40,17 @@ public class CommitFile {
                 // create the file
                 File myfile = new File(repository.getDirectory().getParent(), "testfile");
                 myfile.createNewFile();
-        
+
                 // run the add
                 git.add()
                         .addFilepattern("testfile")
                         .call();
-        
+
                 // and then commit the changes
                 git.commit()
                         .setMessage("Added testfile")
                         .call();
-        
+
                 System.out.println("Committed file " + myfile + " to repository at " + repository.getDirectory());
             }
         }

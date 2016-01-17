@@ -28,7 +28,7 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 
 /**
  * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class BrowseTree {
@@ -39,15 +39,15 @@ public class BrowseTree {
             try (TreeWalk treeWalk = new TreeWalk(repository)) {
                 try (RevWalk revWalk = new RevWalk(repository)) {
                     treeWalk.addTree(revWalk.parseTree(revId));
-            
+
                     while (treeWalk.next())
                     {
                         System.out.println("---------------------------");
                         System.out.append("name: ").println(treeWalk.getNameString());
                         System.out.append("path: ").println(treeWalk.getPathString());
-            
+
                         ObjectLoader loader = repository.open(treeWalk.getObjectId(0));
-            
+
                         System.out.append("directory: ").println(loader.getType()
                                 == Constants.OBJ_TREE);
                         System.out.append("size: ").println(loader.getSize());

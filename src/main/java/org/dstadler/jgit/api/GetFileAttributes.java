@@ -37,7 +37,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 /**
  * Snippet which shows how to use RevWalk and TreeWalk to read the file
  * attributes like execution-bit and type of file/directory/...
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class GetFileAttributes {
@@ -46,11 +46,11 @@ public class GetFileAttributes {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             // find the Tree for current HEAD
             RevTree tree = getTree(repository);
-    
+
             printFile(repository, tree);
-    
+
             printDirectory(repository, tree);
-    
+
             // there is also FileMode.SYMLINK for symbolic links, but this is not handled here yet
         }
     }
@@ -62,9 +62,9 @@ public class GetFileAttributes {
         // a RevWalk allows to walk over commits based on some filtering
         try (RevWalk revWalk = new RevWalk(repository)) {
             RevCommit commit = revWalk.parseCommit(lastCommitId);
-    
+
             System.out.println("Time of commit (seconds since epoch): " + commit.getCommitTime());
-    
+
             // and using commit's tree find the path
             RevTree tree = commit.getTree();
             System.out.println("Having tree: " + tree);
@@ -82,7 +82,7 @@ public class GetFileAttributes {
             if (!treeWalk.next()) {
                 throw new IllegalStateException("Did not find expected file 'README.md'");
             }
-    
+
             // FileMode specifies the type of file, FileMode.REGULAR_FILE for normal file, FileMode.EXECUTABLE_FILE for executable bit
     // set
             FileMode fileMode = treeWalk.getFileMode(0);
@@ -102,7 +102,7 @@ public class GetFileAttributes {
             if (!treeWalk.next()) {
                 throw new IllegalStateException("Did not find expected file 'README.md'");
             }
-    
+
             // FileMode now indicates that this is a directory, i.e. FileMode.TREE.equals(fileMode) holds true
             FileMode fileMode = treeWalk.getFileMode(0);
             System.out.println("src: " + getFileMode(fileMode) + ", type: " + fileMode.getObjectType() + ", mode: " + fileMode);

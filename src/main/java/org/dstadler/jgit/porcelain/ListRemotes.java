@@ -27,7 +27,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Snippet which shows how to iterate remotes, i.e. "git ls-remote"
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListRemotes {
@@ -40,13 +40,13 @@ public class ListRemotes {
                 for (Ref ref : refs) {
                     System.out.println("Ref: " + ref);
                 }
-        
+
                 // heads only
                 refs = git.lsRemote().setHeads(true).call();
                 for (Ref ref : refs) {
                     System.out.println("Head: " + ref);
                 }
-        
+
                 // tags only
                 refs = git.lsRemote().setTags(true).call();
                 for (Ref ref : refs) {

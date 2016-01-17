@@ -29,7 +29,7 @@ import org.eclipse.jgit.lib.Ref;
 /**
  * Simple snippet which shows how to list heads/tags of remote repositories without
  * a local repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListRemoteRepository {

@@ -2,13 +2,13 @@ package org.dstadler.jgit.porcelain;
 
 /*
  * Copyright 2013, 2014 Dominik Stadler
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ import org.eclipse.jgit.lib.Repository;
 /**
  * Simple snippet which shows how to package the contents of a branch into an archive file
  * using a format provided by the org.eclipse.jgit.archive jar.
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CreateArchive {

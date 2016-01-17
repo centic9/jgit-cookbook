@@ -34,12 +34,12 @@ public class WalkRev {
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             Ref head = repository.getRef("refs/heads/master");
-    
+
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk walk = new RevWalk(repository)) {
                 RevCommit commit = walk.parseCommit(head.getObjectId());
                 System.out.println("Start-Commit: " + commit);
-        
+
                 System.out.println("Walking all commits starting at HEAD");
                 walk.markStart(commit);
                 int count = 0;
@@ -48,7 +48,7 @@ public class WalkRev {
                     count++;
                 }
                 System.out.println(count);
-        
+
                 walk.dispose();
             }
         }

@@ -33,13 +33,13 @@ public class GetCommitMessage {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             Ref head = repository.getRef("refs/heads/master");
             System.out.println("Found head: " + head);
-    
+
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk walk = new RevWalk(repository)) {
                 RevCommit commit = walk.parseCommit(head.getObjectId());
-                
+
                 System.out.println("\nCommit-Message: " + commit.getFullMessage());
-                
+
                 walk.dispose();
             }
         }

@@ -33,7 +33,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to list all Tags
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListRefLog {
@@ -44,14 +44,14 @@ public class ListRefLog {
                 List<Ref> refs = git.branchList().call();
                 for (Ref ref : refs) {
                     System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        
+
                     listReflog(repository, ref);
                 }
-        
+
                 List<Ref> call = git.tagList().call();
                 for (Ref ref : call) {
                     System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        
+
                     listReflog(repository, ref);
                 }
             }

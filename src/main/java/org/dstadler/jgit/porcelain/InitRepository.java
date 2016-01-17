@@ -28,7 +28,7 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Simple snippet which shows how to initialize a new repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class InitRepository {

@@ -96,7 +96,7 @@ public class CreateCustomFormatArchive {
             } finally {
                 ArchiveCommand.unregisterFormat("myzip");
             }
-    
+
             System.out.println("Wrote " + file.length() + " bytes to " + file);
         }
     }

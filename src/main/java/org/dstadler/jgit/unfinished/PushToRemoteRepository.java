@@ -51,7 +51,7 @@ public class PushToRemoteRepository {
             // prepare a second folder for the 2nd clone
             File localPath2 = File.createTempFile("TestGitRepository", "");
             localPath2.delete();
-    
+
             // then clone again
             System.out.println("Cloning from file://" + localPath + " to " + localPath2);
             try (Git result2 = Git.cloneRepository()
@@ -68,7 +68,7 @@ public class PushToRemoteRepository {
                         git.push()
                                 .call();
                     }
-            
+
                     System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);
                 }
             }

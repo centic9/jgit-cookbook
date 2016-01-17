@@ -30,7 +30,7 @@ import org.eclipse.jgit.notes.Note;
 
 /**
  * Simple snippet which shows how to load Notes in a Git repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListNotes {
@@ -42,7 +42,7 @@ public class ListNotes {
                 System.out.println("Listing " + call.size() + " notes");
                 for (Note note : call) {
                     System.out.println("Note: " + note + " " + note.getName() + " " + note.getData().getName() + "\nContent: ");
-        
+
                     // displaying the contents of the note is done via a simple blob-read
                     ObjectLoader loader = repository.open(note.getData());
                     loader.copyTo(System.out);

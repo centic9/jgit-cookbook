@@ -45,7 +45,7 @@ public class ShowLog {
                     count++;
                 }
                 System.out.println("Had " + count + " commits overall on current branch");
-        
+
                 logs = git.log()
                         .add(repository.resolve("remotes/origin/testbranch"))
                         .call();
@@ -55,7 +55,7 @@ public class ShowLog {
                     count++;
                 }
                 System.out.println("Had " + count + " commits overall on test-branch");
-        
+
                 logs = git.log()
                         .all()
                         .call();
@@ -65,7 +65,7 @@ public class ShowLog {
                     count++;
                 }
                 System.out.println("Had " + count + " commits overall in repository");
-        
+
                 logs = git.log()
                         // for all log.all()
                         .addPath("README.md")
@@ -76,7 +76,7 @@ public class ShowLog {
                     count++;
                 }
                 System.out.println("Had " + count + " commits on README.md");
-        
+
                 logs = git.log()
                         // for all log.all()
                         .addPath("pom.xml")

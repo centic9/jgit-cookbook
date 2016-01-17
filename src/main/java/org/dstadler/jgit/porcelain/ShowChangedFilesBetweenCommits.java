@@ -45,16 +45,16 @@ public class ShowChangedFilesBetweenCommits {
             // take the tree-ish of it
             ObjectId oldHead = repository.resolve("HEAD^^^^{tree}");
             ObjectId head = repository.resolve("HEAD^{tree}");
-    
+
             System.out.println("Printing diff between tree: " + oldHead + " and " + head);
-    
+
             // prepare the two iterators to compute the diff between
     		try (ObjectReader reader = repository.newObjectReader()) {
         		CanonicalTreeParser oldTreeIter = new CanonicalTreeParser();
         		oldTreeIter.reset(reader, oldHead);
         		CanonicalTreeParser newTreeIter = new CanonicalTreeParser();
         		newTreeIter.reset(reader, head);
-        
+
         		// finally get the list of changed files
         		try (Git git = new Git(repository)) {
                     List<DiffEntry> diffs= git.diff()
@@ -67,7 +67,7 @@ public class ShowChangedFilesBetweenCommits {
         		}
     		}
         }
-    	
+
         System.out.println("Done");
     }
 }

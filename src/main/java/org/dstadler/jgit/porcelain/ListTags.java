@@ -42,17 +42,17 @@ public class ListTags {
                 List<Ref> call = git.tagList().call();
                 for (Ref ref : call) {
                     System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
-        
+
                     // fetch all commits for this tag
                     LogCommand log = git.log();
-        
+
                     Ref peeledRef = repository.peel(ref);
                     if(peeledRef.getPeeledObjectId() != null) {
                     	log.add(peeledRef.getPeeledObjectId());
                     } else {
                     	log.add(ref.getObjectId());
                     }
-        
+
         			Iterable<RevCommit> logs = log.call();
         			for (RevCommit rev : logs) {
         				System.out.println("Commit: " + rev /* + ", name: " + rev.getName() + ", id: " + rev.getId().getName() */);

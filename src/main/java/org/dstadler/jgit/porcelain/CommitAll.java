@@ -28,7 +28,7 @@ public class CommitAll {
 
                 // Stage all files in the repo including new files
                 git.add().addFilepattern(".").call();
-        
+
                 // and then commit the changes.
                 git.commit()
                         .setMessage("Commit all changes including additions")
@@ -44,7 +44,7 @@ public class CommitAll {
                         .setMessage("Commit changes to all files")
                         .call();
 
-        
+
                 System.out.println("Committed all changes to repository at " + repository.getDirectory());
             }
         }

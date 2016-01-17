@@ -28,7 +28,7 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 
 /**
  * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class WalkTreeNonRecursive {
@@ -36,13 +36,13 @@ public class WalkTreeNonRecursive {
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             Ref head = repository.getRef("HEAD");
-    
+
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk walk = new RevWalk(repository)) {
                 RevCommit commit = walk.parseCommit(head.getObjectId());
                 RevTree tree = commit.getTree();
                 System.out.println("Having tree: " + tree);
-        
+
                 // now use a TreeWalk to iterate over all files in the Tree recursively
                 // you can set Filters to narrow down the results if needed
                 try (TreeWalk treeWalk = new TreeWalk(repository)) {

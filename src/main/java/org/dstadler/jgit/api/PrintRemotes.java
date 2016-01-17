@@ -32,7 +32,7 @@ public class PrintRemotes {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             Config storedConfig = repository.getConfig();
             Set<String> remotes = storedConfig.getSubsections("remote");
-    
+
             for (String remoteName : remotes) {
                 String url = storedConfig.getString("remote", remoteName, "url");
                 System.out.println(remoteName + " " + url);

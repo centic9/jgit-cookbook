@@ -43,13 +43,13 @@ public class PullRemoteRepository {
             System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
                     repository.getRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" +
                     repository.resolve("refs/heads/master"));
-    
+
             // TODO: why do we get null here for HEAD?!? See also
     // http://stackoverflow.com/questions/17979660/jgit-pull-noheadexception
-    
+
             try (Git git = new Git(repository)) {
                 PullResult call = git.pull().call();
-        
+
                 System.out.println("Pulled from the remote repository: " + call);
             }
         }

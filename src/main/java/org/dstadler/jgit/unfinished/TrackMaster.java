@@ -62,7 +62,7 @@ public class TrackMaster {
                             .setForce(true)
                             .call();
                 }
-        
+
                 System.out.println("Now tracking master in repository at " + repository.getDirectory() + " from origin/master at " +
                         REMOTE_URL);
             }

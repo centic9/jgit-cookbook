@@ -40,7 +40,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 
 /**
  * Simple snippet which shows how to show diffs between branches
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ShowFileDiff {
@@ -50,7 +50,7 @@ public class ShowFileDiff {
             // the diff works on TreeIterators, we prepare two for the two branches
             AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "09c65401f3730eb3e619c33bf31e2376fb393727");
             AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "aa31703b65774e4a06010824601e56375a70078c");
-    
+
             // then the procelain diff-command returns a list of diff entries
             try (Git git = new Git(repository)) {
                 List<DiffEntry> diff = git.diff().
@@ -76,14 +76,14 @@ public class ShowFileDiff {
         try (RevWalk walk = new RevWalk(repository)) {
             RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
             RevTree tree = walk.parseTree(commit.getTree().getId());
-    
+
             CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
             try (ObjectReader oldReader = repository.newObjectReader()) {
                 oldTreeParser.reset(oldReader, tree.getId());
             }
-            
+
             walk.dispose();
-    
+
             return oldTreeParser;
         }
     }

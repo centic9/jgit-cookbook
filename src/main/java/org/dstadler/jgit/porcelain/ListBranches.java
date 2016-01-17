@@ -30,7 +30,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to list all Branches in a Git repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ListBranches {
@@ -43,13 +43,13 @@ public class ListBranches {
                 for (Ref ref : call) {
                     System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }
-        
+
                 System.out.println("Now including remote branches:");
                 call = git.branchList().setListMode(ListMode.ALL).call();
                 for (Ref ref : call) {
                     System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }
             }
-        }        
+        }
     }
 }

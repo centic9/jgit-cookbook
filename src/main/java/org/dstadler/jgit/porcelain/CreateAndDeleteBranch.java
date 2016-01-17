@@ -29,7 +29,7 @@ import org.eclipse.jgit.lib.Repository;
 
 /**
  * Simple snippet which shows how to create and delete branches
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class CreateAndDeleteBranch {
@@ -42,7 +42,7 @@ public class CreateAndDeleteBranch {
                 for (Ref ref : call) {
                     System.out.println("Branch-Before: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }
-        
+
                 // make sure the branch is not there
                 List<Ref> refs = git.branchList().call();
                 for(Ref ref : refs) {
@@ -53,26 +53,26 @@ public class CreateAndDeleteBranch {
                         .setBranchNames("testbranch")
                         .setForce(true)
                         .call();
-                        
+
                         break;
                     }
                 }
-                
+
                 // run the add-call
                 git.branchCreate()
                         .setName("testbranch")
                         .call();
-        
+
                 call = git.branchList().call();
                 for (Ref ref : call) {
                     System.out.println("Branch-Created: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }
-        
+
                 // run the delete-call
                 git.branchDelete()
                         .setBranchNames("testbranch")
                         .call();
-        
+
                 call = git.branchList().call();
                 for (Ref ref : call) {
                     System.out.println("Branch-After: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());

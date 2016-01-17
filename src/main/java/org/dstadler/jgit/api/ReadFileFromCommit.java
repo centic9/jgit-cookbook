@@ -32,7 +32,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 /**
  * Snippet which shows how to use RevWalk and TreeWalk to read the contents
  * of a specific file from a specific commit.
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class ReadFileFromCommit {
@@ -41,14 +41,14 @@ public class ReadFileFromCommit {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             // find the HEAD
             ObjectId lastCommitId = repository.resolve(Constants.HEAD);
-    
+
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk revWalk = new RevWalk(repository)) {
                 RevCommit commit = revWalk.parseCommit(lastCommitId);
                 // and using commit's tree find the path
                 RevTree tree = commit.getTree();
                 System.out.println("Having tree: " + tree);
-        
+
                 // now try to find a specific file
                 try (TreeWalk treeWalk = new TreeWalk(repository)) {
                     treeWalk.addTree(tree);
@@ -57,14 +57,14 @@ public class ReadFileFromCommit {
                     if (!treeWalk.next()) {
                         throw new IllegalStateException("Did not find expected file 'README.md'");
                     }
-            
+
                     ObjectId objectId = treeWalk.getObjectId(0);
                     ObjectLoader loader = repository.open(objectId);
-            
+
                     // and then one can the loader to read the file
                     loader.copyTo(System.out);
                 }
-        
+
                 revWalk.dispose();
             }
         }

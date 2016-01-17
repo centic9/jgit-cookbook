@@ -28,19 +28,19 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 /**
  * Simple snippet which shows how to initialize a new repository
- * 
+ *
  * @author dominik.stadler at gmx.at
  */
 public class TestSubmodules {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         File mainRepoDir = createRepository();
-        
+
         try (Repository mainRepo = openMainRepo(mainRepoDir)) {
             addSubmodule(mainRepo);
-            
+
             FileRepositoryBuilder builder = new FileRepositoryBuilder();
-    
+
             try (Repository subRepo = builder.setGitDir(new File("testrepo/.git"))
               .readEnvironment() // scan environment GIT_* variables
               .findGitDir() // scan up the file system tree
@@ -93,7 +93,7 @@ public class TestSubmodules {
         try (Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"))) {
             System.out.println("Created a new repository at " + repository.getDirectory());
         }
-        
+
         return dir;
     }
 }

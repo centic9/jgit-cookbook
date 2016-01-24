@@ -118,8 +118,10 @@ The following sources were used to build the snippets:
 #### Other applications using JGit
 
 * EGit - Git plugin for Eclipse - https://www.eclipse.org/egit/
+* Gerrit - A web-based team code collaboration tool - https://www.gerritcodereview.com
 * Gitiles - A simple Git repository browser - http://code.google.com/p/gitiles/ and https://android.googlesource.com
 * JGitFS - A userfs implementation which allows to browse branches, tags, committs as a directory structure - https://github.com/centic9/JGitFS
+* jgitstats - displays repository stats - https://github.com/selesse/jgitstats
 
 #### Contribute
 

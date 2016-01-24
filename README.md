@@ -102,8 +102,8 @@ Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/
 * Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
 * Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
-* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there
-* CherryPick: http://download.eclipse.org/jgit/site/4.1.1.201511131810/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
+* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there, see http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/org/eclipse/jgit/internal/storage/dfs/InMemoryRepository.html
+* CherryPick: http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
 
 #### Sources
 
@@ -114,6 +114,12 @@ The following sources were used to build the snippets:
 * [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
 * [JGit main page](http://www.eclipse.org/jgit/)
+
+#### Other applications using JGit
+
+* EGit - Git plugin for Eclipse - https://www.eclipse.org/egit/
+* Gitiles - A simple Git repository browser - http://code.google.com/p/gitiles/ and https://android.googlesource.com
+* JGitFS - A userfs implementation which allows to browse branches, tags, committs as a directory structure - https://github.com/centic9/JGitFS
 
 #### Contribute
 

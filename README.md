@@ -8,7 +8,7 @@ The JGit framework is rich and diverse, it has two layers, a low-level _api_ and
 
 This project tries to provide a collection of ready-to-run snippets which provide a quick start for building functionality using JGit. 
 
-Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
+Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
 
 *Note: Please use sites such as http://stackoverflow.com for general questions about JGit usage, not issues in this project. Issues should be used for problems with snippets and suggestions of missing snippets. Snippets from good answers on stackoverflow can then be included here, naturally.*
 
@@ -102,14 +102,14 @@ Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/
 * Ammend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
 * Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
-* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there, see http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/org/eclipse/jgit/internal/storage/dfs/InMemoryRepository.html
-* CherryPick: http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
+* Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there, see http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/org/eclipse/jgit/internal/storage/dfs/InMemoryRepository.html
+* CherryPick: http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
 
 #### Sources
 
 The following sources were used to build the snippets:
 
-* [JGit JavaDoc](http://download.eclipse.org/jgit/site/4.1.1.201511131810-r/apidocs/)
+* [JGit JavaDoc](http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
 * [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
@@ -129,7 +129,7 @@ Please note that the list of snippets is not yet complete, probably never will. 
 
 #### Licensing
 
-   Copyright 2013, 2014, 2015 Dominik Stadler
+   Copyright 2013-2016 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

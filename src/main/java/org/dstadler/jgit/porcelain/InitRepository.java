@@ -36,12 +36,23 @@ public class InitRepository {
     public static void main(String[] args) throws IOException, GitAPIException {
         // run the init-call
         File dir = File.createTempFile("gitinit", ".test");
-        dir.delete();
+        if(!dir.delete()) {
+            throw new IOException("Could not delete file " + dir);
+        }
 
-        Git.init()
+        // The Git-object has a static method to initialize a new repository
+        try (Git git = Git.init()
                 .setDirectory(dir)
-                .call();
+                .call()) {
+            System.out.println("Created a new repository at " + git.getRepository().getDirectory());
+        }
 
+        dir = File.createTempFile("repoinit", ".test");
+        if(!dir.delete()) {
+            throw new IOException("Could not delete file " + dir);
+        }
+
+        // you can also create a Repository-object directly from the
         try (Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"))) {
             System.out.println("Created a new repository at " + repository.getDirectory());
         }

@@ -27,6 +27,8 @@ import org.eclipse.jgit.revplot.PlotWalk;
 import org.eclipse.jgit.revwalk.RevCommit;
 
 /**
+ * Note: This snippet is not done and likely does not show anything useful yet
+ *
  * Snippet which shows how to use PlotWalk to read from a specific commit.
  *
  * @author dominik.stadler at gmx.at

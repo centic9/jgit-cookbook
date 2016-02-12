@@ -30,7 +30,9 @@ import org.eclipse.jgit.lib.Repository;
 
 
 /**
- * Simple snippet which shows how to poull from a remote repository from a remote source
+ * Note: This snippet is not done and likely does not show anything useful yet
+ *
+ * Simple snippet which shows how to pull from a remote repository from a remote source
  *
  * @author dominik.stadler at gmx.at
  */

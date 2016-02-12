@@ -27,6 +27,8 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
 
 /**
+ * Note: This snippet is not done and likely does not show anything useful yet
+ *
  * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
  *
  * @author dominik.stadler at gmx.at

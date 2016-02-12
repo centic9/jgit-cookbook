@@ -34,6 +34,8 @@ import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.lib.Repository;
 
 /**
+ * Note: This snippet is not done and likely does not show anything useful yet
+ *
  * Snippet which shows how to mark files as assumed-unchanged (git update-index --assume-unchanged)
  */
 public class UpdateIndex {

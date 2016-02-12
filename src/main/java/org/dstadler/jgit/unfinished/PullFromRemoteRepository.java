@@ -27,7 +27,7 @@ import org.eclipse.jgit.api.errors.TransportException;
 
 
 /**
- * Simple snippet which shows how to clone a repository from a remote source
+ * Note: This snippet is not done and likely does not show anything useful yet
  *
  * @author dominik.stadler at gmx.at
  */

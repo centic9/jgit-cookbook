@@ -32,7 +32,7 @@ import org.eclipse.jgit.lib.Repository;
 
 
 /**
- * Simple snippet which shows how to list all Tags
+ * Note: This snippet is not done and likely does not show anything useful yet
  *
  * @author dominik.stadler at gmx.at
  */

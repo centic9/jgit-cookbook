@@ -46,28 +46,29 @@ public class RevertChanges {
                 Files.write(tempFilePath, "Some modifications".getBytes(), StandardOpenOption.APPEND);
 
                 // assert that file's text does not equal initialText
-                if (initialText.equals(readFile(tempFilePath))) {
-                    throw new IllegalStateException("Modified file should not equal its original state after modification");
+                if (initialText.equals(getTextFromFilePath(tempFilePath))) {
+                    throw new IllegalStateException("Modified file's text should not equal " +
+                            "its original state after modification");
                 }
 
-                System.out.println("File now has text [" + readFile(tempFilePath) + "]");
+                System.out.println("File now has text [" + getTextFromFilePath(tempFilePath) + "]");
 
                 // revert the changes
                 git.checkout().setStartPoint("HEAD").addPath(fileName).call();
 
                 // text should no longer have modifications
-                if (!initialText.equals(readFile(tempFilePath))) {
-                    throw new IllegalStateException("Reverted file's text should equal its initial text");
+                if (!initialText.equals(getTextFromFilePath(tempFilePath))) {
+                    throw new IllegalStateException("Reverted file's text should equal to its initial text");
                 }
 
                 System.out.println("File modifications were reverted. " +
-                        "File now has text [" + readFile(tempFilePath) + "]");
+                        "File now has text [" + getTextFromFilePath(tempFilePath) + "]");
             }
         }
 
     }
 
-    private static String readFile(Path file) throws IOException {
+    private static String getTextFromFilePath(Path file) throws IOException {
         byte[] bytes = Files.readAllBytes(file);
         CharBuffer chars = Charset.defaultCharset().decode(ByteBuffer.wrap(bytes));
         return chars.toString();

@@ -46,7 +46,9 @@ public class RevertChanges {
                 Files.write(tempFilePath, "Some modifications".getBytes(), StandardOpenOption.APPEND);
 
                 // assert that file's text does not equal initialText
-                assert !initialText.equals(readFile(tempFilePath));
+                if (initialText.equals(readFile(tempFilePath))) {
+                    throw new IllegalStateException("Modified file should not equal its original state after modification");
+                }
 
                 System.out.println("File now has text [" + readFile(tempFilePath) + "]");
 
@@ -54,7 +56,9 @@ public class RevertChanges {
                 git.checkout().setStartPoint("HEAD").addPath(fileName).call();
 
                 // text should no longer have modifications
-                assert initialText.equals(readFile(tempFilePath));
+                if (!initialText.equals(readFile(tempFilePath))) {
+                    throw new IllegalStateException("Reverted file's text should equal its initial text");
+                }
 
                 System.out.println("File modifications were reverted. " +
                         "File now has text [" + readFile(tempFilePath) + "]");

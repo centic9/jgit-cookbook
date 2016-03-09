@@ -16,13 +16,13 @@ package org.dstadler.jgit.api;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+
+import java.io.IOException;
 
 
 
@@ -33,7 +33,7 @@ public class WalkRev {
 
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-            Ref head = repository.getRef("refs/heads/master");
+            Ref head = repository.exactRef("refs/heads/master");
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk walk = new RevWalk(repository)) {

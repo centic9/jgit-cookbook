@@ -16,15 +16,15 @@ package org.dstadler.jgit;
    limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+
+import java.io.File;
+import java.io.IOException;
 
 
 
@@ -48,7 +48,7 @@ public class OpenRepository {
             System.out.println("Having repository: " + repository.getDirectory());
 
             // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
-            Ref head = repository.getRef("refs/heads/master");
+            Ref head = repository.exactRef("refs/heads/master");
             System.out.println("Ref of refs/heads/master: " + head);
         }
     }

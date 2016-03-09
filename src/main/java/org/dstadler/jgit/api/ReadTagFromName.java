@@ -16,14 +16,14 @@ package org.dstadler.jgit.api;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevObject;
 import org.eclipse.jgit.revwalk.RevWalk;
+
+import java.io.IOException;
 
 /**
  * Simple snippet which shows how to use RevWalk to read tags
@@ -35,12 +35,12 @@ public class ReadTagFromName {
             // a RevWalk allows to retrieve information from the repository
             try (RevWalk walk = new RevWalk(repository)) {
                 // a simple tag that is not annotated
-                Ref simpleTag = repository.getRef("initialtag");
+                Ref simpleTag = repository.findRef("initialtag");
                 RevObject any = walk.parseAny(simpleTag.getObjectId());
                 System.out.println("Commit: " + any);
 
                 // an annotated tag
-                Ref annotatedTag = repository.getRef("secondtag");
+                Ref annotatedTag = repository.findRef("secondtag");
                 any = walk.parseAny(annotatedTag.getObjectId());
                 System.out.println("Tag: " + any);
 

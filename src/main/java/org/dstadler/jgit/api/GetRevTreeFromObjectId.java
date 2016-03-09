@@ -16,14 +16,14 @@ package org.dstadler.jgit.api;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
+
+import java.io.IOException;
 
 /**
  * Simple snippet which shows how to use RevWalk to iterate over objects
@@ -33,7 +33,7 @@ public class GetRevTreeFromObjectId {
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             // See e.g. GetRevCommitFromObjectId for how to use a SHA-1 directly
-            Ref head = repository.getRef("HEAD");
+            Ref head = repository.findRef("HEAD");
             System.out.println("Ref of HEAD: " + head + ": " + head.getName() + " - " + head.getObjectId().getName());
 
             // a RevWalk allows to walk over commits based on some filtering that is defined

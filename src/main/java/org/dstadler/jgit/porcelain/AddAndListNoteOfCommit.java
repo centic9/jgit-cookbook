@@ -16,9 +16,6 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
-import java.io.IOException;
-import java.util.List;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -28,6 +25,9 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.notes.Note;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+
+import java.io.IOException;
+import java.util.List;
 
 
 
@@ -40,7 +40,7 @@ public class AddAndListNoteOfCommit {
 
 	public static void main(String[] args) throws IOException, GitAPIException {
 		try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-    		Ref head = repository.getRef("refs/heads/master");
+    		Ref head = repository.exactRef("refs/heads/master");
     		System.out.println("Found head: " + head);
 
             try (RevWalk walk = new RevWalk(repository)) {

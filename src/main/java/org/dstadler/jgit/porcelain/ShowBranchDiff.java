@@ -16,9 +16,6 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
-import java.io.IOException;
-import java.util.List;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -34,6 +31,9 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
+import java.io.IOException;
+import java.util.List;
+
 
 
 /**
@@ -46,7 +46,7 @@ public class ShowBranchDiff {
     public static void main(String[] args) throws IOException, GitAPIException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             try (Git git = new Git(repository)) {
-                if(repository.getRef("refs/heads/testbranch") == null) {
+                if(repository.exactRef("refs/heads/testbranch") == null) {
                     // first we need to ensure that the remote branch is visible locally
                     Ref ref = git.branchCreate().setName("testbranch").setStartPoint("origin/testbranch").call();
 
@@ -70,7 +70,7 @@ public class ShowBranchDiff {
             MissingObjectException,
             IncorrectObjectTypeException {
         // from the commit we can build the tree which allows us to construct the TreeParser
-        Ref head = repository.getRef(ref);
+        Ref head = repository.exactRef(ref);
         try (RevWalk walk = new RevWalk(repository)) {
             RevCommit commit = walk.parseCommit(head.getObjectId());
             RevTree tree = walk.parseTree(commit.getTree().getId());

@@ -16,8 +16,6 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -25,6 +23,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
+
+import java.io.IOException;
 
 /**
  * Note: This snippet is not done and likely does not show anything useful yet
@@ -37,7 +37,7 @@ public class WalkTreeNonRecursive {
 
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-            Ref head = repository.getRef("HEAD");
+            Ref head = repository.findRef("HEAD");
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
             try (RevWalk walk = new RevWalk(repository)) {

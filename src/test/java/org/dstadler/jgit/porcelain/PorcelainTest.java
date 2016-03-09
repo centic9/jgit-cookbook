@@ -31,6 +31,7 @@ public class PorcelainTest {
         ListTags.main(null);
         ListUncommittedChanges.main(null);
         RebaseToOriginMaster.main(null);
+        RevertChanges.main(null);
         ShowBlame.main(null);
         ShowBranchDiff.main(null);
         ShowChangedFilesBetweenCommits.main(null);

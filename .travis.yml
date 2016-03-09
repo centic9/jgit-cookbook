@@ -9,8 +9,5 @@ before_install:
  - git fetch --unshallow
  - git fetch origin testbranch:testbranch
 
-after_success:
-- ./gradlew jacocoTestReport
-
 after_failure:
 - cat build/test-results/*.xml

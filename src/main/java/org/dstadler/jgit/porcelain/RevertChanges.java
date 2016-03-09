@@ -35,6 +35,7 @@ public class RevertChanges {
 
                 // write some initial text to it
                 String initialText = "Initial Text";
+                System.out.println("Writing text [" + initialText + "] to file [" + tempFile.toString() + "]");
                 Files.write(tempFilePath, initialText.getBytes());
 
                 // add the file and commit it
@@ -44,23 +45,27 @@ public class RevertChanges {
                 // modify the file
                 Files.write(tempFilePath, "Some modifications".getBytes(), StandardOpenOption.APPEND);
 
-                // assert that file does not equal initialText
-                assert !initialText.equals(readFile(tempFilePath, Charset.defaultCharset()));
+                // assert that file's text does not equal initialText
+                assert !initialText.equals(readFile(tempFilePath));
+
+                System.out.println("File now has text [" + readFile(tempFilePath) + "]");
 
                 // revert the changes
                 git.checkout().setStartPoint("HEAD").addPath(fileName).call();
 
-                assert initialText.equals(readFile(tempFilePath, Charset.defaultCharset()));
+                // text should no longer have modifications
+                assert initialText.equals(readFile(tempFilePath));
 
-
+                System.out.println("File modifications were reverted. " +
+                        "File now has text [" + readFile(tempFilePath) + "]");
             }
         }
 
     }
 
-    private static String readFile(Path file, Charset charset) throws IOException {
+    private static String readFile(Path file) throws IOException {
         byte[] bytes = Files.readAllBytes(file);
-        CharBuffer chars = charset.decode(ByteBuffer.wrap(bytes));
+        CharBuffer chars = Charset.defaultCharset().decode(ByteBuffer.wrap(bytes));
         return chars.toString();
     }
 }

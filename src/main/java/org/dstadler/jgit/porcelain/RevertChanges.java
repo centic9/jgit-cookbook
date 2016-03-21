@@ -54,7 +54,7 @@ public class RevertChanges {
                 System.out.println("File now has text [" + getTextFromFilePath(tempFilePath) + "]");
 
                 // revert the changes
-                git.checkout().setStartPoint("HEAD").addPath(fileName).call();
+                git.checkout().addPath(fileName).call();
 
                 // text should no longer have modifications
                 if (!initialText.equals(getTextFromFilePath(tempFilePath))) {

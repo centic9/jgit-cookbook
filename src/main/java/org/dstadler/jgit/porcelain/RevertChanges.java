@@ -54,11 +54,11 @@ public class RevertChanges {
                 System.out.println("File now has text [" + getTextFromFilePath(tempFilePath) + "]");
 
                 // revert the changes
-                git.checkout().setStartPoint("HEAD").addPath(fileName).call();
+                git.checkout().addPath(fileName).call();
 
                 // text should no longer have modifications
                 if (!initialText.equals(getTextFromFilePath(tempFilePath))) {
-                    throw new IllegalStateException("Reverted file's text should equal to its initial text");
+                    throw new IllegalStateException("Reverted file's text should equal its initial text");
                 }
 
                 System.out.println("File modifications were reverted. " +

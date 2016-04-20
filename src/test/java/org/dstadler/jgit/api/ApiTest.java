@@ -30,6 +30,7 @@ public class ApiTest {
         ResolveRef.main(null);
         ShowBranchTrackingStatus.main(null);
         WalkRev.main(null);
+        WalkFromToRev.main(null);
     }
 
     @Test

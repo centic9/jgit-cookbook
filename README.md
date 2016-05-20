@@ -8,7 +8,7 @@ The JGit framework is rich and diverse, it has two layers, a low-level _api_ and
 
 This project tries to provide a collection of ready-to-run snippets which provide a quick start for building functionality using JGit. 
 
-Please make sure to also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
+Please make sure to take a look at the nicely written [introduction](http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/) and also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
 
 *Note: Please use sites such as http://stackoverflow.com for general questions about JGit usage, not issues in this project. Issues should be used for problems with snippets and suggestions of missing snippets. Snippets from good answers on stackoverflow can then be included here, naturally.*
 

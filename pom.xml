@@ -20,23 +20,23 @@
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
-      <version>4.2.0.201601211800-r</version>
+      <version>4.4.0.201606070830-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.archive</artifactId>
-      <version>4.2.0.201601211800-r</version>
+      <version>4.4.0.201606070830-r</version>
     </dependency>
 
 	<dependency>
 		<groupId>commons-io</groupId>
 		<artifactId>commons-io</artifactId>
-		<version>2.4</version>
+		<version>2.5</version>
 	</dependency>
 	<dependency>
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-simple</artifactId>
-		<version>1.7.12</version>
+		<version>1.7.21</version>
 	</dependency>
 
     <dependency>

@@ -9,6 +9,7 @@ public class PorcelainTest {
         // simply call all the samples to see any severe problems with the samples
         AddAndListNoteOfCommit.main(null);
         AddFile.main(null);
+        BlameFile.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
         // does not run without changes: CloneRemoteRepositoryWithAuthentication.main(null);

@@ -16,13 +16,11 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
+
+import java.io.File;
+import java.io.IOException;
 
 
 
@@ -35,10 +33,12 @@ public class PullFromRemoteRepository {
 
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-    public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+    public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);

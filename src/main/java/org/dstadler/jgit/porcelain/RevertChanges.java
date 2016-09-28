@@ -30,7 +30,9 @@ public class RevertChanges {
                 // set up a file
                 String fileName = "temptFile.txt";
                 File tempFile = new File(repository.getDirectory().getParentFile(), fileName);
-                tempFile.createNewFile();
+                if(!tempFile.createNewFile()) {
+                    throw new IOException("Could not create tempfile " + tempFile);
+                }
                 Path tempFilePath = tempFile.toPath();
 
                 // write some initial text to it

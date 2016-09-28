@@ -17,7 +17,6 @@ package org.dstadler.jgit.api;
  */
 
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;

@@ -24,8 +24,6 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
 import org.eclipse.jgit.diff.DiffFormatter;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
-import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
@@ -69,10 +67,9 @@ public class ShowFileDiff {
         }
     }
 
-    private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException,
-            MissingObjectException,
-            IncorrectObjectTypeException {
+    private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException {
         // from the commit we can build the tree which allows us to construct the TreeParser
+        //noinspection Duplicates
         try (RevWalk walk = new RevWalk(repository)) {
             RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
             RevTree tree = walk.parseTree(commit.getTree().getId());

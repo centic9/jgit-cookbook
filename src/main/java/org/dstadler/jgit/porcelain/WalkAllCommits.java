@@ -16,14 +16,13 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRefNameException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+
+import java.io.IOException;
 
 
 
@@ -33,7 +32,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
  */
 public class WalkAllCommits {
 
-    public static void main(String[] args) throws IOException, InvalidRefNameException, GitAPIException {
+    public static void main(String[] args) throws IOException, GitAPIException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             try (Git git = new Git(repository)) {
                 Iterable<RevCommit> commits = git.log().all().call();

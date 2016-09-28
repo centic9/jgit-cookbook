@@ -16,13 +16,11 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
-import java.util.Collection;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Ref;
+
+import java.util.Collection;
 
 
 
@@ -36,7 +34,7 @@ public class ListRemoteRepository {
 
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-    public static void main(String[] args) throws InvalidRemoteException, TransportException, GitAPIException {
+    public static void main(String[] args) throws GitAPIException {
         // then clone
         System.out.println("Listing remote repository " + REMOTE_URL);
         Collection<Ref> refs = Git.lsRemoteRepository()

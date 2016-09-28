@@ -88,7 +88,7 @@ public class ShowBlame {
 
                 revWalk.dispose();
 
-                return IOUtils.readLines(new ByteArrayInputStream(stream.toByteArray())).size();
+                return IOUtils.readLines(new ByteArrayInputStream(stream.toByteArray()), "UTF-8").size();
             }
         }
     }

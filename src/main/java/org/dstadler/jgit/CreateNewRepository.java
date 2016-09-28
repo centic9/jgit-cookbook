@@ -33,7 +33,9 @@ public class CreateNewRepository {
     public static void main(String[] args) throws IOException, IllegalStateException, GitAPIException {
         // prepare a new folder
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // create the directory
         try (Git git = Git.init().setDirectory(localPath).call()) {

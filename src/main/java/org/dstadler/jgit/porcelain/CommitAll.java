@@ -24,7 +24,9 @@ public class CommitAll {
             try (Git git = new Git(repository)) {
                 // create the file
                 File myfile = new File(repository.getDirectory().getParent(), "testfile");
-                myfile.createNewFile();
+                if(!myfile.createNewFile()) {
+                    throw new IOException("Could not create file " + myfile);
+                }
 
                 // Stage all files in the repo including new files
                 git.add().addFilepattern(".").call();

@@ -26,8 +26,6 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import java.io.File;
 import java.io.IOException;
 
-
-
 /**
  * Simple snippet which shows how to open an existing repository
  *
@@ -59,7 +57,9 @@ public class OpenRepository {
 
             // create the file
             File myfile = new File(repository.getDirectory().getParent(), "testfile");
-            myfile.createNewFile();
+            if(!myfile.createNewFile()) {
+                throw new IOException("Could not create file " + myfile);
+            }
 
             // run the add-call
             try (Git git = new Git(repository)) {
@@ -76,9 +76,7 @@ public class OpenRepository {
 
             System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
 
-            File dir = repository.getDirectory();
-
-            return dir;
+            return repository.getDirectory();
         }
     }
 }

@@ -20,8 +20,6 @@ import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
-import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -66,9 +64,7 @@ public class ShowBranchDiff {
         }
     }
 
-    private static AbstractTreeIterator prepareTreeParser(Repository repository, String ref) throws IOException,
-            MissingObjectException,
-            IncorrectObjectTypeException {
+    private static AbstractTreeIterator prepareTreeParser(Repository repository, String ref) throws IOException {
         // from the commit we can build the tree which allows us to construct the TreeParser
         Ref head = repository.exactRef(ref);
         try (RevWalk walk = new RevWalk(repository)) {

@@ -39,7 +39,9 @@ public class CommitFile {
             try (Git git = new Git(repository)) {
                 // create the file
                 File myfile = new File(repository.getDirectory().getParent(), "testfile");
-                myfile.createNewFile();
+                if(!myfile.createNewFile()) {
+                    throw new IOException("Could not create file " + myfile);
+                }
 
                 // run the add
                 git.add()

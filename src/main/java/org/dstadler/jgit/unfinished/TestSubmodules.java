@@ -84,7 +84,9 @@ public class TestSubmodules {
 
     private static File createRepository() throws IOException, GitAPIException {
         File dir = File.createTempFile("gitinit", ".test");
-        dir.delete();
+        if(!dir.delete()) {
+            throw new IOException("Could not delete temporary file " + dir);
+        }
 
         Git.init()
                 .setDirectory(dir)

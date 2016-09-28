@@ -41,7 +41,9 @@ public class FetchRemoteCommitsWithPrune {
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);

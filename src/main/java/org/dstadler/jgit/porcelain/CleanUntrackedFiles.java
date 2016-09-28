@@ -40,8 +40,12 @@ public class CleanUntrackedFiles {
 
             File untrackedFile = File.createTempFile("untracked", ".txt", repository.getWorkTree());
             File untrackedDir = File.createTempFile("untrackedDir", "", repository.getWorkTree());
-            untrackedDir.delete();
-            untrackedDir.mkdirs();
+            if(!untrackedDir.delete()) {
+                throw new IOException("Could not delete file " + untrackedDir);
+            }
+            if(!untrackedDir.mkdirs()) {
+                throw new IOException("Could not create directory " + untrackedDir);
+            }
 
             System.out.println("Untracked exists: " + untrackedFile.exists() + " Dir: " + untrackedDir.exists() + "/" + untrackedDir.isDirectory());
 

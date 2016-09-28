@@ -16,17 +16,15 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
+
+import java.io.File;
+import java.io.IOException;
 
 
 
@@ -39,7 +37,7 @@ import org.eclipse.jgit.transport.URIish;
 public class CloneRemoteRepositoryWithAuthentication {
     private static final String REMOTE_URL = "ssh://<user>:<pwd>@<host>:22/<path-to-remote-repo>/";
 
-    public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+    public static void main(String[] args) throws IOException, GitAPIException {
         // this is necessary when the remote host does not have a valid certificate, ideally we would install the certificate in the JVM
         // instead of this unsecure workaround!
         CredentialsProvider allowHosts = new CredentialsProvider() {
@@ -73,7 +71,9 @@ public class CloneRemoteRepositoryWithAuthentication {
 
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);

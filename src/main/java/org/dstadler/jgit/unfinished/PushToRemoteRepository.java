@@ -16,15 +16,13 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRemoteException;
-import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+
+import java.io.File;
+import java.io.IOException;
 
 
 
@@ -37,10 +35,12 @@ public class PushToRemoteRepository {
 
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-    public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
+    public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
@@ -50,7 +50,9 @@ public class PushToRemoteRepository {
                 .call()) {
             // prepare a second folder for the 2nd clone
             File localPath2 = File.createTempFile("TestGitRepository", "");
-            localPath2.delete();
+            if(!localPath2.delete()) {
+                throw new IOException("Could not delete temporary file " + localPath2);
+            }
 
             // then clone again
             System.out.println("Cloning from file://" + localPath + " to " + localPath2);
@@ -58,6 +60,8 @@ public class PushToRemoteRepository {
                     .setURI("file://" + localPath)
                     .setDirectory(localPath2)
                     .call()) {
+                System.out.println("Result: " + result2);
+
                 // now open the created repository
                 FileRepositoryBuilder builder = new FileRepositoryBuilder();
                 try (Repository repository = builder.setGitDir(localPath2)

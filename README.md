@@ -108,6 +108,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
 * Doing stuff without local storage: Using org.eclipse.jgit.storage.dfs.InMemoryRepository to clone a Git repo in-memory and work from there, see http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/org/eclipse/jgit/internal/storage/dfs/InMemoryRepository.html
 * CherryPick: http://download.eclipse.org/jgit/site/4.2.0.201601211800-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
+* More authentication: http://www.lordofthejars.com/2016/09/authenticating-with-jgit.html
 
 #### Sources
 

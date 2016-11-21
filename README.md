@@ -97,6 +97,13 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Check if commits on other branches are merged into a given branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/CheckMergeStatusOfCommit.java)
 * [List files in a directory as-of a specific commit or a tag](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ListFilesOfCommitAndTag.java)
 
+##### GitServlet
+
+* There is a standalone sub-project in directory [httpserver](https://github.com/centic9/jgit-cookbook/blob/master/httpserver) which 
+starts up a simple HTTP Git server based on the JGit GitServlet.
+
+Just import the project in your IDE and start up the `Main` application, see the Comments in the code for more details.
+
 #### Missing snippets
 
 * Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java

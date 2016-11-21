@@ -12,29 +12,29 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit:4.5.0.201609210915-r'
-	compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.5.0.201609210915-r'
-	compile 'commons-io:commons-io:2.5'
-	compile 'org.slf4j:slf4j-simple:1.7.21'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:4.5.0.201609210915-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.5.0.201609210915-r'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
 
-    testCompile "junit:junit:4.12"
+    testCompile 'junit:junit:4.12'
 }
 
 // work around unnecessary timestamp in generated file which always causes dirty files in version control
 // https://issues.gradle.org/browse/GRADLE-2293
 task adjustEclipseSettingsFile << {
-	ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
-		fileset(dir: project.projectDir, includes: '.settings/org.eclipse.jdt.core.prefs,.settings/com.google.gdt.eclipse.core.prefs')
-	}
+    ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
+        fileset(dir: project.projectDir, includes: '.settings/org.eclipse.jdt.core.prefs,.settings/com.google.gdt.eclipse.core.prefs')
+    }
 }
 task sortEclipseSettingsFile << {
-	new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
-	new File(project.projectDir, '.classpath').with { it.text = it.readLines().findAll { it }.unique().join('\n') }
-	File file = new File(project.projectDir, '.settings/com.google.gdt.eclipse.core.prefs');
-	if(file.exists()) {
-		file.with { it.text = it.readLines().findAll { it }.sort().join('\n') }
-	}
-	ant.fixcrlf(srcDir: '.settings', eol: 'lf')
+    new File(project.projectDir, '.settings/org.eclipse.jdt.core.prefs').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+    new File(project.projectDir, '.classpath').with { it.text = it.readLines().findAll { it }.unique().join('\n') }
+    File file = new File(project.projectDir, '.settings/com.google.gdt.eclipse.core.prefs');
+    if(file.exists()) {
+        file.with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+    }
+    ant.fixcrlf(srcDir: '.settings', eol: 'lf')
 }
 eclipseJdt.finalizedBy adjustEclipseSettingsFile
 eclipseJdt.finalizedBy sortEclipseSettingsFile
@@ -44,10 +44,10 @@ task wrapper(type: Wrapper) {
 }
 
 task adjustWrapperPropertiesFile << {
-	ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
-		fileset(dir: project.projectDir, includes: 'gradle/wrapper/gradle-wrapper.properties')
-	}
-	new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.properties').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
-	ant.fixcrlf(file: 'gradle/wrapper/gradle-wrapper.properties', eol: 'lf')
+    ant.replaceregexp(match:'^#.*', replace:'', flags:'g', byline:true) {
+        fileset(dir: project.projectDir, includes: 'gradle/wrapper/gradle-wrapper.properties')
+    }
+    new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.properties').with { it.text = it.readLines().findAll { it }.sort().join('\n') }
+    ant.fixcrlf(file: 'gradle/wrapper/gradle-wrapper.properties', eol: 'lf')
 }
 wrapper.finalizedBy adjustWrapperPropertiesFile

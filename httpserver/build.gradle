@@ -1,0 +1,21 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://repo.eclipse.org/content/groups/releases/"
+  }
+}
+
+dependencies {
+	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:4.5.0.201609210915-r'
+	compile 'org.eclipse.jetty:jetty-servlet:9.3.14.v20161028'
+
+	compile 'org.slf4j:slf4j-simple:1.7.21'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}

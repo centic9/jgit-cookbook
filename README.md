@@ -98,6 +98,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [List files in a directory as-of a specific commit or a tag](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/ListFilesOfCommitAndTag.java)
 * [Iterate over files of a commit recursively](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkTreeRecursive.java)
 * [Iterate over files of a commit non-recursively](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkTreeNonRecursive.java)
+* [Find all commits that are reachable via tags, branches, remotes, HEADs, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkAllCommits.java)
 
 ##### GitServlet
 

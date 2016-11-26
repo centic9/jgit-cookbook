@@ -29,6 +29,7 @@ public class ApiTest {
         ReadUserConfig.main(null);
         ResolveRef.main(null);
         ShowBranchTrackingStatus.main(null);
+        WalkAllCommits.main(null);
         WalkRev.main(null);
         WalkFromToRev.main(null);
         WalkTreeNonRecursive.main(null);

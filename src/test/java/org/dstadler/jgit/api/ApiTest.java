@@ -31,6 +31,8 @@ public class ApiTest {
         ShowBranchTrackingStatus.main(null);
         WalkRev.main(null);
         WalkFromToRev.main(null);
+        WalkTreeNonRecursive.main(null);
+        WalkTreeRecursive.main(null);
     }
 
     @Test

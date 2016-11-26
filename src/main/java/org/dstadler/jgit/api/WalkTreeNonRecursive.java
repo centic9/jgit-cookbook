@@ -1,4 +1,4 @@
-package org.dstadler.jgit.unfinished;
+package org.dstadler.jgit.api;
 
 /*
    Copyright 2013, 2014 Dominik Stadler
@@ -27,9 +27,10 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 import java.io.IOException;
 
 /**
- * Note: This snippet is not done and likely does not show anything useful yet
  *
  * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
+ *
+ * See {@link WalkTreeNonRecursive} for a different usage of the {@link TreeWalk} class.
  *
  * @author dominik.stadler at gmx.at
  */
@@ -45,10 +46,11 @@ public class WalkTreeNonRecursive {
                 RevTree tree = commit.getTree();
                 System.out.println("Having tree: " + tree);
 
-                // now use a TreeWalk to iterate over all files in the Tree recursively
+                // now use a TreeWalk to iterate over all files in the Tree
                 // you can set Filters to narrow down the results if needed
                 try (TreeWalk treeWalk = new TreeWalk(repository)) {
                     treeWalk.addTree(tree);
+                    // not walk the tree recursively so we only get the elements in the top-level directory
                     treeWalk.setRecursive(false);
                     while (treeWalk.next()) {
                         System.out.println("found: " + treeWalk.getPathString());

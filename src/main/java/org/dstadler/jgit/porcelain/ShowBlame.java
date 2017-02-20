@@ -1,7 +1,7 @@
 package org.dstadler.jgit.porcelain;
 
 /*
-    Copyright 2013, 2014 Dominik Stadler
+    Copyright 2013, 2014, 2017 Dominik Stadler
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package org.dstadler.jgit.porcelain;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
@@ -38,7 +39,13 @@ import org.eclipse.jgit.treewalk.filter.PathFilter;
 
 /**
  * Simple snippet which shows how to get a diff showing who
- * changed which line in a file
+ * changed which line in a file.
+ *
+ * It uses HEAD~~ to select the version of README.md two commits ago
+ * and reads the blame information for it.
+ *
+ * Then it prints out the number of lines and the actual number of lines in the
+ * latest/local version of the file.
  *
  * @author dominik.stadler at gmx.at
  */
@@ -48,23 +55,28 @@ public class ShowBlame {
         // prepare a new test-repository
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             BlameCommand blamer = new BlameCommand(repository);
-            ObjectId commitID = repository.resolve("HEAD");
+            ObjectId commitID = repository.resolve("HEAD~~");
             blamer.setStartCommit(commitID);
             blamer.setFilePath("README.md");
             BlameResult blame = blamer.call();
 
-            // read the number of lines from the commit to not look at changes in the working copy
-            int lines = countFiles(repository, commitID, "README.md");
+            // read the number of lines from the given revision, this excludes changes from the last two commits due to the "~~" above
+            int lines = countLinesOfFileInCommit(repository, commitID, "README.md");
             for (int i = 0; i < lines; i++) {
                 RevCommit commit = blame.getSourceCommit(i);
                 System.out.println("Line: " + i + ": " + commit);
             }
 
-            System.out.println("Displayed commits responsible for " + lines + " lines of README.md");
+            final int currentLines;
+            try (final FileInputStream input = new FileInputStream("README.md")) {
+                currentLines = IOUtils.readLines(input, "UTF-8").size();
+            }
+
+            System.out.println("Displayed commits responsible for " + lines + " lines of README.md, current version has " + currentLines + " lines");
         }
     }
 
-    private static int countFiles(Repository repository, ObjectId commitID, String name) throws IOException {
+    private static int countLinesOfFileInCommit(Repository repository, ObjectId commitID, String name) throws IOException {
         try (RevWalk revWalk = new RevWalk(repository)) {
             RevCommit commit = revWalk.parseCommit(commitID);
             RevTree tree = commit.getTree();
@@ -82,8 +94,8 @@ public class ShowBlame {
                 ObjectId objectId = treeWalk.getObjectId(0);
                 ObjectLoader loader = repository.open(objectId);
 
+                // load the content of the file into a stream
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                // and then one can the loader to read the file
                 loader.copyTo(stream);
 
                 revWalk.dispose();

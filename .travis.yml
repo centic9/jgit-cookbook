@@ -10,4 +10,4 @@ before_install:
  - git fetch origin testbranch:testbranch
 
 after_failure:
-- cat build/test-results/*.xml
+- cat build/test-results/test/*.xml

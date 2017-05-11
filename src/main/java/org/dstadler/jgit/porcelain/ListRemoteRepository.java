@@ -21,7 +21,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 
 import java.util.Collection;
-
+import java.util.Map;
 
 
 /**
@@ -43,6 +43,26 @@ public class ListRemoteRepository {
                 .setRemote(REMOTE_URL)
                 .call();
 
+        for (Ref ref : refs) {
+            System.out.println("Ref: " + ref);
+        }
+
+        final Map<String, Ref> map = Git.lsRemoteRepository()
+                .setHeads(true)
+                .setTags(true)
+                .setRemote(REMOTE_URL)
+                .callAsMap();
+
+        System.out.println("As map");
+        for (Map.Entry<String, Ref> entry : map.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Ref: " + entry.getValue());
+        }
+
+        refs = Git.lsRemoteRepository()
+                .setRemote(REMOTE_URL)
+                .call();
+
+        System.out.println("All refs");
         for (Ref ref : refs) {
             System.out.println("Ref: " + ref);
         }

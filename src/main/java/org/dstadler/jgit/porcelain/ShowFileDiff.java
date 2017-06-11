@@ -35,7 +35,6 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.filter.PathFilter;
 
 
-
 /**
  * Simple snippet which shows how to show diffs between branches
  *
@@ -46,15 +45,17 @@ public class ShowFileDiff {
     public static void main(String[] args) throws IOException, GitAPIException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             // the diff works on TreeIterators, we prepare two for the two branches
-            AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "09c65401f3730eb3e619c33bf31e2376fb393727");
-            AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "aa31703b65774e4a06010824601e56375a70078c");
+            AbstractTreeIterator oldTreeParser = prepareTreeParser(repository, "b97b184b0ce11c0b6a4dcc2b57768ff155cb696b");
+            AbstractTreeIterator newTreeParser = prepareTreeParser(repository, "9e0719d7d773b41b49ebf04e6fd7b5c637e96063");
 
-            // then the procelain diff-command returns a list of diff entries
+            // then the porcelain diff-command returns a list of diff entries
             try (Git git = new Git(repository)) {
                 List<DiffEntry> diff = git.diff().
                         setOldTree(oldTreeParser).
                         setNewTree(newTreeParser).
                         setPathFilter(PathFilter.create("README.md")).
+                        // to filter on Suffix use the following instead
+                        //setPathFilter(PathSuffixFilter.create(".java")).
                         call();
                 for (DiffEntry entry : diff) {
                     System.out.println("Entry: " + entry + ", from: " + entry.getOldId() + ", to: " + entry.getNewId());

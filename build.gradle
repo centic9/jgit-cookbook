@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    compile 'org.eclipse.jgit:org.eclipse.jgit:4.6.1.201703071140-r'
-    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.6.1.201703071140-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:4.7.1.201706071930-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:4.7.1.201706071930-r'
     compile 'commons-io:commons-io:2.5'
     compile 'org.slf4j:slf4j-simple:1.7.21'
 

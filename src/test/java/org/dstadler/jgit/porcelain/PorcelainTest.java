@@ -31,6 +31,7 @@ public class PorcelainTest {
         ListRemotes.main(null);
         ListTags.main(null);
         ListUncommittedChanges.main(null);
+        MergeChanges.main(null);
         RebaseToOriginMaster.main(null);
         RevertChanges.main(null);
         ShowBlame.main(null);

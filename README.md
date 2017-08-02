@@ -67,6 +67,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Create, list, apply and drop stashes](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateListApplyAndDropStash.java)
 * [Run garbage collection](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CollectGarbage.java)
 * [Blame, i.e. retrieve information who last changed which line in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/BlameFile.java)
+* [Merge changes from a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/MergeChanges.java)
 
 ##### Commands working with remote repositories
 

@@ -16,6 +16,7 @@ package org.dstadler.jgit.porcelain;
    limitations under the License.
  */
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.MergeCommand;
@@ -28,6 +29,8 @@ import org.eclipse.jgit.revwalk.RevCommit;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Snippet which shows how to merge changes from another branch.
@@ -38,18 +41,22 @@ public class MergeChanges {
         try (Repository repository = CookbookHelper.createNewRepository()) {
             try (Git git = new Git(repository)) {
                 // create some commit on master
-                createCommit(repository, git, "masterFile");
+                createCommit(repository, git, "masterFile", "content12");
 
                 // create branch "changes"
                 Ref changes = git.branchCreate().setName("changes").call();
                 System.out.println("Result of creating the branch: " + changes);
 
+                // now start a change on master
+                createCommit(repository, git, "sharedFile", "content12");
+
                 // check out branch "changes"
                 Ref checkout = git.checkout().setName("changes").call();
                 System.out.println("Result of checking out the branch: " + checkout);
 
-                // create some commit on branch "changes"
-                createCommit(repository, git, "branchFile");
+                // create some commit on branch "changes", one of them conflicting with the change on master
+                createCommit(repository, git, "branchFile", "content98");
+                createCommit(repository, git, "sharedFile", "content98");
 
                 // check out "master"
                 checkout = git.checkout().setName("master").call();
@@ -68,16 +75,20 @@ public class MergeChanges {
                         setMessage("Merged changes").
                         call();
                 System.out.println("Merge-Results for id: " + mergeBase + ": " + merge);
+                for (Map.Entry<String,int[][]> entry : merge.getConflicts().entrySet()) {
+                    System.out.println("Key: " + entry.getKey());
+                    for(int[] arr : entry.getValue()) {
+                        System.out.println("value: " + Arrays.toString(arr));
+                    }
+                }
             }
         }
     }
 
-    private static void createCommit(Repository repository, Git git, String fileName) throws IOException, GitAPIException {
+    private static void createCommit(Repository repository, Git git, String fileName, String content) throws IOException, GitAPIException {
         // create the file
         File myFile = new File(repository.getDirectory().getParent(), fileName);
-        if(!myFile.createNewFile()) {
-            throw new IOException("Could not create file " + myFile);
-        }
+        FileUtils.writeStringToFile(myFile, content, "UTF-8");
 
         // run the add
         git.add()

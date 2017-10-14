@@ -38,9 +38,9 @@ public class CommitFile {
         try (Repository repository = CookbookHelper.createNewRepository()) {
             try (Git git = new Git(repository)) {
                 // create the file
-                File myfile = new File(repository.getDirectory().getParent(), "testfile");
-                if(!myfile.createNewFile()) {
-                    throw new IOException("Could not create file " + myfile);
+                File myFile = new File(repository.getDirectory().getParent(), "testfile");
+                if(!myFile.createNewFile()) {
+                    throw new IOException("Could not create file " + myFile);
                 }
 
                 // run the add
@@ -53,7 +53,7 @@ public class CommitFile {
                         .setMessage("Added testfile")
                         .call();
 
-                System.out.println("Committed file " + myfile + " to repository at " + repository.getDirectory());
+                System.out.println("Committed file " + myFile + " to repository at " + repository.getDirectory());
             }
         }
     }

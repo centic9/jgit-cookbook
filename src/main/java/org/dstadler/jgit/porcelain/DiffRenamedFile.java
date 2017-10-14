@@ -24,21 +24,41 @@ import java.util.List;
 // Simple example that shows how to diff a single file between two commits when
 // the file may have been renamed.
 public class DiffRenamedFile {
+	public static void main(String args[])
+			throws IOException, GitAPIException {
+		try (Repository repo = CookbookHelper.openJGitCookbookRepository()) {
+			// Diff README.md between two commits. The file is named README.md in
+			// the new commit (5a10bd6e), but was named "jgit-cookbook README.md" in
+			// the old commit (2e1d65e4).
+			DiffEntry diff = diffFile(repo,
+					"2e1d65e4cf6c5e267e109aa20fd68ae119fa5ec9",
+					"5a10bd6ee431e362facb03cfe763b9a3d9dfd02d",
+					"README.md");
+
+			// Display the diff.
+			try (DiffFormatter formatter = new DiffFormatter(System.out)) {
+				formatter.setRepository(repo);
+				//noinspection ConstantConditions
+				formatter.format(diff);
+			}
+		}
+	}
+
 	private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException {
 		// from the commit we can build the tree which allows us to construct the TreeParser
 		//noinspection Duplicates
 		try (RevWalk walk = new RevWalk(repository)) {
-    		RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
-    		RevTree tree = walk.parseTree(commit.getTree().getId());
+			RevCommit commit = walk.parseCommit(ObjectId.fromString(objectId));
+			RevTree tree = walk.parseTree(commit.getTree().getId());
 
-    		CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-    		try (ObjectReader oldReader = repository.newObjectReader()) {
-    			oldTreeParser.reset(oldReader, tree.getId());
-    		}
+			CanonicalTreeParser treeParser = new CanonicalTreeParser();
+			try (ObjectReader reader = repository.newObjectReader()) {
+				treeParser.reset(reader, tree.getId());
+			}
 
-    		walk.dispose();
+			walk.dispose();
 
-    		return oldTreeParser;
+			return treeParser;
 		}
 	}
 
@@ -58,26 +78,6 @@ public class DiffRenamedFile {
     		if (diffList.size() > 1)
     			throw new RuntimeException("invalid diff");
     		return diffList.get(0);
-		}
-	}
-
-	public static void main(String args[])
-		throws IOException, GitAPIException {
-		try (Repository repo = CookbookHelper.openJGitCookbookRepository()) {
-    		// Diff README.md between two commits. The file is named README.md in
-    		// the new commit (5a10bd6e), but was named "jgit-cookbook README.md" in
-    		// the old commit (2e1d65e4).
-    		DiffEntry diff = diffFile(repo,
-    			"2e1d65e4cf6c5e267e109aa20fd68ae119fa5ec9",
-    			"5a10bd6ee431e362facb03cfe763b9a3d9dfd02d",
-    			"README.md");
-
-    		// Display the diff.
-    		try (DiffFormatter formatter = new DiffFormatter(System.out)) {
-        		formatter.setRepository(repo);
-				//noinspection ConstantConditions
-				formatter.format(diff);
-    		}
 		}
 	}
 }

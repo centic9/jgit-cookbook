@@ -71,14 +71,14 @@ public class ShowBranchDiff {
             RevCommit commit = walk.parseCommit(head.getObjectId());
             RevTree tree = walk.parseTree(commit.getTree().getId());
 
-            CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-            try (ObjectReader oldReader = repository.newObjectReader()) {
-                oldTreeParser.reset(oldReader, tree.getId());
+            CanonicalTreeParser treeParser = new CanonicalTreeParser();
+            try (ObjectReader reader = repository.newObjectReader()) {
+                treeParser.reset(reader, tree.getId());
             }
 
             walk.dispose();
 
-            return oldTreeParser;
+            return treeParser;
         }
     }
 }

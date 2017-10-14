@@ -23,7 +23,6 @@ import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -83,15 +82,14 @@ public class DiffFilesInCommit {
             RevCommit commit = walk.parseCommit(repository.resolve(objectId));
             RevTree tree = walk.parseTree(commit.getTree().getId());
 
-            CanonicalTreeParser oldTreeParser = new CanonicalTreeParser();
-            try (ObjectReader oldReader = repository.newObjectReader()) {
-                oldTreeParser.reset(oldReader, tree.getId());
+            CanonicalTreeParser treeParser = new CanonicalTreeParser();
+            try (ObjectReader reader = repository.newObjectReader()) {
+                treeParser.reset(reader, tree.getId());
             }
 
             walk.dispose();
 
-            return oldTreeParser;
+            return treeParser;
         }
     }
-
 }

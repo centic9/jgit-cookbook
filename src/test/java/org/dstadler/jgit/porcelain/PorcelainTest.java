@@ -21,6 +21,7 @@ public class PorcelainTest {
         CreateArchive.main(null);
         CreateCustomFormatArchive.main(null);
         CreateListApplyAndDropStash.main(null);
+        DiffFilesInCommit.main(null);
         DiffRenamedFile.main(null);
         FetchRemoteCommits.main(null);
         FetchRemoteCommitsWithPrune.main(null);

@@ -89,7 +89,7 @@ public class GetFileAttributes {
             treeWalk.setRecursive(false);
             treeWalk.setFilter(PathFilter.create("src"));
             if (!treeWalk.next()) {
-                throw new IllegalStateException("Did not find expected file 'README.md'");
+                throw new IllegalStateException("Did not find expected folder 'src'");
             }
 
             // FileMode now indicates that this is a directory, i.e. FileMode.TREE.equals(fileMode) holds true

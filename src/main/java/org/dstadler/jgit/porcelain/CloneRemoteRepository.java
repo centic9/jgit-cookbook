@@ -19,6 +19,7 @@ package org.dstadler.jgit.porcelain;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -49,5 +50,8 @@ public class CloneRemoteRepository {
 	        // Note: the call() returns an opened repository already which needs to be closed to avoid file handle leaks!
 	        System.out.println("Having repository: " + result.getRepository().getDirectory());
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

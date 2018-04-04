@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -66,5 +67,8 @@ public class CreateArchive {
         }
 
         System.out.println("Wrote " + file.length() + " bytes to " + file);
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.forceDelete(file);
     }
 }

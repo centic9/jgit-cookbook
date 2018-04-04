@@ -19,6 +19,7 @@ package org.dstadler.jgit.unfinished;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
@@ -42,16 +43,19 @@ public class TestSubmodules {
             FileRepositoryBuilder builder = new FileRepositoryBuilder();
 
             try (Repository subRepo = builder.setGitDir(new File("testrepo/.git"))
-              .readEnvironment() // scan environment GIT_* variables
-              .findGitDir() // scan up the file system tree
-              .build()) {
-                if(subRepo.isBare()) {
+                    .readEnvironment() // scan environment GIT_* variables
+                    .findGitDir() // scan up the file system tree
+                    .build()) {
+                if (subRepo.isBare()) {
                     throw new IllegalStateException("Repository at " + subRepo.getDirectory() + " should not be bare");
                 }
             }
         }
 
         System.out.println("All done!");
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(mainRepoDir);
     }
 
     private static void addSubmodule(Repository mainRepo) throws GitAPIException {

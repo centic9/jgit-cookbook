@@ -16,6 +16,7 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -55,5 +56,8 @@ public class PullFromRemoteRepository {
 
 	        System.out.println("Pulled from remote repository to local repository at " + result.getRepository().getDirectory());
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

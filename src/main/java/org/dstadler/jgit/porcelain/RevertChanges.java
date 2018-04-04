@@ -1,5 +1,6 @@
 package org.dstadler.jgit.porcelain;
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -24,14 +25,17 @@ import java.nio.file.StandardOpenOption;
 public class RevertChanges {
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         try (Repository repository = CookbookHelper.createNewRepository()) {
+            localPath = repository.getWorkTree();
+
             System.out.println("Listing local branches:");
             try (Git git = new Git(repository)) {
                 // set up a file
                 String fileName = "temptFile.txt";
                 File tempFile = new File(repository.getDirectory().getParentFile(), fileName);
                 if(!tempFile.createNewFile()) {
-                    throw new IOException("Could not create tempfile " + tempFile);
+                    throw new IOException("Could not create temporary file " + tempFile);
                 }
                 Path tempFilePath = tempFile.toPath();
 
@@ -68,6 +72,8 @@ public class RevertChanges {
             }
         }
 
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 
     private static String getTextFromFilePath(Path file) throws IOException {

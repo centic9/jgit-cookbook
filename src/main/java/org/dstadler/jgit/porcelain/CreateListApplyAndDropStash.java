@@ -38,8 +38,11 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class CreateListApplyAndDropStash {
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         // prepare a new test-repository
         try (Repository repository = CookbookHelper.createNewRepository()) {
+            localPath = repository.getWorkTree();
+
             try (Git git = new Git(repository)) {
                 // create a file
                 File file1 = new File(repository.getDirectory().getParent(), "testfile");
@@ -90,5 +93,8 @@ public class CreateListApplyAndDropStash {
                 System.out.println("Applied 2nd stash as: " + applied);
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

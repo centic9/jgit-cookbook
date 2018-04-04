@@ -16,6 +16,7 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -39,7 +40,10 @@ public class PullRemoteRepository {
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         try (Repository repository = cloneRepository()) {
+            localPath = repository.getWorkTree();
+
             System.out.println("Having repository: " + repository.getDirectory() + " with head: " +
                     repository.findRef(Constants.HEAD) + "/" + repository.resolve("HEAD") + "/" +
                     repository.resolve("refs/heads/master"));
@@ -53,6 +57,9 @@ public class PullRemoteRepository {
                 System.out.println("Pulled from the remote repository: " + call);
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 
     private static Repository cloneRepository() throws IOException, GitAPIException {

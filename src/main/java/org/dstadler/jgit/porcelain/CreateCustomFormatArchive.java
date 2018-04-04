@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.ArchiveCommand;
 import org.eclipse.jgit.api.ArchiveCommand.Format;
@@ -90,8 +91,9 @@ public class CreateCustomFormatArchive {
     }
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        File file = File.createTempFile("test", ".mzip");
+
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-            File file = File.createTempFile("test", ".mzip");
             // make the archive format known
             ArchiveCommand.registerFormat("myzip", new ZipArchiveFormat());
             try {
@@ -112,5 +114,8 @@ public class CreateCustomFormatArchive {
 
             System.out.println("Wrote " + file.length() + " bytes to " + file);
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.forceDelete(file);
     }
 }

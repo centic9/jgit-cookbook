@@ -38,7 +38,10 @@ import java.util.Map;
 public class MergeChanges {
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         try (Repository repository = CookbookHelper.createNewRepository()) {
+            localPath = repository.getWorkTree();
+
             try (Git git = new Git(repository)) {
                 // create some commit on master
                 createCommit(repository, git, "masterFile", "content12");
@@ -82,6 +85,9 @@ public class MergeChanges {
                     }
                 }
             }
+
+            // clean up here to not keep using more and more disk-space for these samples
+            FileUtils.deleteDirectory(localPath);
         }
     }
 

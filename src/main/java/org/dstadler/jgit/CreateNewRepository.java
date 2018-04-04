@@ -42,6 +42,7 @@ public class CreateNewRepository {
             System.out.println("Having repository: " + git.getRepository().getDirectory());
         }
 
+        // clean up here to not keep using more and more disk-space for these samples
         FileUtils.deleteDirectory(localPath);
     }
 }

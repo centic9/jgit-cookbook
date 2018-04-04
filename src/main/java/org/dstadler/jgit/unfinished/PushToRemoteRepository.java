@@ -16,6 +16,7 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
@@ -77,5 +78,8 @@ public class PushToRemoteRepository {
                 }
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

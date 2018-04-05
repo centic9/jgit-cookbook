@@ -20,23 +20,30 @@
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
-      <version>4.9.0.201710071750-r</version>
+      <version>4.11.0.201803080745-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.archive</artifactId>
-      <version>4.9.0.201710071750-r</version>
+      <version>4.11.0.201803080745-r</version>
     </dependency>
 
     <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.5</version>
+        <version>2.6</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-simple</artifactId>
-        <version>1.7.21</version>
+        <version>1.7.25</version>
+    </dependency>
+
+    <!-- optional dependency of commons-compress which is needed by JGit -->
+    <dependency>
+      <groupId>org.tukaani</groupId>
+      <artifactId>xz</artifactId>
+      <version>1.8</version>
     </dependency>
 
     <dependency>

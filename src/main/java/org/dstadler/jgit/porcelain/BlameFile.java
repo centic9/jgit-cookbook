@@ -5,6 +5,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.blame.BlameResult;
 import org.eclipse.jgit.diff.RawText;
+import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -28,7 +29,8 @@ public class BlameFile {
                 }
 
                 System.out.println("Blaming " + file);
-                final BlameResult result = new Git(repo).blame().setFilePath(file).call();
+                final BlameResult result = new Git(repo).blame().setFilePath(file)
+                    .setTextComparator(RawTextComparator.WS_IGNORE_ALL).call();
                 final RawText rawText = result.getResultContents();
                 for (int i = 0; i < rawText.size(); i++) {
                     final PersonIdent sourceAuthor = result.getSourceAuthor(i);

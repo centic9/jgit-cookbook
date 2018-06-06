@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -19,12 +20,17 @@ import org.eclipse.jgit.lib.Repository;
 public class CommitAll {
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         // prepare a new test-repository
         try (Repository repository = CookbookHelper.createNewRepository()) {
+            localPath = repository.getWorkTree();
+
             try (Git git = new Git(repository)) {
                 // create the file
-                File myfile = new File(repository.getDirectory().getParent(), "testfile");
-                myfile.createNewFile();
+                File myFile = new File(repository.getDirectory().getParent(), "testfile");
+                if(!myFile.createNewFile()) {
+                    throw new IOException("Could not create file " + myFile);
+                }
 
                 // Stage all files in the repo including new files
                 git.add().addFilepattern(".").call();
@@ -34,7 +40,7 @@ public class CommitAll {
                         .setMessage("Commit all changes including additions")
                         .call();
 
-                try(PrintWriter writer = new PrintWriter(myfile)) {
+                try(PrintWriter writer = new PrintWriter(myFile)) {
                     writer.append("Hello, world!");
                 }
 
@@ -48,5 +54,8 @@ public class CommitAll {
                 System.out.println("Committed all changes to repository at " + repository.getDirectory());
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

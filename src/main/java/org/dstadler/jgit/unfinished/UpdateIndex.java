@@ -46,7 +46,7 @@ public class UpdateIndex {
     		    final String testFile = "README.md";
 
     			// Modify the file
-    			FileUtils.write(new File(testFile), new Date().toString());
+    			FileUtils.write(new File(testFile), new Date().toString(), "UTF-8");
     			System.out.println("Modified files: " + getModifiedFiles(git));
 
     			new AssumeChangedCommand(repo, testFile, true).call();
@@ -66,7 +66,7 @@ public class UpdateIndex {
 		return status.getModified();
 	}
 
-	static class AssumeChangedCommand extends GitCommand<String> {
+	private static class AssumeChangedCommand extends GitCommand<String> {
 		private final String fileName;
 		private final boolean assumeUnchanged;
 

@@ -9,6 +9,7 @@ public class PorcelainTest {
         // simply call all the samples to see any severe problems with the samples
         AddAndListNoteOfCommit.main(null);
         AddFile.main(null);
+        BlameFile.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
         // does not run without changes: CloneRemoteRepositoryWithAuthentication.main(null);
@@ -20,6 +21,7 @@ public class PorcelainTest {
         CreateArchive.main(null);
         CreateCustomFormatArchive.main(null);
         CreateListApplyAndDropStash.main(null);
+        DiffFilesInCommit.main(null);
         DiffRenamedFile.main(null);
         FetchRemoteCommits.main(null);
         FetchRemoteCommitsWithPrune.main(null);
@@ -30,6 +32,7 @@ public class PorcelainTest {
         ListRemotes.main(null);
         ListTags.main(null);
         ListUncommittedChanges.main(null);
+        MergeChanges.main(null);
         RebaseToOriginMaster.main(null);
         RevertChanges.main(null);
         ShowBlame.main(null);

@@ -38,14 +38,17 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class CreateListApplyAndDropStash {
 
     public static void main(String[] args) throws IOException, GitAPIException {
+        final File localPath;
         // prepare a new test-repository
         try (Repository repository = CookbookHelper.createNewRepository()) {
+            localPath = repository.getWorkTree();
+
             try (Git git = new Git(repository)) {
                 // create a file
                 File file1 = new File(repository.getDirectory().getParent(), "testfile");
-                FileUtils.writeStringToFile(file1, "some text");
+                FileUtils.writeStringToFile(file1, "some text", "UTF-8");
                 File file2 = new File(repository.getDirectory().getParent(), "testfile2");
-                FileUtils.writeStringToFile(file2, "some text");
+                FileUtils.writeStringToFile(file2, "some text", "UTF-8");
 
                 // add and commit the file
                 git.add()
@@ -59,7 +62,7 @@ public class CreateListApplyAndDropStash {
                         .call();
 
                 // then modify the file
-                FileUtils.writeStringToFile(file1, "some more text", true);
+                FileUtils.writeStringToFile(file1, "some more text", "UTF-8", true);
 
                 // push the changes to a new stash
                 RevCommit stash = git.stashCreate()
@@ -68,7 +71,7 @@ public class CreateListApplyAndDropStash {
                 System.out.println("Created stash " + stash);
 
                 // then modify the 2nd file
-                FileUtils.writeStringToFile(file2, "some more text", true);
+                FileUtils.writeStringToFile(file2, "some more text", "UTF-8", true);
 
                 // push the changes to a new stash
                 stash = git.stashCreate()
@@ -90,5 +93,8 @@ public class CreateListApplyAndDropStash {
                 System.out.println("Applied 2nd stash as: " + applied);
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

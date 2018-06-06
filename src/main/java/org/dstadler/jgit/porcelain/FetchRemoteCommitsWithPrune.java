@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ListBranchCommand.ListMode;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -41,7 +42,9 @@ public class FetchRemoteCommitsWithPrune {
     public static void main(String[] args) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
@@ -69,5 +72,8 @@ public class FetchRemoteCommitsWithPrune {
                 System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
             }
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(localPath);
     }
 }

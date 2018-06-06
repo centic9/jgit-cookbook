@@ -1,7 +1,7 @@
 package org.dstadler.jgit.api;
 
 /*
-   Copyright 2013, 2014 Dominik Stadler
+   Copyright 2016 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,31 +16,41 @@ package org.dstadler.jgit.api;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 
+import java.io.IOException;
+import java.util.Collection;
+
+
 /**
- * Simple snippet which shows how to retrieve the commit-message based on object id.
+ * Simple snippet which shows how to use RevWalk to iterate over all commits
+ * across all branches/tags/remotes in the given repository
+ *
+ * See the original discussion at http://stackoverflow.com/a/40803945/411846
  */
-public class GetCommitMessage {
+public class WalkAllCommits {
 
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-            Ref head = repository.findRef("refs/heads/master");
-            System.out.println("Found head: " + head);
+            // get a list of all known heads, tags, remotes, ...
+            Collection<Ref> allRefs = repository.getAllRefs().values();
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
-            try (RevWalk walk = new RevWalk(repository)) {
-                RevCommit commit = walk.parseCommit(head.getObjectId());
-
-                System.out.println("\nCommit-Message: " + commit.getFullMessage());
-
-                walk.dispose();
+            try (RevWalk revWalk = new RevWalk( repository )) {
+                for( Ref ref : allRefs ) {
+                    revWalk.markStart( revWalk.parseCommit( ref.getObjectId() ));
+                }
+                System.out.println("Walking all commits starting with " + allRefs.size() + " refs: " + allRefs);
+                int count = 0;
+                for( RevCommit commit : revWalk ) {
+                    System.out.println("Commit: " + commit);
+                    count++;
+                }
+                System.out.println("Had " + count + " commits");
             }
         }
     }

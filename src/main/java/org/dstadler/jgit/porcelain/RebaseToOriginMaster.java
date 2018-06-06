@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.RebaseCommand;
 import org.eclipse.jgit.api.RebaseCommand.InteractiveHandler;
+import org.eclipse.jgit.api.RebaseResult;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.errors.IllegalTodoFileModification;
 import org.eclipse.jgit.lib.RebaseTodoLine;
@@ -44,8 +46,12 @@ public class RebaseToOriginMaster {
                 InteractiveHandler handler = new InteractiveHandler() {
                     @Override
                     public void prepareSteps(List<RebaseTodoLine> steps) {
+                        // the handler receives the list of commits that are rebased, i.e. the ones on the local branch
                         for(RebaseTodoLine step : steps) {
+                            // for each step, you can decide which action should be taken
+                            // default is PICK
                             try {
+                                // by selecting "EDIT", the rebase will stop and ask you to edit the commit-contents
                                 step.setAction(Action.EDIT);
                             } catch (IllegalTodoFileModification e) {
                                 throw new IllegalStateException(e);
@@ -59,8 +65,19 @@ public class RebaseToOriginMaster {
                     }
                 };
 
-                git.rebase().setUpstream("origin/master").runInteractively(handler).call();
-                System.out.println("Rebased..");
+                RebaseResult result = git.rebase().setUpstream("origin/master").runInteractively(handler).call();
+                System.out.println("Rebase had state: " + result.getStatus() + ": " + result.getConflicts());
+
+                // because of the "EDIT" in the InteractiveHandler, the rebase was stopped in-between
+                // now you can adjust the commit and continue rebasing with setOperation(RebaseCommand.Operation.CONTINUE)
+                // to use the local changes for the commit or setOperation(RebaseCommand.Operation.SKIP) to skip this
+                // commit (i.e. remove it from the branch!)
+
+                if(!result.getStatus().isSuccessful()) {
+                    // if rebasing stopped or failed, you can get back to the original state by running it with setOperation(RebaseCommand.Operation.ABORT)
+                    result = git.rebase().setUpstream("origin/master").runInteractively(handler).setOperation(RebaseCommand.Operation.ABORT).call();
+                    System.out.println("Aborted reabse with state: " + result.getStatus() + ": " + result.getConflicts());
+                }
             }
         }
     }

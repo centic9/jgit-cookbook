@@ -27,17 +27,18 @@ public class CookbookHelper {
 
     public static Repository openJGitCookbookRepository() throws IOException {
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        Repository repository = builder
+        return builder
                 .readEnvironment() // scan environment GIT_* variables
                 .findGitDir() // scan up the file system tree
                 .build();
-        return repository;
     }
 
     public static Repository createNewRepository() throws IOException {
         // prepare a new folder
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // create the directory
         Repository repository = FileRepositoryBuilder.create(new File(localPath, ".git"));

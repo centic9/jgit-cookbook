@@ -33,13 +33,16 @@ public class CreateNewRepository {
     public static void main(String[] args) throws IOException, IllegalStateException, GitAPIException {
         // prepare a new folder
         File localPath = File.createTempFile("TestGitRepository", "");
-        localPath.delete();
+        if(!localPath.delete()) {
+            throw new IOException("Could not delete temporary file " + localPath);
+        }
 
         // create the directory
         try (Git git = Git.init().setDirectory(localPath).call()) {
             System.out.println("Having repository: " + git.getRepository().getDirectory());
         }
 
+        // clean up here to not keep using more and more disk-space for these samples
         FileUtils.deleteDirectory(localPath);
     }
 }

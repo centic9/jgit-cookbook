@@ -16,18 +16,16 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRefNameException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.ReflogEntry;
 import org.eclipse.jgit.lib.Repository;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 
 
@@ -58,7 +56,7 @@ public class ListRefLog {
         }
     }
 
-    private static void listReflog(Repository repository, Ref ref) throws GitAPIException, InvalidRefNameException {
+    private static void listReflog(Repository repository, Ref ref) throws GitAPIException {
         /*
          * Ref head = repository.getRef(ref.getName());
          * RevWalk walk = new RevWalk(repository);
@@ -67,9 +65,7 @@ public class ListRefLog {
 
         try (Git git = new Git(repository)) {
             Collection<ReflogEntry> call = git.reflog().setRef(ref.getName()).call();
-            Iterator<ReflogEntry> it = call.iterator();
-            while (it.hasNext()) {
-                ReflogEntry reflog = it.next();
+            for (ReflogEntry reflog : call) {
                 System.out.println("Reflog: " + reflog);
             }
         }

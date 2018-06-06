@@ -16,6 +16,7 @@ package org.dstadler.jgit;
    limitations under the License.
  */
 
+import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -25,8 +26,6 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 import java.io.File;
 import java.io.IOException;
-
-
 
 /**
  * Simple snippet which shows how to open an existing repository
@@ -51,6 +50,9 @@ public class OpenRepository {
             Ref head = repository.exactRef("refs/heads/master");
             System.out.println("Ref of refs/heads/master: " + head);
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(repoDir.getParentFile());
     }
 
     private static File createSampleGitRepo() throws IOException, GitAPIException {
@@ -58,8 +60,10 @@ public class OpenRepository {
             System.out.println("Temporary repository at " + repository.getDirectory());
 
             // create the file
-            File myfile = new File(repository.getDirectory().getParent(), "testfile");
-            myfile.createNewFile();
+            File myFile = new File(repository.getDirectory().getParent(), "testfile");
+            if(!myFile.createNewFile()) {
+                throw new IOException("Could not create file " + myFile);
+            }
 
             // run the add-call
             try (Git git = new Git(repository)) {
@@ -74,11 +78,9 @@ public class OpenRepository {
                         .call();
             }
 
-            System.out.println("Added file " + myfile + " to repository at " + repository.getDirectory());
+            System.out.println("Added file " + myFile + " to repository at " + repository.getDirectory());
 
-            File dir = repository.getDirectory();
-
-            return dir;
+            return repository.getDirectory();
         }
     }
 }

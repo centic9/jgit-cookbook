@@ -19,6 +19,7 @@ package org.dstadler.jgit.porcelain;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
@@ -47,6 +48,9 @@ public class InitRepository {
             System.out.println("Created a new repository at " + git.getRepository().getDirectory());
         }
 
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(dir);
+
         dir = File.createTempFile("repoinit", ".test");
         if(!dir.delete()) {
             throw new IOException("Could not delete file " + dir);
@@ -56,5 +60,8 @@ public class InitRepository {
         try (Repository repository = FileRepositoryBuilder.create(new File(dir.getAbsolutePath(), ".git"))) {
             System.out.println("Created a new repository at " + repository.getDirectory());
         }
+
+        // clean up here to not keep using more and more disk-space for these samples
+        FileUtils.deleteDirectory(dir);
     }
 }

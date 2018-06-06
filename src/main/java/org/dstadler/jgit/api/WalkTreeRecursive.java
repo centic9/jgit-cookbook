@@ -1,4 +1,4 @@
-package org.dstadler.jgit.unfinished;
+package org.dstadler.jgit.api;
 
 /*
    Copyright 2013, 2014 Dominik Stadler
@@ -27,9 +27,9 @@ import org.eclipse.jgit.treewalk.TreeWalk;
 import java.io.IOException;
 
 /**
- * Note: This snippet is not done and likely does not show anything useful yet
+ * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree.
  *
- * Simple snippet which shows how to use RevWalk to iterate over items in a file-tree
+ * See {@link WalkTreeNonRecursive} for a different usage of the {@link TreeWalk} class.
  *
  * @author dominik.stadler at gmx.at
  */

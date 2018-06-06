@@ -16,23 +16,15 @@ package org.dstadler.jgit.api;
    limitations under the License.
  */
 
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
-import org.eclipse.jgit.errors.AmbiguousObjectException;
-import org.eclipse.jgit.errors.CorruptObjectException;
-import org.eclipse.jgit.errors.IncorrectObjectTypeException;
-import org.eclipse.jgit.errors.MissingObjectException;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.FileMode;
-import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.ObjectLoader;
-import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
 import org.eclipse.jgit.treewalk.filter.PathFilter;
+
+import java.io.IOException;
 
 /**
  * Snippet which shows how to use RevWalk and TreeWalk to read the file
@@ -55,8 +47,7 @@ public class GetFileAttributes {
         }
     }
 
-    private static RevTree getTree(Repository repository) throws AmbiguousObjectException, IncorrectObjectTypeException,
-            IOException, MissingObjectException {
+    private static RevTree getTree(Repository repository) throws IOException {
         ObjectId lastCommitId = repository.resolve(Constants.HEAD);
 
         // a RevWalk allows to walk over commits based on some filtering
@@ -72,8 +63,7 @@ public class GetFileAttributes {
         }
     }
 
-    private static void printFile(Repository repository, RevTree tree) throws MissingObjectException,
-            IncorrectObjectTypeException, CorruptObjectException, IOException {
+    private static void printFile(Repository repository, RevTree tree) throws IOException {
         // now try to find a specific file
         try (TreeWalk treeWalk = new TreeWalk(repository)) {
             treeWalk.addTree(tree);
@@ -92,15 +82,14 @@ public class GetFileAttributes {
         }
     }
 
-    private static void printDirectory(Repository repository, RevTree tree) throws MissingObjectException,
-            IncorrectObjectTypeException, CorruptObjectException, IOException {
+    private static void printDirectory(Repository repository, RevTree tree) throws IOException {
         // look at directory, this has FileMode.TREE
         try (TreeWalk treeWalk = new TreeWalk(repository)) {
             treeWalk.addTree(tree);
             treeWalk.setRecursive(false);
             treeWalk.setFilter(PathFilter.create("src"));
             if (!treeWalk.next()) {
-                throw new IllegalStateException("Did not find expected file 'README.md'");
+                throw new IllegalStateException("Did not find expected folder 'src'");
             }
 
             // FileMode now indicates that this is a directory, i.e. FileMode.TREE.equals(fileMode) holds true

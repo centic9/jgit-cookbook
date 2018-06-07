@@ -139,7 +139,6 @@ The following sources were used to build the snippets:
 * Gitiles - A simple Git repository browser - http://code.google.com/p/gitiles/ and https://android.googlesource.com
 * JGitFS - A userfs implementation which allows to browse branches, tags, committs as a directory structure - https://github.com/centic9/JGitFS
 * jgitstats - displays repository stats - https://github.com/selesse/jgitstats
-* JGitFX - Easy Git integration for JavaFX applications - https://github.com/JordanMartinez/JGitFX
 * git-to-solr - Index git history into a Solr repository - https://github.com/arafalov/git-to-solr
 * Elegit - GUI client for people who want to learn Git - https://github.com/dmusican/Elegit
 

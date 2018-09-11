@@ -35,6 +35,7 @@ public class PorcelainTest {
         MergeChanges.main(null);
         RebaseToOriginMaster.main(null);
         RevertChanges.main(null);
+        RevertCommit.main(null);
         ShowBlame.main(null);
         ShowBranchDiff.main(null);
         ShowChangedFilesBetweenCommits.main(null);

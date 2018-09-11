@@ -46,7 +46,7 @@ public class ListTags {
                     // fetch all commits for this tag
                     LogCommand log = git.log();
 
-                    Ref peeledRef = repository.peel(ref);
+                    Ref peeledRef = repository.getRefDatabase().peel(ref);
                     if(peeledRef.getPeeledObjectId() != null) {
                     	log.add(peeledRef.getPeeledObjectId());
                     } else {

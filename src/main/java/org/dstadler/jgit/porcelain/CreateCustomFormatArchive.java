@@ -53,13 +53,8 @@ public class CreateCustomFormatArchive {
     private static final class ZipArchiveFormat implements Format<ZipOutputStream> {
 
 		@Override
-        public ZipOutputStream createArchiveOutputStream(OutputStream s) throws IOException {
+        public ZipOutputStream createArchiveOutputStream(OutputStream s) {
             return new ZipOutputStream(s);
-        }
-
-		@Override
-        public void putEntry(ZipOutputStream out, String path, FileMode mode, ObjectLoader loader) throws IOException {
-            putEntry(out, null, path, mode, loader);
         }
 
         @Override
@@ -85,7 +80,7 @@ public class CreateCustomFormatArchive {
         }
 
         @Override
-        public ZipOutputStream createArchiveOutputStream(OutputStream s, Map<String, Object> o) throws IOException {
+        public ZipOutputStream createArchiveOutputStream(OutputStream s, Map<String, Object> o) {
             return new ZipOutputStream(s);
         }
     }

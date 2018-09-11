@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:4.11.0.201803080745-r'
+	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.0.3.201809091024-r'
 	compile 'org.eclipse.jetty:jetty-servlet:9.4.9.v20180320'
 
 	compile 'org.slf4j:slf4j-simple:1.7.25'

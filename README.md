@@ -79,6 +79,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Fetch from remote repositories and use 'prune' to remove outdated remote branches/tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommitsWithPrune.java)
 * [Clone a remote repository via SSH protocol and username/password credentials](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryWithAuthentication.java)
 * [Rebase onto an upstream branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RebaseToOriginMaster.java)
+* [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryIntoMemoryAndReadFile.java)
 
 ##### Low-level API
 
@@ -101,7 +102,6 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Iterate over files of a commit recursively](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkTreeRecursive.java)
 * [Iterate over files of a commit non-recursively](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkTreeNonRecursive.java)
 * [Find all commits that are reachable via tags, branches, remotes, HEADs, ...](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkAllCommits.java)
-* [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/api/WalkAllCommits.java)
 
 ##### GitServlet
 

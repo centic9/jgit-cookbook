@@ -77,6 +77,17 @@ public class CreateAndDeleteBranch {
                 for (Ref ref : call) {
                     System.out.println("Branch-After: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }
+
+                // run the add-call with a given starting point
+                git.branchCreate()
+                        .setName("testbranch")
+                        .setStartPoint("d52a1031cd359a5941d0e047aa7ab82053f7f7c3")
+                        .call();
+
+                call = git.branchList().call();
+                for (Ref ref : call) {
+                    System.out.println("Branch-Created with starting point: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
             }
         }
     }

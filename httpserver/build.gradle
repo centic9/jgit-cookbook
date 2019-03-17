@@ -16,6 +16,6 @@ dependencies {
 	compile 'org.slf4j:slf4j-simple:1.7.25'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+wrapper {
+    gradleVersion = '4.10.3'
 }

@@ -77,6 +77,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
 * [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
 * [Fetch from remote repositories and use 'prune' to remove outdated remote branches/tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommitsWithPrune.java)
+* [Fetch from remote repositories via ssh protocol](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommitsWithSshAuth.java)
 * [Clone a remote repository via SSH protocol and username/password credentials](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryWithAuthentication.java)
 * [Rebase onto an upstream branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RebaseToOriginMaster.java)
 * [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryIntoMemoryAndReadFile.java)
@@ -148,7 +149,7 @@ Please note that the list of snippets is not yet complete, probably never will. 
 
 #### Licensing
 
-   Copyright 2013-2017 Dominik Stadler
+   Copyright 2013-2018 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

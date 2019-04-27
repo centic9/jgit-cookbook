@@ -8,7 +8,7 @@ The JGit framework is rich and diverse, it has two layers, a low-level _api_ and
 
 This project tries to provide a collection of ready-to-run snippets which provide a quick start for building functionality using JGit. 
 
-Please make sure to take a look at the nicely written [introduction](http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/) and also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/4.9.0.201710071750-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
+Please make sure to take a look at the nicely written [introduction](http://www.codeaffine.com/2015/12/15/getting-started-with-jgit/) and also use the existing [JavaDoc](http://download.eclipse.org/jgit/site/5.2.1.201812262042-r/apidocs/) and the [User Guide](http://wiki.eclipse.org/JGit/User_Guide) as well, as they are well done and provide detailed information and a general overview of JGit respectively.
 
 *Note: Please use sites such as http://stackoverflow.com for general questions about JGit usage, not issues in this project. Issues should be used for problems with snippets and suggestions of missing snippets. Snippets from good answers on stackoverflow can then be included here, naturally.*
 
@@ -113,23 +113,24 @@ Just import the project in your IDE and start up the `Main` application, see the
 
 #### Missing snippets
 
-* Iterate all commits of a repository - https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
+* Iterate all commits of a repository: https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
 * Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
 * SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules http://www.codeaffine.com/2014/04/16/how-to-manage-git-submodules-with-jgit/
 * Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
 * Amend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
 * Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files
 * Git repo on Amazon S3: http://stackoverflow.com/questions/8744611/git-repository-on-s3-as-origin-not-as-backup http://stackoverflow.com/questions/7031729/publish-to-s3-using-git http://www.fancybeans.com/blog/2012/08/24/how-to-use-s3-as-a-private-git-repository/
-* CherryPick: http://download.eclipse.org/jgit/site/4.9.0.201710071750-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
+* CherryPick: http://download.eclipse.org/jgit/site/5.2.1.201812262042-r/apidocs/org/eclipse/jgit/api/CherryPickCommand.html http://stackoverflow.com/questions/18300898/how-to-cherry-pick-a-commit-that-has-more-than-one-parent
 * More authentication: http://www.lordofthejars.com/2016/09/authenticating-with-jgit.html
+* How to do a shallow clone (i.e. --depth 1) as soon as https://bugs.eclipse.org/bugs/show_bug.cgi?id=475615 is implemented
 
 #### Sources
 
 The following sources were used to build the snippets:
 
-* [JGit JavaDoc](http://download.eclipse.org/jgit/site/4.9.0.201710071750-r/apidocs/)
+* [JGit JavaDoc](http://download.eclipse.org/jgit/site/5.2.1.201812262042-r/apidocs/)
 * [JGit User Guide](http://wiki.eclipse.org/JGit/User_Guide)
-* [JGit related questions on Stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
+* [JGit related questions on stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
 * [JGit main page](http://www.eclipse.org/jgit/)
 

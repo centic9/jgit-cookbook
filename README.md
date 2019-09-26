@@ -115,7 +115,7 @@ Just import the project in your IDE and start up the `Main` application, see the
 
 * Iterate all commits of a repository: https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java
 * Take some of the unit tests as example: https://github.com/eclipse/jgit/tree/master/org.eclipse.jgit.test/tst/org/eclipse/jgit/api
-* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules http://www.codeaffine.com/2014/04/16/how-to-manage-git-submodules-with-jgit/
+* SubModules: http://stackoverflow.com/questions/13426798/jgit-read-gitmodules http://www.codeaffine.com/2014/04/16/how-to-manage-git-submodules-with-jgit/ https://stackoverflow.com/questions/26090139/jgit-reading-commits-from-a-submodule https://download.eclipse.org/jgit/site/5.5.0.201909110433-r/apidocs/org/eclipse/jgit/submodule/package-frame.html
 * Diffing: http://stackoverflow.com/questions/12987364/how-to-diff-with-two-files-by-jgit-without-creating-repo
 * Amend a previous commit: http://stackoverflow.com/questions/4772142/jgit-unstaging-files-removing-files-from-the-index-and-ammending-a-commit
 * Remove a file from the index: http://stackoverflow.com/questions/4803462/jgit-java-git-library-unstaging-files

@@ -20,12 +20,12 @@
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
-      <version>5.4.0.201906121030-r</version>
+      <version>5.5.0.201909110433-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.archive</artifactId>
-      <version>5.4.0.201906121030-r</version>
+      <version>5.5.0.201909110433-r</version>
     </dependency>
 
     <dependency>

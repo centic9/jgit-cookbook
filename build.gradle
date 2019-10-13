@@ -10,10 +10,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.eclipse.jgit:org.eclipse.jgit:5.4.0.201906121030-r'
-    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.4.0.201906121030-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.5.0.201909110433-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.5.0.201909110433-r'
     compile 'commons-io:commons-io:2.6'
-    compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'org.slf4j:slf4j-simple:1.7.28'
 
     // optional dependency of commons-compress which is needed by JGit
     compile 'org.tukaani:xz:1.8'

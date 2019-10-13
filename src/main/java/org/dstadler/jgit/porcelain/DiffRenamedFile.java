@@ -23,7 +23,7 @@ import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 // Simple example that shows how to diff a single file between two commits when
 // the file may have been renamed.
 public class DiffRenamedFile {
-    public static void main(String args[])
+    public static void main(String[] args)
             throws IOException, GitAPIException {
         try (Repository repo = CookbookHelper.openJGitCookbookRepository()) {
             runDiff(repo,

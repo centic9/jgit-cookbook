@@ -15,7 +15,7 @@ import java.io.IOException;
 
 // Simple example that shows how to get the Blame-information for a file
 public class BlameFile {
-    public static void main(String args[])
+    public static void main(String[] args)
         throws IOException, GitAPIException {
         try (Repository repo = CookbookHelper.openJGitCookbookRepository()) {
             final String[] list = new File(".").list();

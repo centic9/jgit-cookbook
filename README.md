@@ -81,6 +81,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Clone a remote repository via SSH protocol and username/password credentials](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryWithAuthentication.java)
 * [Rebase onto an upstream branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RebaseToOriginMaster.java)
 * [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryIntoMemoryAndReadFile.java)
+* [Checkout a PR from GitHub](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CheckoutGitHubPullRequest.java)
 
 ##### Low-level API
 

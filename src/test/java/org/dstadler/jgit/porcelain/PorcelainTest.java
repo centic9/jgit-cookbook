@@ -10,6 +10,7 @@ public class PorcelainTest {
         AddAndListNoteOfCommit.main(null);
         AddFile.main(null);
         BlameFile.main(null);
+        CheckoutGitHubPullRequest.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
         // does not run without changes: CloneRemoteRepositoryWithAuthentication.main(null);

@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.5.0.201909110433-r'
-	compile 'org.eclipse.jetty:jetty-servlet:9.4.9.v20180320'
+	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.6.0.201912101111-r'
+	compile 'org.eclipse.jetty:jetty-servlet:9.4.26.v20200117'
 
-	compile 'org.slf4j:slf4j-simple:1.7.28'
+	compile 'org.slf4j:slf4j-simple:1.7.30'
 }
 
 wrapper {
-    gradleVersion = '4.10.3'
+    gradleVersion = '5.6.4'
 }

@@ -1,15 +1,18 @@
+dist: bionic
 language: java
-dist: trusty
 jdk:
-  - oraclejdk8
-  - oraclejdk11
- 
+  - openjdk8
+  - openjdk11
+
 before_install:
  - chmod +x gradlew
  - git config --unset-all remote.origin.fetch
  - git config --add remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
  - git fetch --unshallow
  - git fetch origin testbranch:testbranch
+
+install: 
+- gradle wrapper
 
 after_failure:
 - cat build/test-results/test/*.xml

@@ -1,4 +1,15 @@
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'org.dstadler.jgit.server.Main'
+applicationDefaultJvmArgs = ['-Xmx512m', '-XX:+HeapDumpOnOutOfMemoryError']
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'A simple HTTP Git server based on the JGit GitServlet', 'Implementation-Version': version
+    }
+}
 
 sourceCompatibility = 1.8
 

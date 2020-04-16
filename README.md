@@ -112,6 +112,8 @@ starts up a simple HTTP Git server based on the JGit GitServlet.
 
 Just import the project in your IDE and start up the `Main` application, see the Comments in the code for more details.
 
+Another simple way to start the sample-server is to run `./gradlew run` in the httpserver-directory.
+
 #### Missing snippets
 
 * Iterate all commits of a repository: https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java

@@ -26,6 +26,11 @@ import java.io.IOException;
  *
  * Note: Visiting http://localhost:8080/&lt;reponame&gt; in the Browser
  * will not work and always return a HTTP Error 404.
+ *
+ * Also this is just a very simple sample and not a full-features
+ * Git Server!
+ *
+ * Expect some work if you want to do anything useful with this!
  */
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -62,6 +67,9 @@ public class Main {
     }
 
     private static void populateRepository(Repository repository) throws IOException, GitAPIException {
+        // enable pushing to the sample repository via http
+        repository.getConfig().setString("http", null, "receivepack", "true");
+
         try (Git git = new Git(repository)) {
             File myfile = new File(repository.getDirectory().getParent(), "testfile");
             if(!myfile.createNewFile()) {

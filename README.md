@@ -127,6 +127,10 @@ Another simple way to start the sample-server is to run `./gradlew run` in the h
 * More authentication: http://www.lordofthejars.com/2016/09/authenticating-with-jgit.html
 * How to do a shallow clone (i.e. --depth 1) as soon as https://bugs.eclipse.org/bugs/show_bug.cgi?id=475615 is implemented
 
+#### Support this project
+
+If you find these snippets useful and would like to support it, you can [Sponsor the author](https://github.com/sponsors/centic9)
+
 #### Sources
 
 The following sources were used to build the snippets:

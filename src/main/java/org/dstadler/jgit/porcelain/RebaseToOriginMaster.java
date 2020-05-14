@@ -29,6 +29,7 @@ import org.eclipse.jgit.errors.IllegalTodoFileModification;
 import org.eclipse.jgit.lib.RebaseTodoLine;
 import org.eclipse.jgit.lib.RebaseTodoLine.Action;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.RepositoryState;
 
 /**
  * Snippet which shows how to rebase local changes onto a remote branch.
@@ -73,7 +74,9 @@ public class RebaseToOriginMaster {
                 // to use the local changes for the commit or setOperation(RebaseCommand.Operation.SKIP) to skip this
                 // commit (i.e. remove it from the branch!)
 
-                if(!result.getStatus().isSuccessful()) {
+                if(!result.getStatus().isSuccessful() &&
+                        // sometimes the repository does not need aborting afterwards?!
+                        repository.getRepositoryState() != RepositoryState.SAFE) {
                     // if rebasing stopped or failed, you can get back to the original state by running it with setOperation(RebaseCommand.Operation.ABORT)
                     result = git.rebase().setUpstream("origin/master").runInteractively(handler).setOperation(RebaseCommand.Operation.ABORT).call();
                     System.out.println("Aborted reabse with state: " + result.getStatus() + ": " + result.getConflicts());

@@ -39,7 +39,7 @@ public class FetchRemoteCommitsWithPrune {
 
     private static final String REMOTE_URL = "https://github.com/github/testrepo.git";
 
-    public static void main(String[] args) throws IOException, GitAPIException {
+    public static void main(String[] args) throws IOException, GitAPIException, InterruptedException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
         if(!localPath.delete()) {
@@ -74,6 +74,15 @@ public class FetchRemoteCommitsWithPrune {
         }
 
         // clean up here to not keep using more and more disk-space for these samples
-        FileUtils.deleteDirectory(localPath);
+        try {
+            FileUtils.deleteDirectory(localPath);
+        } catch (IOException e) {
+            System.out.println("Retrying deleting path " + localPath + " once after catching exception");
+            e.printStackTrace();
+
+            Thread.sleep(1000);
+
+            FileUtils.deleteDirectory(localPath);
+        }
     }
 }

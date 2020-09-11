@@ -13,7 +13,7 @@ dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.8.1.202007141445-r'
     compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.8.1.202007141445-r'
     compile 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.8.1.202007141445-r'
-    compile 'commons-io:commons-io:2.7'
+    compile 'commons-io:commons-io:2.8.0'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
     // optional dependency of commons-compress which is needed by JGit

@@ -157,7 +157,7 @@ Please note that the list of snippets is not yet complete, probably never will. 
 
 #### Licensing
 
-   Copyright 2013-2019 Dominik Stadler
+   Copyright 2013-2020 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

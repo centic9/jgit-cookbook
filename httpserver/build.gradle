@@ -21,8 +21,8 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.8.1.202007141445-r'
-	compile 'org.eclipse.jetty:jetty-servlet:9.4.30.v20200611'
+	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.9.0.202009080501-r'
+	compile 'org.eclipse.jetty:jetty-servlet:9.4.31.v20200723'
 
 	compile 'org.slf4j:slf4j-simple:1.7.30'
 }

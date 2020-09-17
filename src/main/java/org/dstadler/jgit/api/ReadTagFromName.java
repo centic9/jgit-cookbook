@@ -37,12 +37,12 @@ public class ReadTagFromName {
                 // a simple tag that is not annotated
                 Ref simpleTag = repository.findRef("initialtag");
                 RevObject any = walk.parseAny(simpleTag.getObjectId());
-                System.out.println("Commit: " + any);
+                System.out.println("Commit: (" + any.getClass() + ")" + any);
 
                 // an annotated tag
                 Ref annotatedTag = repository.findRef("secondtag");
                 any = walk.parseAny(annotatedTag.getObjectId());
-                System.out.println("Tag: " + any);
+                System.out.println("Tag: (" + any.getClass() + ")" + any);
 
                 // finally try to print out the tag-content
                 System.out.println("\nTag-Content: \n");

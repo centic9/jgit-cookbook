@@ -19,11 +19,11 @@ dependencies {
     // optional dependency of commons-compress which is needed by JGit
     compile 'org.tukaani:xz:1.8'
 
-    testCompile 'junit:junit:4.13'
+    testCompile 'junit:junit:4.13.1'
 }
 
 wrapper {
-    gradleVersion = '5.6.4'
+    gradleVersion = '6.6.1'
 }
 
 task adjustWrapperPropertiesFile {

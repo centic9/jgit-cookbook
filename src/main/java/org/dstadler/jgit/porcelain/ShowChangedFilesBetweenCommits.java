@@ -62,7 +62,9 @@ public class ShowChangedFilesBetweenCommits {
             		                    .setOldTree(oldTreeIter)
             		                    .call();
                     for (DiffEntry entry : diffs) {
-                        System.out.println("Entry: " + entry);
+                        System.out.println("old: " + entry.getOldPath() +
+                                ", new: " + entry.getNewPath() +
+                                ", entry: " + entry);
                     }
         		}
     		}

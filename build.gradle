@@ -19,7 +19,7 @@ dependencies {
     // optional dependency of commons-compress which is needed by JGit
     compile 'org.tukaani:xz:1.8'
 
-    testCompile 'junit:junit:4.13.1'
+    testCompile 'junit:junit:4.13.2'
 }
 
 wrapper {

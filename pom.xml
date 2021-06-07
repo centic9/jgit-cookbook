@@ -20,17 +20,17 @@
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
-      <version>5.10.0.202012080955-r</version>
+      <version>5.11.1.202105131744-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.archive</artifactId>
-      <version>5.10.0.202012080955-r</version>
+      <version>5.11.1.202105131744-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
-      <version>5.10.0.202012080955-r</version>
+      <version>5.11.1.202105131744-r</version>
     </dependency>
 
     <dependency>

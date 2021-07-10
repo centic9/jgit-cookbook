@@ -10,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
-    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.11.1.202105131744-r'
-    compile 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.11.1.202105131744-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.12.0.202106070339-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.12.0.202106070339-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.12.0.202106070339-r'
     compile 'commons-io:commons-io:2.9.0'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 

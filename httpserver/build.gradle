@@ -7,7 +7,7 @@ version = '1.0'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'A simple HTTP Git server based on the JGit GitServlet', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'A simple HTTP Git server based on the JGit GitServlet', 'Implementation-Version': archiveVersion
     }
 }
 

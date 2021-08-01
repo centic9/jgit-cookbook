@@ -24,7 +24,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
-
+import org.eclipse.jgit.submodule.SubmoduleWalk;
 
 
 /**
@@ -40,15 +40,12 @@ public class TestSubmodules {
         try (Repository mainRepo = openMainRepo(mainRepoDir)) {
             addSubmodule(mainRepo);
 
-            FileRepositoryBuilder builder = new FileRepositoryBuilder();
-
-            try (Repository subRepo = builder.setGitDir(new File("testrepo/.git"))
-                    .readEnvironment() // scan environment GIT_* variables
-                    .findGitDir() // scan up the file system tree
-                    .build()) {
+            try (Repository subRepo = SubmoduleWalk.getSubmoduleRepository(mainRepo, "testrepo")) {
                 if (subRepo.isBare()) {
                     throw new IllegalStateException("Repository at " + subRepo.getDirectory() + " should not be bare");
                 }
+
+                System.out.println("Found submodule-repository at: " + subRepo.getDirectory().getAbsolutePath());
             }
         }
 

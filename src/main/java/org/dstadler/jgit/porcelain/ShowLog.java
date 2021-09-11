@@ -17,6 +17,12 @@ package org.dstadler.jgit.porcelain;
  */
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
@@ -98,7 +104,44 @@ public class ShowLog {
                     count++;
                 }
                 System.out.println("Had " + count + " commits on pom.xml");
+
+                // then produce a "classic" Git commit log
+                // see also https://stackoverflow.com/a/69138290/411846
+                System.out.println();
+                logs = git.log()
+                        .add(repository.resolve("remotes/origin/testbranch"))
+                        .call();
+                for (RevCommit rev : logs) {
+                    System.out.println(getConventionalCommitMessage(rev));
+                }
             }
         }
     }
+
+    private static String getConventionalCommitMessage(RevCommit commit) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // Prepare the pieces
+        final String justTheAuthorNoTime = commit.getAuthorIdent().toExternalString().split(">")[0] + ">";
+        final Instant commitInstant = Instant.ofEpochSecond(commit.getCommitTime());
+        final ZoneId zoneId = commit.getAuthorIdent().getTimeZone().toZoneId();
+        final ZonedDateTime authorDateTime = ZonedDateTime.ofInstant(commitInstant, zoneId);
+        final String gitDateTimeFormatString = "EEE MMM dd HH:mm:ss yyyy Z";
+        final String formattedDate = authorDateTime.format(DateTimeFormatter.ofPattern(gitDateTimeFormatString));
+        final String tabbedCommitMessage =
+                Arrays.stream(commit.getFullMessage()
+                        .split("\\r?\\n")) // split it up by line
+                        .map(s -> "\t" + s + "\n") // add a tab on each line
+                        .collect(Collectors.joining()); // put it back together
+
+        // Put pieces together
+        stringBuilder
+                .append("commit ").append(commit.getName()).append("\n")
+                .append("Author:\t").append(justTheAuthorNoTime).append("\n")
+                .append("Date:\t").append(formattedDate).append("\n\n")
+                .append(tabbedCommitMessage);
+
+        return stringBuilder.toString();
+    }
+
 }

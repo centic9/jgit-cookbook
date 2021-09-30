@@ -52,6 +52,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [List uncommitted changes of a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListUncommittedChanges.java)
 * [Create and delete branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteBranch.java)
 * [Create and delete tags](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CreateAndDeleteTag.java)
+* [List all tags applied on a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListTagsOnBranch.java)
 * [Revert a modified tracked file back to its original state in most recent commit](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RevertChanges.java)
 * [Return diff between two branches](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowBranchDiff.java)
 * [Show diff of changes to a file between two revs](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ShowFileDiff.java)

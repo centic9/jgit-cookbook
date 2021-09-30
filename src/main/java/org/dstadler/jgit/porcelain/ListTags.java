@@ -1,7 +1,7 @@
 package org.dstadler.jgit.porcelain;
 
 /*
-   Copyright 2013, 2014 Dominik Stadler
+   Copyright 2013, 2014, 2021 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -27,8 +27,6 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 
-
-
 /**
  * Simple snippet which shows how to list all Tags
  *
@@ -41,7 +39,8 @@ public class ListTags {
             try (Git git = new Git(repository)) {
                 List<Ref> call = git.tagList().call();
                 for (Ref ref : call) {
-                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName() +
+							(ref.getPeeledObjectId() == null ? "" : ", peeled: " + ref.getPeeledObjectId().getName()));
 
                     // fetch all commits for this tag
                     LogCommand log = git.log();

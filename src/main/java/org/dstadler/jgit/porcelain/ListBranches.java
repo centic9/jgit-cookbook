@@ -1,7 +1,7 @@
 package org.dstadler.jgit.porcelain;
 
 /*
-   Copyright 2013, 2014 Dominik Stadler
+   Copyright 2013, 2014, 2021 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,8 +26,6 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 
-
-
 /**
  * Simple snippet which shows how to list all Branches in a Git repository
  *
@@ -37,9 +35,9 @@ public class ListBranches {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
-            System.out.println("Listing local branches:");
             try (Git git = new Git(repository)) {
-                List<Ref> call = git.branchList().call();
+				System.out.println("Listing local branches:");
+				List<Ref> call = git.branchList().call();
                 for (Ref ref : call) {
                     System.out.println("Branch: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
                 }

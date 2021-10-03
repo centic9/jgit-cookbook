@@ -158,6 +158,13 @@ The following sources were used to build the snippets:
 * jgitstats - displays repository stats - https://github.com/selesse/jgitstats
 * git-to-solr - Index git history into a Solr repository - https://github.com/arafalov/git-to-solr
 * Elegit - GUI client for people who want to learn Git - https://github.com/dmusican/Elegit
+* Grgit - A wrapper over JGit that provides a fluent API for interacting with Git repositories in Groovy-based tooling - https://github.com/ajoberstar/grgit
+* jgitver A library to calculate a project semver compatible version from a git repository and its content - https://github.com/jgitver/jgitver
+* gitective - Investigate Git repositories via filters - https://github.com/kevinsawicki/gitective
+* RJGit - A JRuby wrapper around the JGit library - https://github.com/repotag/rjgit
+* KGit - A Kotlin Wrapper of JGit - https://github.com/sya-ri/KGit
+
+Ruby Build
 
 #### Contribute
 

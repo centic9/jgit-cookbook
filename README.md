@@ -115,6 +115,13 @@ Just import the project in your IDE and start up the `Main` application, see the
 
 Another simple way to start the sample-server is to run `./gradlew run` in the httpserver-directory.
 
+#### Useful code elsewhere
+
+##### cf-ops-automation-broker 
+
+* Implementation of a simple git server serving anynymous `git:` protocol: https://github.com/orange-cloudfoundry/cf-ops-automation-broker/blob/8bcb286652fae2b8fe2ccc9f67c53cb0272bcbd0/cf-ops-automation-broker-core/src/main/java/com/orange/oss/cloudfoundry/broker/opsautomation/ondemandbroker/git/GitServer.java
+* Usage in tests: https://github.com/orange-cloudfoundry/cf-ops-automation-broker/blob/8bcb286652fae2b8fe2ccc9f67c53cb0272bcbd0/cf-ops-automation-bosh-broker/src/test/java/com/orange/oss/cloudfoundry/broker/opsautomation/ondemandbroker/sample/BoshServiceProvisionningTest.java#L134
+
 #### Missing snippets
 
 * Iterate all commits of a repository: https://gerrit.googlesource.com/plugins/branch-network/+log/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/branchnetwork/data/JGitFacade.java

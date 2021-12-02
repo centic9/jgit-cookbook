@@ -21,6 +21,7 @@ import java.io.IOException;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
@@ -43,26 +44,37 @@ public class CreateAndDeleteTag {
                 // remove the tag before creating it
                 git.tagDelete().setTags("tag_for_testing").call();
 
-                // set it on the current HEAD
+				System.out.println("HEAD: " + git.getRepository().resolve(Constants.HEAD));
+
+				// set it on the current HEAD
                 Ref tag = git.tag().setName("tag_for_testing").call();
-                System.out.println("Created/moved tag " + tag + " to repository at " + repository.getDirectory());
+                System.out.println("Created/moved tag " + tag +
+						(tag.getPeeledObjectId() == null ? "" : ", peeled: " + tag.getPeeledObjectId().getName()) +
+						" to repository at " + repository.getDirectory());
 
                 // remove the tag again
                 git.tagDelete().setTags("tag_for_testing").call();
 
-                // read some other commit and set the tag on it
-                ObjectId id = repository.resolve("HEAD^");
+				// read some other commit and set the tag on it
+				System.out.println();
+				System.out.println("HEAD^: " + git.getRepository().resolve("HEAD^"));
+				ObjectId id = repository.resolve("HEAD^");
                 try (RevWalk walk = new RevWalk(repository)) {
                     RevCommit commit = walk.parseCommit(id);
                     tag = git.tag().setObjectId(commit).setName("tag_for_testing").call();
-                    System.out.println("Created/moved tag " + tag + " to repository at " + repository.getDirectory());
+                    System.out.println("Created/moved tag " + tag +
+							(tag.getPeeledObjectId() == null ? "" : ", peeled: " + tag.getPeeledObjectId().getName()) +
+							" to repository at " + repository.getDirectory());
 
                     // remove the tag again
                     git.tagDelete().setTags("tag_for_testing").call();
 
                     // create an annotated tag
+					System.out.println();
                     tag = git.tag().setName("tag_for_testing").setAnnotated(true).call();
-                    System.out.println("Created/moved tag " + tag + " to repository at " + repository.getDirectory());
+                    System.out.println("Created/moved tag " + tag +
+							(tag.getPeeledObjectId() == null ? "" : ", peeled: " + tag.getPeeledObjectId().getName()) +
+							" to repository at " + repository.getDirectory());
 
                     // remove the tag again
                     git.tagDelete().setTags("tag_for_testing").call();

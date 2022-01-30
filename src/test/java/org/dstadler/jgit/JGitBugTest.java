@@ -20,11 +20,13 @@ public class JGitBugTest {
     public void testRevWalkDisposeClosesReader() throws IOException {
         try (Repository repo = CookbookHelper.openJGitCookbookRepository()) {
             try (ObjectReader reader = repo.newObjectReader()) {
+                assertNotNull("Need to get back an ObjectReader", reader);
                 try (RevWalk walk = new RevWalk(reader)) {
                     walk.dispose();
 
                     Ref head = repo.exactRef("refs/heads/master");
                     System.out.println("Found head: " + head);
+                    assertNotNull("Need to find head on master-branch", head);
 
                     ObjectLoader loader = reader.open(head.getObjectId());
                     assertNotNull(loader);

@@ -32,8 +32,11 @@ public class CommitAll {
                     throw new IOException("Could not create file " + myFile);
                 }
 
-                // Stage all files in the repo including new files
+                // Stage all files in the repo including new files, excluding deleted files
                 git.add().addFilepattern(".").call();
+
+                // Stage all changed files, including deleted files, excluding new files
+                git.add().addFilepattern(".").setUpdate(true).call();
 
                 // and then commit the changes.
                 git.commit()

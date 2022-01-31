@@ -14,7 +14,7 @@ dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit.archive:5.13.0.202109080827-r'
     compile 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.0.202109080827-r'
     compile 'commons-io:commons-io:2.11.0'
-    compile 'org.slf4j:slf4j-simple:1.7.33'
+    compile 'org.slf4j:slf4j-simple:1.7.35'
 
     // optional dependency of commons-compress which is needed by JGit
     compile 'org.tukaani:xz:1.9'

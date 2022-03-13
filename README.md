@@ -1,6 +1,8 @@
 jgit-cookbook
 =============
-[![Build Status](https://travis-ci.org/centic9/jgit-cookbook.svg)](https://travis-ci.org/centic9/jgit-cookbook) [![Gradle Status](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status)
+[![Build Status](https://github.com/centic9/jgit-cookbook/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/centic9/jgit-cookbook/actions)
+[![Gradle Status](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/jgit-cookbook/status)
+[![Tag](https://img.shields.io/github/tag/centic9/jgit-cookbook.svg)](https://github.com/centic9/jgit-cookbook/tags)
 
 Provides examples and code snippets for the [JGit](https://eclipse.org/jgit/) Java Git implementation. 
 

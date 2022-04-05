@@ -21,12 +21,12 @@ repositories {
 }
 
 dependencies {
-	compile 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.13.0.202109080827-r'
-	compile 'org.eclipse.jetty:jetty-servlet:9.4.41.v20210516'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.13.0.202109080827-r'
+	implementation 'org.eclipse.jetty:jetty-servlet:9.4.41.v20210516'
 
-	compile 'org.slf4j:slf4j-simple:1.7.36'
+	implementation 'org.slf4j:slf4j-simple:1.7.36'
 }
 
 wrapper {
-    gradleVersion = '6.6.1'
+    gradleVersion = '6.9.2'
 }

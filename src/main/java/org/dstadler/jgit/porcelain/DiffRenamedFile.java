@@ -56,9 +56,21 @@ public class DiffRenamedFile {
 
         // Display the diff
         System.out.println("Showing diff of " + path);
+
+		if (diff == null) {
+			System.out.println("Could not load diff");
+			return;
+		}
+
+		String oldPath = diff.getOldPath();
+		String newPath = diff.getNewPath();
+		if (!oldPath.equals(newPath)) {
+			System.out.println("Found renaming of file from " + oldPath + " to " + newPath);
+		}
+		System.out.println();
+
         try (DiffFormatter formatter = new DiffFormatter(System.out)) {
             formatter.setRepository(repo);
-            //noinspection ConstantConditions
             formatter.format(diff);
         }
     }

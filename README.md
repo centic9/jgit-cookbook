@@ -18,7 +18,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 
 ##### Grab it
 
-    git clone git://github.com/centic9/jgit-cookbook
+    git clone https://github.com/centic9/jgit-cookbook.git
 
 ##### Build it and create Eclipse project files
 

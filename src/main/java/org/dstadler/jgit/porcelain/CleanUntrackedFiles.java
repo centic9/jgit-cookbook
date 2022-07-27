@@ -18,6 +18,7 @@ package org.dstadler.jgit.porcelain;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -25,7 +26,6 @@ import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
-
 
 
 /**
@@ -43,13 +43,7 @@ public class CleanUntrackedFiles {
             System.out.println("Repository at " + repository.getWorkTree());
 
             File untrackedFile = File.createTempFile("untracked", ".txt", repository.getWorkTree());
-            File untrackedDir = File.createTempFile("untrackedDir", "", repository.getWorkTree());
-            if(!untrackedDir.delete()) {
-                throw new IOException("Could not delete file " + untrackedDir);
-            }
-            if(!untrackedDir.mkdirs()) {
-                throw new IOException("Could not create directory " + untrackedDir);
-            }
+            File untrackedDir = Files.createTempDirectory(repository.getWorkTree().toPath(), "untrackedDir").toFile();
 
             System.out.println("Untracked exists: " + untrackedFile.exists() + " Dir: " + untrackedDir.exists() + "/" + untrackedDir.isDirectory());
 

@@ -1,7 +1,5 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
-
 repositories {
   mavenCentral()
   maven {
@@ -10,9 +8,9 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:5.13.0.202109080827-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:5.13.0.202109080827-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:6.3.0.202209071007-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.3.0.202209071007-r'
 	implementation 'commons-io:commons-io:2.11.0'
 	implementation 'org.slf4j:slf4j-simple:1.7.36'
 

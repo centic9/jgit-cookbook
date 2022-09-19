@@ -11,8 +11,6 @@ jar {
     }
 }
 
-sourceCompatibility = 1.8
-
 repositories {
   mavenCentral()
   maven {
@@ -21,7 +19,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.http.server:5.13.0.202109080827-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.http.server:6.3.0.202209071007-r'
 	implementation 'org.eclipse.jetty:jetty-servlet:9.4.41.v20210516'
 
 	implementation 'org.slf4j:slf4j-simple:1.7.36'

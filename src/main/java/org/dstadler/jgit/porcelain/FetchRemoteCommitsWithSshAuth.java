@@ -5,14 +5,12 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LsRemoteCommand;
-import org.eclipse.jgit.api.TransportConfigCallback;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.transport.JschConfigSessionFactory;
-import org.eclipse.jgit.transport.OpenSshConfig;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.SshTransport;
-import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.ssh.jsch.JschConfigSessionFactory;
+import org.eclipse.jgit.transport.ssh.jsch.OpenSshConfig;
 import org.eclipse.jgit.util.FS;
 
 import java.util.Map;
@@ -48,13 +46,9 @@ public class FetchRemoteCommitsWithSshAuth {
 
         LsRemoteCommand lsRemoteCommand = Git.lsRemoteRepository();
         lsRemoteCommand.setRemote(REMOTE_URL);
-        lsRemoteCommand.setTransportConfigCallback(new TransportConfigCallback()
-        {
-            @Override
-            public void configure(Transport transport) {
-                SshTransport sshTransport = (SshTransport) transport;
-                sshTransport.setSshSessionFactory(sshSessionFactory);
-            }
+        lsRemoteCommand.setTransportConfigCallback(transport -> {
+            SshTransport sshTransport = (SshTransport) transport;
+            sshTransport.setSshSessionFactory(sshSessionFactory);
         });
 
         final Map<String, Ref> map = lsRemoteCommand.setHeads(true)

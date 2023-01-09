@@ -53,9 +53,9 @@ public class TrackMaster {
 
             // now open the created repository
             FileRepositoryBuilder builder = new FileRepositoryBuilder();
-            try (Repository repository = builder.setGitDir(localPath)
+            try (Repository repository = builder
                     .readEnvironment() // scan environment GIT_* variables
-                    .findGitDir() // scan up the file system tree
+                    .findGitDir(localPath) // scan up the file system tree
                     .build()) {
                 try (Git git = new Git(repository)) {
                     git.branchCreate()

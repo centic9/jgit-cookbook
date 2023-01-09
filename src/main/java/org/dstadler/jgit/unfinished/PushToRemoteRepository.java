@@ -21,6 +21,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.transport.PushResult;
+import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,8 +72,16 @@ public class PushToRemoteRepository {
                         .findGitDir() // scan up the file system tree
                         .build()) {
                     try (Git git = new Git(repository)) {
-                        git.push()
+                        Iterable<PushResult> results = git.push()
                                 .call();
+                        for (PushResult r : results) {
+                            for(RemoteRefUpdate update : r.getRemoteUpdates()) {
+                                if(update.getStatus() != RemoteRefUpdate.Status.OK && update.getStatus() != RemoteRefUpdate.Status.UP_TO_DATE) {
+                                    String errorMessage = "Push failed: "+ update.getStatus();
+                                    throw new RuntimeException(errorMessage);
+                                }
+                            }
+                        }
                     }
 
                     System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);

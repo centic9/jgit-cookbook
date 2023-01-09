@@ -21,9 +21,9 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.dstadler.jgit.helper.CookbookHelper;
+import org.dstadler.jgit.helper.SimpleProgressMonitor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.lib.Repository;
 
 
@@ -40,38 +40,11 @@ public class CollectGarbage {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             try (Git git = new Git(repository)) {
                 Properties ret = git.gc().
-                        setProgressMonitor(new PrintlnProgressMonitor()).call();
+                        setProgressMonitor(new SimpleProgressMonitor()).call();
                 for(Map.Entry<Object, Object> entry : ret.entrySet()) {
                     System.out.println("Ret: " + entry.getKey() + ": " + entry.getValue());
                 }
             }
-        }
-    }
-
-    private static class PrintlnProgressMonitor implements ProgressMonitor {
-        @Override
-        public void start(int totalTasks) {
-            System.out.println("Starting work on " + totalTasks + " tasks");
-        }
-
-        @Override
-        public void beginTask(String title, int totalWork) {
-            System.out.println("Start " + title + ": " + totalWork);
-        }
-
-        @Override
-        public void update(int completed) {
-            System.out.print(completed);
-        }
-
-        @Override
-        public void endTask() {
-            System.out.println("Done");
-        }
-
-        @Override
-        public boolean isCancelled() {
-            return false;
         }
     }
 }

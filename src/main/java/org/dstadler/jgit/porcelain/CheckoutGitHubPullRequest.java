@@ -17,13 +17,12 @@ package org.dstadler.jgit.porcelain;
  */
 
 import org.apache.commons.io.FileUtils;
+import org.dstadler.jgit.helper.SimpleProgressMonitor;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.FetchResult;
-import org.eclipse.jgit.transport.RefSpec;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +67,8 @@ public class CheckoutGitHubPullRequest {
                     .setName("pr_6")
                     .call();
 
-            System.out.println("Checked out PR, now printing log, it should include two commits from the PR on top");
+            System.out.println("Checked out PR: " + checkoutRef +
+                    ", now printing log, it should include two commits from the PR on top");
 
             Iterable<RevCommit> logs = result.log()
                     .call();
@@ -79,32 +79,5 @@ public class CheckoutGitHubPullRequest {
 
         // clean up here to not keep using more and more disk-space for these samples
         FileUtils.deleteDirectory(localPath);
-    }
-
-    private static class SimpleProgressMonitor implements ProgressMonitor {
-        @Override
-        public void start(int totalTasks) {
-            System.out.println("Starting work on " + totalTasks + " tasks");
-        }
-
-        @Override
-        public void beginTask(String title, int totalWork) {
-            System.out.println("Start " + title + ": " + totalWork);
-        }
-
-        @Override
-        public void update(int completed) {
-            System.out.print(completed + "-");
-        }
-
-        @Override
-        public void endTask() {
-            System.out.println("Done");
-        }
-
-        @Override
-        public boolean isCancelled() {
-            return false;
-        }
     }
 }

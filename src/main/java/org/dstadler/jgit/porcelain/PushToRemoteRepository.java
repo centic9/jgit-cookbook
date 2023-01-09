@@ -1,4 +1,4 @@
-package org.dstadler.jgit.unfinished;
+package org.dstadler.jgit.porcelain;
 
 /*
    Copyright 2013, 2014 Dominik Stadler
@@ -49,7 +49,7 @@ public class PushToRemoteRepository {
 
         // then clone
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
-        try (Git result = Git.cloneRepository()
+        try (Git git = Git.cloneRepository()
                 .setURI(REMOTE_URL)
                 .setDirectory(localPath)
                 .call()) {
@@ -61,30 +61,30 @@ public class PushToRemoteRepository {
 
             // then clone again
             System.out.println("Cloning from file://" + localPath + " to " + localPath2);
-            try (Git result2 = Git.cloneRepository()
+            try (Git git2 = Git.cloneRepository()
                     .setURI("file://" + localPath)
                     .setDirectory(localPath2)
                     .setProgressMonitor(new SimpleProgressMonitor())
                     .call()) {
-                System.out.println("Result: " + result2);
+                System.out.println("Result: " + git2);
 
-                createCommit(result2.getRepository(), result2, "other" + System.currentTimeMillis(), "content" + System.currentTimeMillis());
+                createCommit(git2.getRepository(), git2, "other" + System.currentTimeMillis(), "content" + System.currentTimeMillis());
 
                 // now open the created repository
-                try (Git git = new Git(result2.getRepository())) {
-                    Iterable<PushResult> results = git.push()
-                            .call();
-                        for (PushResult r : results) {
-                            for(RemoteRefUpdate update : r.getRemoteUpdates()) {
-                                if(update.getStatus() != RemoteRefUpdate.Status.OK && update.getStatus() != RemoteRefUpdate.Status.UP_TO_DATE) {
-                                    String errorMessage = "Push failed: "+ update.getStatus();
-                                    throw new RuntimeException(errorMessage);
-                                }
-                            }
+                Iterable<PushResult> results = git2.push()
+                        .call();
+                for (PushResult r : results) {
+                    for(RemoteRefUpdate update : r.getRemoteUpdates()) {
+                        System.out.println("Having result: " + update);
+                        if(update.getStatus() != RemoteRefUpdate.Status.OK && update.getStatus() != RemoteRefUpdate.Status.UP_TO_DATE) {
+                            String errorMessage = "Push failed: "+ update.getStatus();
+                            throw new RuntimeException(errorMessage);
                         }
+                    }
                 }
 
-                System.out.println("Pushed from repository: " + result2.getRepository().getDirectory() + " to remote repository at " + REMOTE_URL);
+                System.out.println("Pushed from repository: " + git2.getRepository().getDirectory() +
+                        " to remote repository at " + git.getRepository().getDirectory());
             }
         }
 

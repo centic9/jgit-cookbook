@@ -34,6 +34,7 @@ public class PorcelainTest {
         ListTags.main(null);
         ListUncommittedChanges.main(null);
         MergeChanges.main(null);
+        PushToRemoteRepository.main(null);
         RebaseToOriginMaster.main(null);
         RevertChanges.main(null);
         RevertCommit.main(null);

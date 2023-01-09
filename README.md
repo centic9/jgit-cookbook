@@ -85,6 +85,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Rebase onto an upstream branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/RebaseToOriginMaster.java)
 * [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryIntoMemoryAndReadFile.java)
 * [Checkout a PR from GitHub](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CheckoutGitHubPullRequest.java)
+* [Push to a remote repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/PushToRemoteRepository.java)
 
 ##### Low-level API
 
@@ -165,6 +166,7 @@ The following sources were used to build the snippets:
 * gitective - Investigate Git repositories via filters - https://github.com/kevinsawicki/gitective
 * RJGit - A JRuby wrapper around the JGit library - https://github.com/repotag/rjgit
 * KGit - A Kotlin Wrapper of JGit - https://github.com/sya-ri/KGit
+* Jabylon - A web based translation tool - https://github.com/jutzig/jabylon/ - [GitTeamProvider.java](https://github.com/jutzig/jabylon/blob/master/org.jabylon.team.git/src/main/java/org/jabylon/team/git/GitTeamProvider.java)
 
 Ruby Build
 

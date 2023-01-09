@@ -19,14 +19,16 @@ package org.dstadler.jgit.unfinished;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 
 /**
@@ -62,18 +64,16 @@ public class PushToRemoteRepository {
             try (Git result2 = Git.cloneRepository()
                     .setURI("file://" + localPath)
                     .setDirectory(localPath2)
+                    .setProgressMonitor(new SimpleProgressMonitor())
                     .call()) {
                 System.out.println("Result: " + result2);
 
+                createCommit(result2.getRepository(), result2, "other" + System.currentTimeMillis(), "content" + System.currentTimeMillis());
+
                 // now open the created repository
-                FileRepositoryBuilder builder = new FileRepositoryBuilder();
-                try (Repository repository = builder.setGitDir(localPath2)
-                        .readEnvironment() // scan environment GIT_* variables
-                        .findGitDir() // scan up the file system tree
-                        .build()) {
-                    try (Git git = new Git(repository)) {
-                        Iterable<PushResult> results = git.push()
-                                .call();
+                try (Git git = new Git(result2.getRepository())) {
+                    Iterable<PushResult> results = git.push()
+                            .call();
                         for (PushResult r : results) {
                             for(RemoteRefUpdate update : r.getRemoteUpdates()) {
                                 if(update.getStatus() != RemoteRefUpdate.Status.OK && update.getStatus() != RemoteRefUpdate.Status.UP_TO_DATE) {
@@ -82,14 +82,58 @@ public class PushToRemoteRepository {
                                 }
                             }
                         }
-                    }
-
-                    System.out.println("Pushed from repository: " + repository.getDirectory() + " to remote repository at " + REMOTE_URL);
                 }
+
+                System.out.println("Pushed from repository: " + result2.getRepository().getDirectory() + " to remote repository at " + REMOTE_URL);
             }
         }
 
         // clean up here to not keep using more and more disk-space for these samples
         FileUtils.deleteDirectory(localPath);
+    }
+
+    private static void createCommit(Repository repository, Git git, String fileName, String content) throws IOException, GitAPIException {
+        // create the file
+        File myFile = new File(repository.getDirectory().getParent(), fileName);
+        Files.write(myFile.toPath(), content.getBytes(StandardCharsets.UTF_8));
+
+        // run the add
+        git.add()
+                .addFilepattern(fileName)
+                .call();
+
+        // and then commit the changes
+        RevCommit revCommit = git.commit()
+                .setMessage("Added " + fileName)
+                .call();
+
+        System.out.println("Committed file " + myFile + " as " + revCommit + " to repository at " + repository.getDirectory());
+    }
+
+    private static class SimpleProgressMonitor implements ProgressMonitor {
+        @Override
+        public void start(int totalTasks) {
+            System.out.println("Starting work on " + totalTasks + " tasks");
+        }
+
+        @Override
+        public void beginTask(String title, int totalWork) {
+            System.out.println("Start " + title + ": " + totalWork);
+        }
+
+        @Override
+        public void update(int completed) {
+            System.out.print(completed + "-");
+        }
+
+        @Override
+        public void endTask() {
+            System.out.println("Done");
+        }
+
+        @Override
+        public boolean isCancelled() {
+            return false;
+        }
     }
 }

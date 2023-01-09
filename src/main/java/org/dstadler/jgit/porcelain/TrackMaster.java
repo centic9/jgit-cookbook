@@ -1,4 +1,4 @@
-package org.dstadler.jgit.unfinished;
+package org.dstadler.jgit.porcelain;
 
 /*
    Copyright 2013, 2014 Dominik Stadler

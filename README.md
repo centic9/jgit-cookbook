@@ -86,6 +86,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Using InMemoryRepository to clone a Git repo in-memory and work from there](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryIntoMemoryAndReadFile.java)
 * [Checkout a PR from GitHub](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CheckoutGitHubPullRequest.java)
 * [Push to a remote repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/PushToRemoteRepository.java)
+* [Set remote tracking branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/TrackMaster.java)
 
 ##### Low-level API
 

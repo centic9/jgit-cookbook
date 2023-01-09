@@ -44,6 +44,7 @@ public class PorcelainTest {
         ShowFileDiff.main(null);
         ShowLog.main(null);
         ShowStatus.main(null);
+        TrackMaster.main(null);
         WalkAllCommits.main(null);
     }
 }

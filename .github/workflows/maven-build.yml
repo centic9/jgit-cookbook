@@ -13,3 +13,5 @@ on:
 jobs:
   build-and-test:
     uses: centic9/actions/.github/workflows/maven-build.yml@5
+    with:
+      fullCheckout: true

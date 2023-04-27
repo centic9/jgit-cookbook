@@ -27,4 +27,9 @@ public class SimpleProgressMonitor implements ProgressMonitor {
     public boolean isCancelled() {
         return false;
     }
+
+	@Override
+	public void showDuration(boolean enabled) {
+		// ignored here
+	}
 }

@@ -13,6 +13,7 @@ public class PorcelainTest {
         CheckoutGitHubPullRequest.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
+		CloneRemoteRepositoryWithApacheSSHD.main(null);
         // does not run without changes: CloneRemoteRepositoryWithAuthentication.main(null);
         // TODO: sometimes fails because there are still files open?!: CollectGarbage.main(null);
         CommitAll.main(null);

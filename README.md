@@ -32,7 +32,8 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 
 #### Run it
 
-    Import the project into your favourite IDE and execute the snippets there.
+    Each snippet is a small standalone Java application, so you can simply  
+    import the project into your favourite IDE and execute the snippets there.
 
 #### Currently the following snippets are available
 
@@ -76,6 +77,7 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 ##### Commands working with remote repositories
 
 * [Clone a remote repository into a new local directory](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepository.java)
+* [Clone a remote repository via Apache SSHD](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/CloneRemoteRepositoryWithApacheSSHD.java)
 * [Iterate remote references in a repository](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemotes.java)
 * [List remote heads/tags without a local clone](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/ListRemoteRepository.java)
 * [Fetch from remote repositories](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/FetchRemoteCommits.java)
@@ -177,7 +179,7 @@ Please note that the list of snippets is not yet complete, probably never will. 
 
 #### Licensing
 
-   Copyright 2013-2020 Dominik Stadler
+   Copyright 2013-2023 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

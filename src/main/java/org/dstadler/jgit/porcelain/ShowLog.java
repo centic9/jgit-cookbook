@@ -52,6 +52,7 @@ public class ShowLog {
                 }
                 System.out.println("Had " + count + " commits overall on current branch");
 
+                System.out.println("Listing commits on testbranch");
                 logs = git.log()
                         .add(repository.resolve("remotes/origin/testbranch"))
                         .call();
@@ -62,6 +63,7 @@ public class ShowLog {
                 }
                 System.out.println("Had " + count + " commits overall on test-branch");
 
+				System.out.println("Listing commits on testbranch but not on master (i.e. unmerged)");
                 logs = git.log()
                         .not(repository.resolve("master"))
                         .add(repository.resolve("remotes/origin/testbranch"))
@@ -108,6 +110,7 @@ public class ShowLog {
                 // then produce a "classic" Git commit log
                 // see also https://stackoverflow.com/a/69138290/411846
                 System.out.println();
+				System.out.println("Print log of commits on testbranch");
                 logs = git.log()
                         .add(repository.resolve("remotes/origin/testbranch"))
                         .call();

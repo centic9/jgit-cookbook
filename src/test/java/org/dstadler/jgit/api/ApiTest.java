@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 
 import org.dstadler.jgit.helper.CookbookHelper;
+import org.dstadler.jgit.porcelain.ShowLog;
+import org.eclipse.jgit.errors.MissingObjectException;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -16,7 +18,14 @@ public class ApiTest {
     @Test
     public void runSamples() throws Exception {
         // simply call all the samples to see any severe problems with the samples
-        CheckMergeStatusOfCommit.main(null);
+		try {
+			CheckMergeStatusOfCommit.main(null);
+		} catch (MissingObjectException e) {
+			// this fails in CI sometimes, so print out git log to be able to analyze
+			ShowLog.main(null);
+
+			throw e;
+		}
         GetCommitMessage.main(null);
         GetFileAttributes.main(null);
         GetRefFromName.main(null);

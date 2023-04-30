@@ -1,5 +1,6 @@
 package org.dstadler.jgit.porcelain;
 
+import org.eclipse.jgit.api.errors.TransportException;
 import org.junit.Test;
 
 
@@ -13,7 +14,13 @@ public class PorcelainTest {
         CheckoutGitHubPullRequest.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
-		CloneRemoteRepositoryWithApacheSSHD.main(null);
+		try {
+			CloneRemoteRepositoryWithApacheSSHD.main(null);
+		} catch (TransportException e) {
+			// this can happen when SSH is not set up properly against github.com
+			System.out.println("Cloning with Apache SSHD failed");
+			e.printStackTrace();
+		}
         // does not run without changes: CloneRemoteRepositoryWithAuthentication.main(null);
         // TODO: sometimes fails because there are still files open?!: CollectGarbage.main(null);
         CommitAll.main(null);

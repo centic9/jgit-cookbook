@@ -55,6 +55,7 @@ public class CloneRemoteRepositoryWithApacheSSHD {
         }
 
         // then clone
+		// NOTE: This may fail if SSH keys are not set up properly for github.com!
         System.out.println("Cloning from " + REMOTE_URL + " to " + localPath);
         try (Git result = Git.cloneRepository()
                 .setURI(REMOTE_URL)

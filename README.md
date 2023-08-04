@@ -73,6 +73,8 @@ Please make sure to take a look at the nicely written [introduction](http://www.
 * [Blame, i.e. retrieve information who last changed which line in a file](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/BlameFile.java)
 * [Merge changes from a branch](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/MergeChanges.java)
 * [List changed files between two commits](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/DiffFilesInCommit.java)
+* [List changed files in index](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/DiffIndexChanges.java)
+* [List changed files in checkout](https://github.com/centic9/jgit-cookbook/blob/master/src/main/java/org/dstadler/jgit/porcelain/DiffLocalChanges.java)
 
 ##### Commands working with remote repositories
 

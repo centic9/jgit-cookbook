@@ -30,12 +30,16 @@ import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
+import org.eclipse.jgit.treewalk.FileTreeIterator;
 
 /**
- * Simple snippet which shows how to retrieve the diffs
- * between two commits
+ * Simple snippet which shows how to diff HEAD with the current
+ * working directory
+ *
+ * You may need to perform some local changes in order to make this
+ * snippet show some diffs
  */
-public class DiffFilesInCommit {
+public class DiffLocalChanges {
 
     public static void main(String[] args) throws IOException, GitAPIException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
@@ -43,30 +47,18 @@ public class DiffFilesInCommit {
 
                 // compare older commit with the newer one, showing an addition
                 // and 2 changes
-                listDiff(repository, git,
-                        "3cc51d5cfd1dc3e890f9d6ded4698cb0d22e650e",
-                        "19536fe5765ee79489265927a97cb0e19bb93e70");
-
-                // also the diffing the reverse works and now shows a deletion
-                // instead of the added file
-                listDiff(repository, git,
-                        "19536fe5765ee79489265927a97cb0e19bb93e70",
-                        "3cc51d5cfd1dc3e890f9d6ded4698cb0d22e650e");
-
-                // to compare against the "previous" commit, you can use
-                // the caret-notation
-                listDiff(repository, git,
-                        "19536fe5765ee79489265927a97cb0e19bb93e70^",
-                        "19536fe5765ee79489265927a97cb0e19bb93e70");
+                listDiff(git,
+						prepareTreeParser(repository),
+						new FileTreeIterator(git.getRepository()));
             }
         }
     }
 
-	private static AbstractTreeIterator prepareTreeParser(Repository repository, String objectId) throws IOException {
+	private static AbstractTreeIterator prepareTreeParser(Repository repository) throws IOException {
 		// from the commit we can build the tree which allows us to construct the TreeParser
 		//noinspection Duplicates
 		try (RevWalk walk = new RevWalk(repository)) {
-			RevCommit commit = walk.parseCommit(repository.resolve(objectId));
+			RevCommit commit = walk.parseCommit(repository.resolve("HEAD"));
 			RevTree tree = walk.parseTree(commit.getTree().getId());
 
 			CanonicalTreeParser treeParser = new CanonicalTreeParser();
@@ -80,16 +72,16 @@ public class DiffFilesInCommit {
 		}
 	}
 
-    private static void listDiff(Repository repository, Git git, String oldCommit, String newCommit) throws GitAPIException, IOException {
+    private static void listDiff(Git git, AbstractTreeIterator oldTree, AbstractTreeIterator newTree) throws GitAPIException {
         final List<DiffEntry> diffs = git.diff()
-                .setOldTree(prepareTreeParser(repository, oldCommit))
-                .setNewTree(prepareTreeParser(repository, newCommit))
+                .setOldTree(oldTree)
+                .setNewTree(newTree)
                 .call();
 
 		System.out.println();
-        System.out.println("Found: " + diffs.size() + " differences between " + oldCommit + " and " + newCommit);
+		System.out.println("Found: " + diffs.size() + " differences between " + oldTree + " and " + newTree);
         for (DiffEntry diff : diffs) {
-            CookbookHelper.printDiff(diff);
+			CookbookHelper.printDiff(diff);
         }
     }
 }

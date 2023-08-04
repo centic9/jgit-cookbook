@@ -154,6 +154,7 @@ The following sources were used to build the snippets:
 * [JGit related questions on stackoverflow](http://stackoverflow.com/questions/tagged/jgit)
 * [AlBlue's Blog: Embedding JGit](http://alblue.bandlem.com/2013/11/embedding-jgit.html)
 * [JGit main page](http://www.eclipse.org/jgit/)
+* [What’s the Difference? Creating Diffs with JGit](https://www.codeaffine.com/2016/06/16/jgit-diff/)
 
 #### Other applications using JGit
 

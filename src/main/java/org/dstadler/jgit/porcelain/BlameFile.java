@@ -23,7 +23,7 @@ public class BlameFile {
 				throw new IllegalStateException("Did not find any files at " + new File(".").getAbsolutePath());
 			}
 
-			final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd HH:mm");
+			final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			for (String file : list) {
 				if (new File(file).isDirectory()) {
 					continue;

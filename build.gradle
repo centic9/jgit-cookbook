@@ -18,7 +18,7 @@ dependencies {
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'
 
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.1'
 }
 
 wrapper {

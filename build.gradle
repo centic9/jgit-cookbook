@@ -12,7 +12,7 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:6.7.0.202309050840-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.7.0.202309050840-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.7.0.202309050840-r'
-	implementation 'commons-io:commons-io:2.15.0'
+	implementation 'commons-io:commons-io:2.15.1'
 	implementation 'org.slf4j:slf4j-simple:1.7.36'
 
     // optional dependency of commons-compress which is needed by JGit
@@ -22,7 +22,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '7.6.1'
+    gradleVersion = '8.5'
 }
 
 task adjustWrapperPropertiesFile {

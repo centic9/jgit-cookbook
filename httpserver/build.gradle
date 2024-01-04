@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.http.server:6.7.0.202309050840-r'
 	implementation 'org.eclipse.jetty:jetty-servlet:9.4.51.v20230217'
 
-	implementation 'org.slf4j:slf4j-simple:1.7.36'
+	implementation 'org.slf4j:slf4j-simple:2.0.10'
 }
 
 wrapper {

@@ -13,7 +13,7 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.7.0.202309050840-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.7.0.202309050840-r'
 	implementation 'commons-io:commons-io:2.15.1'
-	implementation 'org.slf4j:slf4j-simple:1.7.36'
+	implementation 'org.slf4j:slf4j-simple:2.0.10'
 
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'

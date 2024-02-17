@@ -20,28 +20,28 @@
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
-      <version>6.7.0.202309050840-r</version>
+      <version>6.8.0.202311291450-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.archive</artifactId>
-      <version>6.7.0.202309050840-r</version>
+      <version>6.8.0.202311291450-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.ssh.jsch</artifactId>
-      <version>6.7.0.202309050840-r</version>
+      <version>6.8.0.202311291450-r</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit.ssh.apache</artifactId>
-      <version>6.7.0.202309050840-r</version>
+      <version>6.8.0.202311291450-r</version>
     </dependency>
 
     <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.15.0</version>
+        <version>2.15.1</version>
     </dependency>
     <dependency>
         <groupId>org.slf4j</groupId>

@@ -8,10 +8,10 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.eclipse.jgit:org.eclipse.jgit:6.8.0.202311291450-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:6.8.0.202311291450-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.8.0.202311291450-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.8.0.202311291450-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:6.10.0.202406032230-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.10.0.202406032230-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.10.0.202406032230-r'
 	implementation 'commons-io:commons-io:2.16.1'
 	implementation 'org.slf4j:slf4j-simple:2.0.10'
 

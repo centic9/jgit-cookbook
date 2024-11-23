@@ -12,6 +12,6 @@ on:
 
 jobs:
   build-and-test:
-    uses: centic9/actions/.github/workflows/maven-build.yml@7
+    uses: centic9/actions/.github/workflows/maven-build.yml@8
     with:
       fullCheckout: true

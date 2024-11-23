@@ -8,17 +8,17 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:6.10.0.202406032230-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:6.10.0.202406032230-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.10.0.202406032230-r'
-	implementation 'commons-io:commons-io:2.17.0'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:7.0.0.202409031743-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:7.0.0.202409031743-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:7.0.0.202409031743-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:7.0.0.202409031743-r'
+	implementation 'commons-io:commons-io:2.18.0'
 	implementation 'org.slf4j:slf4j-simple:2.0.10'
 
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'
 
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.11.0'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.11.3'
 }
 
 wrapper {

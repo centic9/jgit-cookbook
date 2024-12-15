@@ -27,7 +27,6 @@ import org.eclipse.jgit.transport.RemoteRefUpdate;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 
@@ -95,7 +94,7 @@ public class PushToRemoteRepository {
     private static void createCommit(Repository repository, Git git, String fileName, String content) throws IOException, GitAPIException {
         // create the file
         File myFile = new File(repository.getDirectory().getParent(), fileName);
-        Files.write(myFile.toPath(), content.getBytes(StandardCharsets.UTF_8));
+        Files.writeString(myFile.toPath(), content);
 
         // run the add
         git.add()

@@ -41,7 +41,7 @@ public class RevertChanges {
 
                 // write some initial text to it
                 String initialText = "Initial Text";
-                System.out.println("Writing text [" + initialText + "] to file [" + tempFile.toString() + "]");
+                System.out.println("Writing text [" + initialText + "] to file [" + tempFile + "]");
                 Files.write(tempFilePath, initialText.getBytes());
 
                 // add the file and commit it

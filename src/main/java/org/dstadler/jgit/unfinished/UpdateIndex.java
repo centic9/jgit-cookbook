@@ -16,11 +16,6 @@ package org.dstadler.jgit.unfinished;
    limitations under the License.
  */
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Set;
-
 import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.Git;
@@ -32,6 +27,11 @@ import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheEntry;
 import org.eclipse.jgit.errors.NoWorkTreeException;
 import org.eclipse.jgit.lib.Repository;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * Note: This snippet is not done and likely does not show anything useful yet
@@ -78,7 +78,7 @@ public class UpdateIndex {
 		}
 
 		@Override
-		public String call() throws GitAPIException {
+		public String call() {
 			try {
 				DirCache index = repo.lockDirCache();
 				DirCacheEntry entry = index.getEntry(fileName);

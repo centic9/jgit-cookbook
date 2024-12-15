@@ -56,8 +56,8 @@ public class CloneRemoteRepositoryWithAuthentication {
             @Override
             public boolean get(URIish uri, CredentialItem... items) throws UnsupportedCredentialItem {
                 for(CredentialItem item : items) {
-                    if(item instanceof CredentialItem.YesNoType) {
-                        ((CredentialItem.YesNoType)item).setValue(true);
+                    if(item instanceof CredentialItem.YesNoType type) {
+                        type.setValue(true);
                         return true;
                     }
                 }

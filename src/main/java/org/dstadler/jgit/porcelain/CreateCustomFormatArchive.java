@@ -16,15 +16,6 @@ package org.dstadler.jgit.porcelain;
  * limitations under the License.
  */
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Collections;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
 import org.apache.commons.io.FileUtils;
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.eclipse.jgit.api.ArchiveCommand;
@@ -36,6 +27,15 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectLoader;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 
 /**
@@ -63,8 +63,8 @@ public class CreateCustomFormatArchive {
             if (loader != null) {
                 ZipEntry entry = new ZipEntry(path);
 
-                if (tree instanceof RevCommit) {
-                    long t = ((RevCommit) tree).getCommitTime() * 1000L;
+                if (tree instanceof RevCommit commit) {
+                    long t = commit.getCommitTime() * 1000L;
                     entry.setTime(t);
                 }
 

@@ -1,7 +1,7 @@
 package org.dstadler.jgit.porcelain;
 
 import org.eclipse.jgit.api.errors.TransportException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class PorcelainTest {

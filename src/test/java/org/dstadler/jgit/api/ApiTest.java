@@ -1,9 +1,5 @@
 package org.dstadler.jgit.api;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.io.IOException;
-
 import org.dstadler.jgit.helper.CookbookHelper;
 import org.dstadler.jgit.porcelain.ShowLog;
 import org.eclipse.jgit.errors.MissingObjectException;
@@ -11,7 +7,11 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class ApiTest {
@@ -51,14 +51,14 @@ public class ApiTest {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
             try (RevWalk revWalk = new RevWalk( repository )) {
                 ObjectId resolve = repository.resolve( "refs/heads/master" );
-                assertNotNull("Did not find refs/heads/master", resolve);
+                assertNotNull(resolve, "Did not find refs/heads/master");
 
                 RevCommit masterHead = revWalk.parseCommit( resolve);
 
                 // first a commit that was merged
                 ObjectId id = repository.resolve("05d18a76875716fbdbd2c200091b40caa06c713d");
                 System.out.println("Had id: " + id);
-                assertNotNull("Did not find specific commit", resolve);
+                assertNotNull(resolve, "Did not find specific commit");
 
                 RevCommit otherHead = revWalk.parseCommit( id );
                 if( revWalk.isMergedInto( otherHead, masterHead ) ) {

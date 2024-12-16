@@ -29,16 +29,3 @@ test {
 wrapper {
     gradleVersion = '8.5'
 }
-
-tasks.register('adjustWrapperPropertiesFile') {
-    doLast {
-        ant.replaceregexp(match: '^#.*', replace: '', flags: 'g', byline: true) {
-            fileset(dir: project.projectDir, includes: 'gradle/wrapper/gradle-wrapper.properties')
-        }
-        new File(project.projectDir, 'gradle/wrapper/gradle-wrapper.properties').with {
-            it.text = it.readLines().findAll { it }.sort().join('\n')
-        }
-        ant.fixcrlf(file: 'gradle/wrapper/gradle-wrapper.properties', eol: 'lf')
-    }
-}
-wrapper.finalizedBy adjustWrapperPropertiesFile

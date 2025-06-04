@@ -1,8 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'org.dstadler.jgit.server.Main'
-applicationDefaultJvmArgs = ['-Xmx512m', '-XX:+HeapDumpOnOutOfMemoryError']
+java {
+  toolchain {
+	  sourceCompatibility = JavaVersion.VERSION_17
+  }
+}
+application {
+    mainClass = 'org.dstadler.jgit.server.Main'
+    applicationDefaultJvmArgs = ['-Xmx512m', '-XX:+HeapDumpOnOutOfMemoryError']
+}
 version = '1.0'
 
 jar {
@@ -14,7 +21,7 @@ jar {
 repositories {
   mavenCentral()
   maven {
-    url "https://repo.eclipse.org/content/groups/releases/"
+    url = "https://repo.eclipse.org/content/groups/releases/"
   }
 }
 
@@ -26,5 +33,5 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '8.5'
+    gradleVersion = '8.14.1'
 }

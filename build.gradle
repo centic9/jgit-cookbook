@@ -18,9 +18,9 @@ dependencies {
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.1'
 }
 
 test {
@@ -28,5 +28,5 @@ test {
 }
 
 wrapper {
-    gradleVersion = '8.14.1'
+    gradleVersion = '8.14.2'
 }

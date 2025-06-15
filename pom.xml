@@ -13,6 +13,12 @@
       <id>jgit-repository</id>
       <url>https://repo.eclipse.org/content/groups/releases/</url>
     </repository>
+    <!-- For some reason, Maven Central needs to be manually specified here now -->
+    <repository>
+      <id>central1</id>
+      <name>Central Repository</name>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
   </repositories>
 
   <!-- Core Library -->
@@ -59,19 +65,19 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.13.0</version>
+      <version>5.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.13.0</version>
+      <version>5.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-launcher</artifactId>
-      <version>1.13.0</version>
+      <version>1.13.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

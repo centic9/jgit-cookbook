@@ -127,6 +127,8 @@ Just import the project in your IDE and start up the `Main` application, see the
 
 Another simple way to start the sample-server is to run `./gradlew run` in the httpserver-directory.
 
+**NOTE** This seems to be broken currently, JGit requires Jetty 12, but after updating Jetty it did not work any more 
+
 #### Useful code elsewhere
 
 ##### cf-ops-automation-broker 

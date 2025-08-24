@@ -8,19 +8,19 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.eclipse.jgit:org.eclipse.jgit:7.2.1.202505142326-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:7.2.1.202505142326-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:7.2.1.202505142326-r'
-	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:7.2.1.202505142326-r'
-	implementation 'commons-io:commons-io:2.19.0'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit:7.3.0.202506031305-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:7.3.0.202506031305-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:7.3.0.202506031305-r'
+	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:7.3.0.202506031305-r'
+	implementation 'commons-io:commons-io:2.20.0'
 	implementation 'org.slf4j:slf4j-simple:2.0.17'
 
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.1'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
 }
 
 test {
@@ -28,5 +28,5 @@ test {
 }
 
 wrapper {
-    gradleVersion = '8.14.2'
+    gradleVersion = '8.14.3'
 }

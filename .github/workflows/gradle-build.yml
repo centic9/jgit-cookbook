@@ -12,6 +12,6 @@ on:
 
 jobs:
   build-and-test:
-    uses: centic9/actions/.github/workflows/gradle-build.yml@8
+    uses: centic9/actions/.github/workflows/gradle-build.yml@9
     with:
       fullCheckout: true

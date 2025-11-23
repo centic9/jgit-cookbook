@@ -12,15 +12,15 @@ dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.archive:7.4.0.202509020913-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:7.4.0.202509020913-r'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:7.4.0.202509020913-r'
-	implementation 'commons-io:commons-io:2.20.0'
+	implementation 'commons-io:commons-io:2.21.0'
 	implementation 'org.slf4j:slf4j-simple:2.0.17'
 
     // optional dependency of commons-compress which is needed by JGit
     implementation 'org.tukaani:xz:1.9'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.1'
 }
 
 test {

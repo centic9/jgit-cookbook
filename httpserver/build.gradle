@@ -27,7 +27,7 @@ repositories {
 
 dependencies {
 	implementation 'org.eclipse.jgit:org.eclipse.jgit.http.server:7.4.0.202509020913-r'
-    implementation 'org.eclipse.jetty.ee10:jetty-ee10-servlet:12.0.28'
+    implementation 'org.eclipse.jetty.ee10:jetty-ee10-servlet:12.0.30'
 
 	implementation 'org.slf4j:slf4j-simple:2.0.17'
 }

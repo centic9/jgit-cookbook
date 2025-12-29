@@ -3,7 +3,7 @@ apply plugin: 'application'
 
 java {
   toolchain {
-	  sourceCompatibility = JavaVersion.VERSION_17
+	  sourceCompatibility = JavaVersion.VERSION_21
   }
 }
 application {

@@ -58,7 +58,7 @@ public class Main {
         context.setContextPath("/");
         server.setHandler(context);
 
-        context.addServlet(gs, "/repo");
+        context.addServlet(gs, "/repo/*");
 
         server.start();
         return server;

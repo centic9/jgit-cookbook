@@ -120,14 +120,20 @@ You will need at least JDK 17 for JGit 7.0 and newer.
 
 ##### GitServlet
 
-* There is a standalone sub-project in directory [httpserver](https://github.com/centic9/jgit-cookbook/blob/master/httpserver) which 
+There is a standalone sub-project in directory [httpserver](https://github.com/centic9/jgit-cookbook/blob/master/httpserver) which 
 starts up a simple HTTP Git server based on the JGit GitServlet.
 
-Just import the project in your IDE and start up the `Main` application, see the Comments in the code for more details.
+It creates a small demo-repository and serves this repository on any URL beneath `/repo`.
+
+**Usage:**
+
+Import the project in your IDE and start up the `Main` application, see the Comments in the code for more details.
 
 Another simple way to start the sample-server is to run `./gradlew run` in the httpserver-directory.
 
-**NOTE** This seems to be broken currently, JGit requires Jetty 12, but after updating Jetty it did not work any more 
+When the server is running, you can use the following to fetch and push a single sample repo
+
+    git clone http://localhost:8080/repo/some_repo
 
 #### Useful code elsewhere
 

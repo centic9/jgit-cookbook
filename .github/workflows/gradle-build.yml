@@ -1,6 +1,6 @@
 # This workflow will perform a build of the project and run tests
 
-name: Build and check
+name: Build and check - Gradle
 
 on:
   push:

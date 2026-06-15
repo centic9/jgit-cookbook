@@ -39,6 +39,7 @@ public class PorcelainTest {
         ListNotes.main(null);
         ListRemoteRepository.main(null);
         ListRemotes.main(null);
+        ListCommitsForFilePattern.main(null);
         ListTags.main(null);
         ListUncommittedChanges.main(null);
         MergeChanges.main(null);

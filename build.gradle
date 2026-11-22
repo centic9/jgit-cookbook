@@ -28,5 +28,5 @@ test {
 }
 
 wrapper {
-    gradleVersion = '8.14.5'
+    gradleVersion = '9.9.2'
 }

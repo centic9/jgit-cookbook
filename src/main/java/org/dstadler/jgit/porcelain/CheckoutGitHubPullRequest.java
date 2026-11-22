@@ -61,7 +61,7 @@ public class CheckoutGitHubPullRequest {
                     //.setRefSpecs(new RefSpec("+refs/heads/*:refs/heads/*"))
                     .call();
 
-            System.out.println("Result when fetching the PR: " + fetchResult.getMessages());
+            System.out.println("Result when fetching the PR: " + fetchResult);
 
             Ref checkoutRef = result.checkout()
                     .setName("pr_6")

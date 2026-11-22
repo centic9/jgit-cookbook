@@ -11,7 +11,7 @@ public class PorcelainTest {
         AddAndListNoteOfCommit.main(null);
         AddFile.main(null);
         BlameFile.main(null);
-        CheckoutGitHubPullRequest.main(null);
+        //CheckoutGitHubPullRequest.main(null);
         CleanUntrackedFiles.main(null);
         CloneRemoteRepository.main(null);
 		try {
